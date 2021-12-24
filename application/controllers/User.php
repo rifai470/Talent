@@ -12,6 +12,7 @@ class User extends CI_Controller
         $this->load->model('User_model');
         $this->load->library('form_validation');
         $this->load->library('datatables');
+        $this->load->helper(array('Form', 'Cookie', 'String'));
     }
 
     public function index()
@@ -238,5 +239,69 @@ class User extends CI_Controller
         $id_pasien = $this->input->post('id', TRUE);
         $data = $this->User_model->get_email($id_pasien)->result();
         echo json_encode($data);
+    }
+
+    function profile($id)
+    {
+        $row = $this->User_model->get_by_id($id);
+        $data = array(
+            'id_users' => $row->id_users,
+            'username' => $row->username,
+            'nama_lengkap' => $row->nama_lengkap,
+            'kontak' => $row->kontak,
+            'images' => set_value('images', $row->images),
+            'perusahaan' => set_value('perusahaan', $row->perusahaan),
+        ); 
+        $this->load->view('user/profile', $data);
+    }
+
+    function change_profile()
+    {
+        $nama_lengkap = $this->input->post('nama_lengkap', TRUE);
+        $kontak = $this->input->post('kontak', TRUE);
+        $username = $this->input->post('username', TRUE);
+        $perusahaan = $this->input->post('perusahaan', TRUE);
+
+        $data = array(
+            'nama_lengkap' => $nama_lengkap,
+            'kontak' => $kontak,
+            'username' => $username,
+            'perusahaan' => $perusahaan,
+        );
+
+        $this->User_model->update($this->input->post('id_users', TRUE), $data);
+        $this->session->set_flashdata('message_r', 'Ubah profile berhasil');
+        redirect(site_url('user/profile/'.$this->input->post('id_users', TRUE).''));
+    }
+
+    function change_password()
+    {
+        $current_password = $this->input->post('password', TRUE);
+        $new_password = $this->input->post('new_password', TRUE);
+
+        $row = $this->User_model->login($this->input->post('id_users', TRUE));
+        if ($row) {
+            $userPassword = $row->password;
+            if (password_verify($current_password, $userPassword)) {
+                $options        = array("cost" => 4);
+                $hashPassword   = password_hash($new_password, PASSWORD_BCRYPT, $options);
+                $data = array(
+                    'password' => $hashPassword,
+                );
+
+                $this->User_model->update($this->input->post('id_users', TRUE), $data);
+                delete_cookie('talent');
+                $this->session->sess_destroy();
+                redirect('auth');
+            } else {
+                $this->session->set_flashdata('message', 'Current password salah');
+                redirect(site_url('user/profile/'.$this->input->post('id_users', TRUE).''));
+            }
+        } else {
+            $this->session->set_flashdata('message', 'Data tidak ada');
+            redirect(site_url('user/profile/'.$this->input->post('id_users', TRUE).''));
+        }
+
+        
     }
 }

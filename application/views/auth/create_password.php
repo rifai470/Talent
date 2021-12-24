@@ -33,7 +33,7 @@
     <!-- /.login-logo -->
     <div class="card card-outline card-primary">
       <div class="card-header text-center">
-        <a href="" class="h1"><b>LOGIN</b></a>
+        <a href="" class="h1"><b>DAFTAR</b></a>
       </div>
       <div class="card-body">
         <?php
@@ -43,26 +43,10 @@
         } else {
           $message = $status_login;
         }
-
-        $status_register = $this->session->userdata('status_register');
-        if (empty($status_register)) {
-          $message_r = "";
-        } else {
-          $message_r = $status_register;
-        }
         ?>
         <p class="login-box-msg" style="color: red;"><?php echo $message; ?></p>
-        <p class="login-box-msg" style="color: green;"><?php echo $message_r; ?></p>
         <?php $attributes = array('class' => 'margin-bottom-0');
-        echo form_open('auth/cheklogin', $attributes); ?>
-        <div class="input-group mb-3">
-          <input type="text" class="form-control form-control-md" name="username" placeholder="Email" required />
-          <div class="input-group-append">
-            <div class="input-group-text">
-              <span class="fas fa-envelope"></span>
-            </div>
-          </div>
-        </div>
+        echo form_open('auth/create_password', $attributes); ?>
         <div class="input-group mb-3">
           <input type="password" class="form-control form-control-md" name="password" placeholder="Password" required />
           <div class="input-group-append">
@@ -71,26 +55,27 @@
             </div>
           </div>
         </div>
-        <div class="row">
-          <div class="col-8">
-            <div class="icheck-primary">
-              <?php echo form_checkbox('remember', TRUE, $remember) ?>
-              <label for="remember">
-                Remember Me
-              </label>
+        <div class="input-group mb-3">
+          <input type="password" class="form-control form-control-md" name="confirm_password" placeholder="Confirm Password" required />
+          <div class="input-group-append">
+            <div class="input-group-text">
+              <span class="fas fa-lock"></span>
             </div>
           </div>
-          <!-- /.col -->
+        </div>
+        <div class="row">
           <div class="col-4">
-            <button type="submit" class="btn btn-primary btn-block">Login</button>
+          <input type="hidden" class="form-control form-control-md" name="username" value="<?php echo $username; ?>" />
+          <input type="hidden" class="form-control form-control-md" name="kontak" value="<?php echo $kontak; ?>" />
+            <button type="submit" class="btn btn-primary btn-block">Save</button>
           </div>
           <!-- /.col -->
         </div>
         </form>
 
-      </br>
+        </br>
         <p class="mb-0">
-        Belum pernah daftar? <a href="<?php echo base_url('auth/register'); ?>" class="text-center">Daftar di sini​</a>
+        Sudah pernah daftar? <a href="<?php echo base_url('auth'); ?>" class="text-center">Login di sini​</a>
         </p>
       </div>
       <!-- /.card-body -->

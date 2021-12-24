@@ -15,13 +15,13 @@
                 <tr>
                   <td width='200'>Jabatan <?php echo form_error('id_user_level') ?></td>
                   <td>
-					<?php echo cmb_dinamis('id_user_level', 'tbl_user_level', 'nama_level', 'id_user_level', $id_user_level, 'ASC') ?>
+                    <?php echo cmb_dinamis('id_user_level', 'tbl_user_level', 'nama_level', 'id_user_level', $id_user_level, 'ASC') ?>
                   </td>
                 </tr>
                 <tr>
                   <td width='200'>Username </td>
                   <td><select class="form-control select2" id="email" name="email" required>
-					  <option value="<?php echo $username; ?>" selected><?php echo $username; ?></option>
+                      <option value="<?php echo $username; ?>" selected><?php echo $username; ?></option>
                     </select></td>
                 </tr>
                 <?php
@@ -40,9 +40,9 @@
                     <!--<input type="text" class="form-control" name="is_aktif" id="is_aktif" placeholder="Is Aktif" value="<?php echo $is_aktif; ?>" />-->
                   </td>
                 </tr>
-			  <tr>
+                <tr>
                   <td width='200'>Perusahaan </td>
-                  <td><input type="text" class="form-control" name="perusahaan" id="perusahaan" placeholder="Perusahaan" value="<?php echo $perusahaan; ?>"/></td>
+                  <td><input type="text" class="form-control" name="perusahaan" id="perusahaan" placeholder="Perusahaan" value="<?php echo $perusahaan; ?>" /></td>
                 </tr>
                 <tr>
                   <td></td>

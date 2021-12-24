@@ -14,7 +14,7 @@ class Auth extends CI_Controller
     {
         $cookie = get_cookie('talent');
         if ($this->session->userdata('logged')) {
-            redirect('welcome');
+            redirect('auth');
         } else if ($cookie <> '') {
             // cek cookie
             $row = $this->Auth_model->get_by_cookie($cookie)->row();
@@ -64,7 +64,7 @@ class Auth extends CI_Controller
             }
         } else {
             // login gagal
-            $this->session->set_flashdata('status_login', 'email atau password salah');
+            $this->session->set_flashdata('status_login', 'Email atau Password salah');
             $this->index();
         }
     }
@@ -86,7 +86,11 @@ class Auth extends CI_Controller
             'nama_level' => $row->nama_level,
         );
         $this->session->set_userdata($sess);
-        redirect('welcome');
+        if($row->id_user_level == 1 || $row->id_user_level == 2){
+            redirect('welcome');
+        } else {
+            redirect('home_page');
+        }
     }
 
     public function logout()
@@ -94,6 +98,60 @@ class Auth extends CI_Controller
         // delete cookie dan session
         delete_cookie('talent');
         $this->session->sess_destroy();
+        redirect('home_page');
+    }
+
+    function register()
+    {
+        $data = array(
+            'username' => set_value('username'),
+            'password' => set_value('password'),
+            'nama_lengkap' => set_value('nama_lengkap'),
+            'kontak' => set_value('kontak'),
+            'perusahaan' => set_value('perusahaan'),
+            'message' => $this->session->flashdata('message'),
+        );
+        $this->load->view('auth/register', $data);
+    }
+
+    function register_action()
+    {
+        $nama_lengkap = $this->input->post('nama_lengkap', TRUE);
+        $kontak = $this->input->post('kontak', TRUE);
+        $username = $this->input->post('username', TRUE);
+        $row = $this->Auth_model->login($username);
+        if(empty($row->username)){
+            $data = array(
+                'nama_lengkap' => $nama_lengkap,
+                'kontak' => $kontak,
+                'username' => $username,
+                'id_user_level' => 3,
+                'is_aktif' => 'y',
+            );
+
+            $this->Auth_model->insert_register($data);
+            $this->load->view('auth/create_password', $data);
+        } else {
+            $this->session->set_flashdata('status_register', 'Email sudah terdaftar');
+            redirect('auth/register');
+        }
+    }
+
+    function create_password()
+    {
+        $this->form_validation->set_rules('password', 'Password', 'required');
+        $this->form_validation->set_rules('confirm_password', 'Confirm Password', 'required|matches[password]');
+        $kontak = $this->input->post('kontak', TRUE);
+        $username = $this->input->post('username', TRUE);
+        $password = $this->input->post('password', TRUE);
+        $options = array("cost" => 4);
+        $hashPassword = password_hash($password, PASSWORD_BCRYPT, $options);
+        $data = array(
+            'password' => $hashPassword,
+        );
+
+        $this->Auth_model->create_password($username, $kontak, $data);
+        $this->session->set_flashdata('status_register', 'Berhasil mendaftar, Silahkan login.');
         redirect('auth');
     }
 }

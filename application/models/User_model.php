@@ -107,4 +107,24 @@ class User_model extends CI_Model
         $query = $this->db->get();
         return $query;
     }
+
+    function login($id_users)
+    {
+        $this->db->select('tbl_user.id_users,
+                tbl_user.username,
+                tbl_user.password,
+                tbl_user.id_user_level,
+                tbl_user.is_aktif,
+                tbl_user.cookie,
+                tbl_user.nama_lengkap,
+                tbl_user.perusahaan,
+                tbl_user.images,
+                tbl_user_level.nama_level,
+                tbl_user.kontak');
+        $this->db->where('tbl_user.id_users', $id_users);
+        $this->db->join('tbl_user_level', 'tbl_user.id_user_level = tbl_user_level.id_user_level', 'left');
+        $query = $this->db->get('tbl_user');
+        $data = $query->row();
+        return $data;
+    }
 }

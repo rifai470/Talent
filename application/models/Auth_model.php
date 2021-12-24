@@ -29,6 +29,10 @@ class Auth_model extends CI_Model
         $query = $this->db->get('tbl_user');
         $data = $query->row();
         return $data;
+        // print_r($this->db->last_query());
+        // echo "<pre>";
+        // print_r($data);
+        // exit;
     }
 
     // update user
@@ -42,5 +46,17 @@ class Auth_model extends CI_Model
     {
         $this->db->where('cookie', $cookie);
         return $this->db->get($this->table);
+    }
+
+    function insert_register($data)
+    {
+        $this->db->insert('tbl_user', $data);
+    }
+
+    function create_password($username, $kontak, $data)
+    {
+        $this->db->where('username', $username);
+        $this->db->where('kontak', $kontak);
+        $this->db->update('tbl_user', $data);
     }
 }
