@@ -85,11 +85,15 @@ class Tbl_talent extends CI_Controller
 			'tentang' => set_value('tentang'),
 			'id_tarif' => set_value('id_tarif'),
 			'prestasi' => set_value('prestasi'),
-			'sosmed' => set_value('sosmed'),
-			'url' => set_value('url'),
+			'instagram' => set_value('instagram'),
+			'facebook' => set_value('facebook'),
+			'twitter' => set_value('twitter'),
+			'other' => set_value('other'),
+			'tags' => set_value('tags'),
 			'photo' => set_value('photo'),
 			'row_kategori' => $row_kategori,
 			'row_tarif' => $row_tarif,
+			'code_talent' => set_value('code_talent'),
 
 		);
 		$this->template->load('template', 'tbl_talent/tbl_talent_form', $data);
@@ -138,20 +142,25 @@ class Tbl_talent extends CI_Controller
 		$this->Tbl_talent_model->insert_sosmed($data_sosmed);
 
 		//array prestasi 
-		$prestasi = $this->input->post('prestasi', TRUE);
-		$prestasi_array = array();
-		$index = 0;
-		foreach ($prestasi as $data) {
-			$data_prestasi = array(
-				'prestasi' => $data,
-				'code_talent' => $code_talent,
-				'SecLogUser' => $this->session->userdata('nama_lengkap'),
-				'SecLogDate' => date('Y-m-d H:i:s'),
-			);
-			array_push($prestasi_array, $data_prestasi);
-			$index++;
-		}
-		$this->Tbl_talent_model->insert_prestasi($prestasi_array);
+		$data_prestasi = array (
+		'prestasi' => $this->input->post('prestasi', TRUE),
+		'code_talent' => $code_talent,
+		'SecLogUser' => $this->session->userdata('nama_lengkap'),
+		'SecLogDate' => date('Y-m-d H:i:s'),
+		);
+		// $prestasi_array = array();
+		// $index = 0;
+		// foreach ($prestasi as $data) {
+		// 	$data_prestasi = array(
+		// 		'prestasi' => $data,
+		// 		'code_talent' => $code_talent,
+		// 		'SecLogUser' => $this->session->userdata('nama_lengkap'),
+		// 		'SecLogDate' => date('Y-m-d H:i:s'),
+		// 	);
+		// 	array_push($prestasi_array, $data_prestasi);
+		// 	$index++;
+		// }
+		$this->Tbl_talent_model->insert_prestasi($data_prestasi);
 
 
 
@@ -202,6 +211,8 @@ class Tbl_talent extends CI_Controller
 	public function update($id)
 	{
 		$row = $this->Tbl_talent_model->get_by_id($id);
+		$row_kategori = $this->Tbl_kategori_model->get_all();
+		$row_tarif = $this->Tbl_tarif_model->get_all();
 
 		if ($row) {
 			$data = array(
@@ -224,9 +235,14 @@ class Tbl_talent extends CI_Controller
 				'tentang' => set_value('tentang', $row->tentang),
 				'id_tarif' => set_value('id_tarif', $row->id_tarif),
 				'prestasi' => set_value('prestasi', $row->prestasi),
-				'sosmed' => set_value('sosmed', $row->sosmed),
-				'url' => set_value('url', $row->url),
+				'instagram' => set_value('instagram', $row->instagram),
+				'facebook' => set_value('facebook', $row->facebook),
+				'twitter' => set_value('twitter', $row->twitter),
+				'other' => set_value('other', $row->other),
 				'photo' => set_value('photo', $row->photo),
+				'row_kategori' => $row_kategori,
+				'row_tarif' => $row_tarif,
+				'code_talent' => set_value('code_talent', $row->code_talent),
 			);
 			$this->template->load('template', 'tbl_talent/tbl_talent_form', $data);
 		} else {
@@ -237,11 +253,9 @@ class Tbl_talent extends CI_Controller
 
 	public function update_action()
 	{
-		$this->_rules();
+		$code_talent=$this->input->post('code_talent', TRUE);
+		$row = $this->Tbl_talent_model->get_by_id($this->input->post('id_talent', TRUE));
 
-		if ($this->form_validation->run() == FALSE) {
-			$this->update($this->input->post('id_talent', TRUE));
-		} else {
 			$data = array(
 				'nama' => $this->input->post('nama', TRUE),
 				'nama_panggilan' => $this->input->post('nama_panggilan', TRUE),
@@ -263,9 +277,62 @@ class Tbl_talent extends CI_Controller
 			);
 
 			$this->Tbl_talent_model->update($this->input->post('id_talent', TRUE), $data);
+
+			//update prestasi
+			$data_update_prestasi= array (
+				'prestasi' => $this->input->post('prestasi', TRUE),
+				'SecLogUser' => $this->session->userdata('nama_lengkap'),
+				'SecLogDate' => date('Y-m-d H:i:s'),
+				);
+				$this->Tbl_talent_model->update_prestasi($code_talent, $data_update_prestasi);
+
+			//update sosmed
+			$data_update_sosmed= array (
+				'instagram' => $this->input->post('instagram', TRUE),
+				'facebook' => $this->input->post('facebook', TRUE),
+				'twitter' => $this->input->post('twitter', TRUE),
+				'other' => $this->input->post('other', TRUE),
+				'SecLogUser' => $this->session->userdata('nama_lengkap'),
+				'SecLogDate' => date('Y-m-d H:i:s'),
+				);
+				$this->Tbl_talent_model->update_sosmed($code_talent, $data_update_sosmed);
+			
+			//update photo
+			if ($_FILES['upload']['name'] == '') {
+				$this->session->set_flashdata('massage','file harus diisi');
+			}else {
+				$config['upload_path'] = './uploads/photo/'; 
+				$config['allowed_types'] = 'gif|jpg|jpeg|png';
+				// $config['max_size'] = '1024';
+				// $config['max_width'] = '1920';
+				// $config['max_height'] = '1280';
+				$this->load->library('upload', $config);
+	
+						$this->upload->initialize($config);
+						$upload='upload';
+						if (!$this->upload->do_upload($upload)) {
+							$data_file = array('file_name' => $row->photo);
+						} else {
+							$data_file = $this->upload->data();
+						}
+						$data_update_photo= array (
+							'photo' => $data_file['file_name'],
+							'SecLogUser' => $this->session->userdata('nama_lengkap'),
+							'SecLogDate' => date('Y-m-d H:i:s'),
+							);
+						$this->Tbl_talent_model->update_photo($code_talent, $data_update_photo);
+					// }
+				// }
+				// if (!empty($data_photo)) {
+				// 	// Insert files data into the database 
+				// 	$this->Tbl_talent_model->insert_photo($data_photo);
+				// }
+			}
+			
+
 			$this->session->set_flashdata('message', 'Update Record Success');
 			redirect(site_url('tbl_talent'));
-		}
+		
 	}
 
 	public function delete($id)

@@ -82,6 +82,8 @@ class Tbl_kategori_model extends CI_Model
     {
         return $this->db->get('tbl_kategori')->row();
     }
+
+    
 }
 
 /* End of file Tbl_kategori_model.php */
