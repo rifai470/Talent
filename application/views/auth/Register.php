@@ -26,6 +26,11 @@
   <link rel="stylesheet" href="<?php echo base_url(); ?>assets\adminlte\plugins\icheck-bootstrap\icheck-bootstrap.min.css">
   <!-- Theme style -->
   <link rel="stylesheet" href="<?php echo base_url(); ?>assets\adminlte\dist\css\adminlte.min.css">
+  <style>
+    form span {
+      cursor: pointer;
+    }
+  </style>
 </head>
 
 <body class="hold-transition login-page">
@@ -50,7 +55,7 @@
         <div class="input-group mb-3">
           <input type="text" class="form-control form-control-md" name="nama_lengkap" placeholder="Nama Lengkap" required />
           <div class="input-group-append">
-            <div class="input-group-text">
+            <div class="input-group-text" style="width: 45px;">
               <span class="fas fa-user"></span>
             </div>
           </div>
@@ -58,7 +63,7 @@
         <div class="input-group mb-3">
           <input type="text" class="form-control form-control-md" name="kontak" placeholder="No Whatsapp" required />
           <div class="input-group-append">
-            <div class="input-group-text">
+            <div class="input-group-text" style="width: 45px;">
               <span class="fab fa-whatsapp"></span>
             </div>
           </div>
@@ -66,10 +71,29 @@
         <div class="input-group mb-3">
           <input type="text" class="form-control form-control-md" name="username" placeholder="Email" required />
           <div class="input-group-append">
-            <div class="input-group-text">
+            <div class="input-group-text" style="width: 45px;">
               <span class="fas fa-envelope"></span>
             </div>
           </div>
+        </div>
+        <div class="input-group mb-3">
+          <input type="password" class="form-control form-control-md" name="password" id="password" placeholder="Password" required />
+          <div class="input-group-append">
+            <div class="input-group-text" style="width: 45px;">
+              <span class="fas fa-eye-slash" id="togglePassword"></span>
+            </div>
+          </div>
+        </div>
+        <div class="input-group mb-3">
+          <input type="password" class="form-control form-control-md" name="confirm_password" id="confirm_password" placeholder="Confirm Password" required />
+          <div class="input-group-append">
+            <div class="input-group-text" style="width: 45px;">
+              <span class="fas fa-eye-slash" id="toggleConfirmPassword"></span>
+            </div>
+          </div>
+        </div>
+        <div class="input-group mb-3">
+          <span id='message'></span>
         </div>
         <div class="row">
           <div class="col-4">
@@ -81,7 +105,7 @@
 
         </br>
         <p class="mb-0">
-        Sudah pernah daftar? <a href="<?php echo base_url('auth'); ?>" class="text-center">Login di sini​</a>
+          Sudah pernah daftar? <a href="<?php echo base_url('auth'); ?>" class="text-center">Login di sini​</a>
         </p>
       </div>
       <!-- /.card-body -->
@@ -96,6 +120,45 @@
   <script src="<?php echo base_url(); ?>assets\adminlte\plugins\bootstrap\js\bootstrap.bundle.min.js"></script>
   <!-- AdminLTE App -->
   <script src="<?php echo base_url(); ?>assets\adminlte\dist\js\adminlte.min.js"></script>
+  <script>
+    $(document).ready(function() {
+      $('#password, #confirm_password').on('keyup', function() {
+        if ($('#password').val() == $('#confirm_password').val()) {
+          $('#message').html('Password Matching').css('color', 'green');
+        } else
+          $('#message').html('Password Not Matching').css('color', 'red');
+      });
+    });
+
+    var togglePassword = document.getElementById('togglePassword');
+    var toggleConfirmPassword = document.getElementById('toggleConfirmPassword');
+    var password = document.getElementById('password');
+    var confirm_password = document.getElementById('confirm_password');
+
+    togglePassword.addEventListener('click', function(e) {
+      var type = password.getAttribute('type') === 'password' ? 'text' : 'password';
+      password.setAttribute('type', type);
+      if(type === 'password'){
+        this.classList.remove('fa-eye');
+        this.classList.add('fa-eye-slash');
+      } else {
+        this.classList.remove('fa-eye-slash');
+        this.classList.add('fa-eye');
+      }
+    });
+
+    toggleConfirmPassword.addEventListener('click', function(e) {
+      var type = confirm_password.getAttribute('type') === 'password' ? 'text' : 'password';
+      confirm_password.setAttribute('type', type);
+      if(type === 'password'){
+        this.classList.remove('fa-eye');
+        this.classList.add('fa-eye-slash');
+      } else {
+        this.classList.remove('fa-eye-slash');
+        this.classList.add('fa-eye');
+      }
+    });
+  </script>
 </body>
 
 </html>

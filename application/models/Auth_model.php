@@ -51,12 +51,19 @@ class Auth_model extends CI_Model
     function insert_register($data)
     {
         $this->db->insert('tbl_user', $data);
+        return $this->db->insert_id();
     }
 
-    function create_password($username, $kontak, $data)
+    function cek_user($id)
     {
-        $this->db->where('username', $username);
-        $this->db->where('kontak', $kontak);
-        $this->db->update('tbl_user', $data);
+        $this->db->where('id_users', $id);
+        $data = $this->db->get('tbl_user')->row_array();
+        return $data;
+    }
+
+    function activate($data, $id)
+    {
+        $this->db->where('id_users', $id);
+        return $this->db->update('tbl_user', $data);
     }
 }

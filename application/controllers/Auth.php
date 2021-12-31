@@ -47,20 +47,25 @@ class Auth extends CI_Controller
         $remember = $this->input->post('remember');
         $row = $this->Auth_model->login($username);
         if ($row) {
-            $userPassword = $row->password;
-            if (password_verify($password, $userPassword)) {
-                // 1. Buat Cookies jika remember di check - login berhasil
-                if ($remember) {
-                    $key = random_string('alnum', 64);
-                    set_cookie('talent', $key, 3600 * 24 * 360); // set expired 1 tahun
-                    $update_key = array(
-                        'cookie' => $key
-                    );
-                    $this->Auth_model->update($update_key, $row->id_users);
+            if ($row->is_aktif == 'y') {
+                $userPassword = $row->password;
+                if (password_verify($password, $userPassword)) {
+                    // 1. Buat Cookies jika remember di check - login berhasil
+                    if ($remember) {
+                        $key = random_string('alnum', 64);
+                        set_cookie('talent', $key, 3600 * 24 * 360); // set expired 1 tahun
+                        $update_key = array(
+                            'cookie' => $key
+                        );
+                        $this->Auth_model->update($update_key, $row->id_users);
+                    }
+                    $this->_daftarkan_session($row);
+                } else {
+                    redirect('auth');
                 }
-                $this->_daftarkan_session($row);
             } else {
-                redirect('auth');
+                $this->session->set_flashdata('status_login', 'Akun tidak aktif');
+                $this->index();
             }
         } else {
             // login gagal
@@ -86,7 +91,7 @@ class Auth extends CI_Controller
             'nama_level' => $row->nama_level,
         );
         $this->session->set_userdata($sess);
-        if($row->id_user_level == 1 || $row->id_user_level == 2){
+        if ($row->id_user_level == 1 || $row->id_user_level == 2) {
             redirect('welcome');
         } else {
             redirect('home_page');
@@ -116,42 +121,112 @@ class Auth extends CI_Controller
 
     function register_action()
     {
-        $nama_lengkap = $this->input->post('nama_lengkap', TRUE);
-        $kontak = $this->input->post('kontak', TRUE);
-        $username = $this->input->post('username', TRUE);
-        $row = $this->Auth_model->login($username);
-        if(empty($row->username)){
-            $data = array(
-                'nama_lengkap' => $nama_lengkap,
-                'kontak' => $kontak,
-                'username' => $username,
-                'id_user_level' => 3,
-                'is_aktif' => 'y',
-            );
+        $this->form_validation->set_rules('password', 'Password', 'required');
+        $this->form_validation->set_rules('confirm_password', 'Confirm Password', 'required|matches[password]');
 
-            $this->Auth_model->insert_register($data);
-            $this->load->view('auth/create_password', $data);
-        } else {
-            $this->session->set_flashdata('status_register', 'Email sudah terdaftar');
+        if ($this->form_validation->run() == FALSE) {
+            $this->session->set_flashdata('status_register', 'Email atau Password salah');
             redirect('auth/register');
+        } else {
+            $nama_lengkap = $this->input->post('nama_lengkap', TRUE);
+            $kontak = $this->input->post('kontak', TRUE);
+            $username = $this->input->post('username', TRUE);
+            $row = $this->Auth_model->login($username);
+            $password = $this->input->post('password', TRUE);
+            $options = array("cost" => 4);
+            $hashPassword = password_hash($password, PASSWORD_BCRYPT, $options);
+
+            //generate simple random code
+            $set = $nama_lengkap.$kontak;
+			$code = substr(str_shuffle($set), 0, 12);
+
+            if (empty($row->username)) {
+                $data = array(
+                    'nama_lengkap' => $nama_lengkap,
+                    'kontak' => $kontak,
+                    'username' => $username,
+                    'password' => $hashPassword,
+                    'id_user_level' => 3,
+                    'is_aktif' => 'n',
+                    'code' => $code
+                );
+
+                $id = $this->Auth_model->insert_register($data);
+                $this->send_activation($data, $id);
+                $this->session->set_flashdata('status_register', 'Berhasil mendaftar, Silahkan cek email untuk verifikasi.');
+                redirect('auth');
+            } else {
+                $this->session->set_flashdata('status_register', 'Email sudah terdaftar');
+                redirect('auth/register');
+            }
         }
     }
 
-    function create_password()
+    public function activate()
     {
-        $this->form_validation->set_rules('password', 'Password', 'required');
-        $this->form_validation->set_rules('confirm_password', 'Confirm Password', 'required|matches[password]');
-        $kontak = $this->input->post('kontak', TRUE);
-        $username = $this->input->post('username', TRUE);
-        $password = $this->input->post('password', TRUE);
-        $options = array("cost" => 4);
-        $hashPassword = password_hash($password, PASSWORD_BCRYPT, $options);
-        $data = array(
-            'password' => $hashPassword,
-        );
+        $id =  $this->uri->segment(3);
+		$code = $this->uri->segment(4);
 
-        $this->Auth_model->create_password($username, $kontak, $data);
-        $this->session->set_flashdata('status_register', 'Berhasil mendaftar, Silahkan login.');
-        redirect('auth');
+        $user = $this->Auth_model->cek_user($id);
+
+		if ($user['code'] == $code) {
+			$data['is_aktif'] = 'y';
+			$query = $this->Auth_model->activate($data, $id);
+
+			if ($query) {
+				$this->session->set_flashdata('status_register', 'User activated successfully');
+			} else {
+				$this->session->set_flashdata('status_login', 'Something went wrong in activating account');
+			}
+		} else {
+			$this->session->set_flashdata('status_login', 'Cannot activate account. Code didnt match');
+		}
+		redirect('auth');
     }
+
+    public function send_activation($data, $id)
+	{
+		//Load data
+
+		$message = "
+        <html>
+        <head>
+            <title>Verification Code</title>
+        </head>
+        <body>
+            <h2>Thank you for Registering Mustika Ratu Talent Account.</h2>
+            <p>Please click the link below to activate your account.</p>
+            <h4><a href='" . base_url() . "auth/activate/" . $id . "/" . $data['code'] . "'>Activate My Account</a></h4>
+        </body>
+        </html>
+        ";
+
+		//Send Email
+		$config['protocol'] = 'smtp';
+		$config['charset'] = 'iso-8859-1';
+		$config['wordwrap'] = TRUE;
+		$config['smtp_host'] = 'ssl://smtp.googlemail.com';
+		$config['smtp_port'] = 465;
+		$config['smtp_user'] = 'mustikaratu.mailer@gmail.com';
+		$config['smtp_pass'] = 'mustikagoogle';
+		$config['mailtype'] = 'html';
+
+		$this->load->library('email', $config);
+
+		$this->email->initialize($config);
+
+		$this->email->set_newline("\r\n");
+		$this->email->from('mustikaratu.mailer@gmail.com', 'No-Reply');
+		// $this->email->to($data['username']);
+		$this->email->to('development@mustika-ratu.co.id');
+		$this->email->subject('Signup Verification Email');
+		$this->email->message($message);
+
+		if ($this->email->send()) {
+			$this->session->set_flashdata("email_sent", "Congragulation Email Send Successfully.");
+		} else {
+			$this->session->set_flashdata("email_sent", "Error in sending Email.");
+			// show_error($this->email->print_debugger());
+		}
+	}
 }

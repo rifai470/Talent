@@ -73,12 +73,9 @@
         </div>
         <div class="row">
           <div class="col-8">
-            <div class="icheck-primary">
-              <?php echo form_checkbox('remember', TRUE, $remember) ?>
               <label for="remember">
-                Remember Me
+              <?php echo form_checkbox('remember', TRUE, $remember) ?> Remember Me
               </label>
-            </div>
           </div>
           <!-- /.col -->
           <div class="col-4">
