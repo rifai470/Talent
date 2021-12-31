@@ -28,11 +28,14 @@ class Home_page extends CI_Controller
         $get_kategori=$this->Tbl_kategori_model->get_by_id($id_kategori);
         $get_talent=$this->Tbl_talent_model->get_kategori_talent($id_kategori);
         $data=array(
-            'get_talent'=> $get_talent,  
             'get_kategori'=> $get_kategori,  
+            'get_talent'=> $get_talent, 
         );
         $this->template->load('home_page/tamplate','home_page/talent_list',$data);
     }
+
+
+    
 
 
 }

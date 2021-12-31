@@ -162,11 +162,16 @@ class Tbl_talent extends CI_Controller
 		// }
 		$this->Tbl_talent_model->insert_prestasi($data_prestasi);
 
-
+		//buat array tags
+		$data_tags = array(  
+			'tags' => $this->input->post('tags', TRUE),
+			'code_talent' => $code_talent,
+			'SecLogUser' => $this->session->userdata('nama_lengkap'),
+			'SecLogDate' => date('Y-m-d H:i:s'),
+		);
+		$this->Tbl_talent_model->insert_tags($data_tags);
 
 		//array photo
-		// If files are selected to upload 
-		
 		if ($_FILES['upload']['name'] == '') {
 			$this->session->set_flashdata('massage','file harus diisi');
 		}else {
@@ -240,6 +245,7 @@ class Tbl_talent extends CI_Controller
 				'twitter' => set_value('twitter', $row->twitter),
 				'other' => set_value('other', $row->other),
 				'photo' => set_value('photo', $row->photo),
+				'tags' => set_value('tags', $row->tags),
 				'row_kategori' => $row_kategori,
 				'row_tarif' => $row_tarif,
 				'code_talent' => set_value('code_talent', $row->code_talent),
@@ -296,6 +302,14 @@ class Tbl_talent extends CI_Controller
 				'SecLogDate' => date('Y-m-d H:i:s'),
 				);
 				$this->Tbl_talent_model->update_sosmed($code_talent, $data_update_sosmed);
+
+			//update tags
+			$data_update_tags= array (
+				'tags' => $this->input->post('tags', TRUE),
+				'SecLogUser' => $this->session->userdata('nama_lengkap'),
+				'SecLogDate' => date('Y-m-d H:i:s'),
+				);
+				$this->Tbl_talent_model->update_tags($code_talent, $data_update_tags);
 			
 			//update photo
 			if ($_FILES['upload']['name'] == '') {
@@ -348,6 +362,24 @@ class Tbl_talent extends CI_Controller
 			redirect(site_url('tbl_talent'));
 		}
 	}
+
+	// public function tags(){
+	// 	$data_tags = array();
+
+	// 	$query = $this->db->get('tbl_tags');
+	// 	$result = $query->result_array();
+	// 	foreach ($result as $result){
+	// 		$data_tags[] = array(
+	// 			'tags_id' => $result['tags_id'],
+	// 			'tags' => $result['tags']
+	// 		)
+	// 	}
+
+	// 	$this->output
+	// 	->set_content_type('asset/tags/dist')
+	// 	->
+
+	// }
 
 	public function _rules()
 	{

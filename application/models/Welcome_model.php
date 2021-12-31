@@ -11,7 +11,7 @@ class Welcome_model extends CI_Model
     // get all
     function get_all()
     {
-        $this->db->select('tbl_talent.nama, tbl_talent.tempat, tbl_photo.photo, tbl_kategori.kategori, tbl_tarif.tarif from tbl_talent
+        $this->db->select('tbl_talent.*, tbl_photo.*, tbl_kategori.*, tbl_tarif.* from tbl_talent
         left join tbl_photo on tbl_talent.code_talent=tbl_photo.code_talent  
         left join tbl_kategori on tbl_talent.id_kategori=tbl_kategori.id_kategori
         left join tbl_tarif on tbl_talent.id_tarif=tbl_tarif.id_tarif');

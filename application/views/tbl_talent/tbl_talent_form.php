@@ -116,7 +116,7 @@
 								<div class="input-group-prepend">
 									<span class="input-group-text"><i class="fas fa-tags"></i></span>
 								</div>
-								<input type="text" name="tags" class="form-control" placeholder="tags" value="<?php echo $instagram; ?>" data-role="tagsinput">
+								<input type="text" name="tags" class="form-control" placeholder="tags" value="<?php echo $tags; ?>" data-role="tagsinput">
 							</div>
 						</div>
 					</div>
@@ -181,7 +181,7 @@
 											</div>
 											<!-- /.card-header -->
 											<div class="card-body">
-												<textarea id="prestasi" name='prestasi' placeholder="Masukan prestasi disini"></textarea>
+												<textarea id="prestasi" name='prestasi' ><?php echo $prestasi; ?></textarea>
 											</div>
 										</div>
 									</div>
@@ -230,3 +230,17 @@
 		$('#prestasi').summernote()
 	})
 </script>
+
+<!-- Tagify -->
+<script src="<?php echo base_url() . 'assets/tagify/dist/tagify.js' ?>"></script>
+<script src="<?php echo base_url() . 'assets/tagify/dist/jQuery.tagify.min.js' ?>"></script>
+
+<script>
+	$(function() {
+		// tagify
+		$('[name=tags]').tagify({duplicates :false});
+	})
+</script>
+
+<!-- Taginput -->
+<script src="<?php echo base_url() . 'assets/tags/dist/bootstrap-tagsinput.js' ?>"></script>
