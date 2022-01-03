@@ -259,13 +259,13 @@ class User extends CI_Controller
     {
         $nama_lengkap = $this->input->post('nama_lengkap', TRUE);
         $kontak = $this->input->post('kontak', TRUE);
-        $username = $this->input->post('username', TRUE);
+        // $username = $this->input->post('username', TRUE);
         $perusahaan = $this->input->post('perusahaan', TRUE);
 
         $data = array(
             'nama_lengkap' => $nama_lengkap,
             'kontak' => $kontak,
-            'username' => $username,
+            // 'username' => $username,
             'perusahaan' => $perusahaan,
         );
 

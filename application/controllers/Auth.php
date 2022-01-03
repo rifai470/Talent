@@ -64,7 +64,7 @@ class Auth extends CI_Controller
                     redirect('auth');
                 }
             } else {
-                $this->session->set_flashdata('status_login', 'Akun tidak aktif');
+                $this->session->set_flashdata('status_login', 'Akun tidak aktif, Mohon verifikasi terlebih dahulu.');
                 $this->index();
             }
         } else {
@@ -137,8 +137,8 @@ class Auth extends CI_Controller
             $hashPassword = password_hash($password, PASSWORD_BCRYPT, $options);
 
             //generate simple random code
-            $set = $nama_lengkap.$kontak;
-			$code = substr(str_shuffle($set), 0, 12);
+            $set = $nama_lengkap.$kontak."TalentManagement"."MustikaRatu";
+			$code = substr(str_shuffle($set), 0, 24);
 
             if (empty($row->username)) {
                 $data = array(
@@ -216,7 +216,7 @@ class Auth extends CI_Controller
 		$this->email->initialize($config);
 
 		$this->email->set_newline("\r\n");
-		$this->email->from('mustikaratu.mailer@gmail.com', 'No-Reply');
+		$this->email->from('mustikaratu.mailer@gmail.com', 'Mustika Ratu Talent');
 		// $this->email->to($data['username']);
 		$this->email->to('development@mustika-ratu.co.id');
 		$this->email->subject('Signup Verification Email');

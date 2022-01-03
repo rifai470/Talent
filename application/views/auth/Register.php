@@ -92,8 +92,8 @@
             </div>
           </div>
         </div>
-        <div class="input-group mb-3">
-          <span id='message'></span>
+        <div class="input-group mb-1">
+          <p id='message'></p>
         </div>
         <div class="row">
           <div class="col-4">
