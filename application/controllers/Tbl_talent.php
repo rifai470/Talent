@@ -65,6 +65,7 @@ class Tbl_talent extends CI_Controller
 	{
 		$row_kategori = $this->Tbl_kategori_model->get_all();
 		$row_tarif = $this->Tbl_tarif_model->get_all();
+		$row_tags = $this->Tbl_talent_model->get_tags();
 		$data = array(
 			'button' => 'Save',
 			'action' => site_url('tbl_talent/create_action'),
@@ -94,6 +95,7 @@ class Tbl_talent extends CI_Controller
 			'row_kategori' => $row_kategori,
 			'row_tarif' => $row_tarif,
 			'code_talent' => set_value('code_talent'),
+			'row_tags' => $row_tags,
 
 		);
 		$this->template->load('template', 'tbl_talent/tbl_talent_form', $data);
@@ -148,18 +150,6 @@ class Tbl_talent extends CI_Controller
 		'SecLogUser' => $this->session->userdata('nama_lengkap'),
 		'SecLogDate' => date('Y-m-d H:i:s'),
 		);
-		// $prestasi_array = array();
-		// $index = 0;
-		// foreach ($prestasi as $data) {
-		// 	$data_prestasi = array(
-		// 		'prestasi' => $data,
-		// 		'code_talent' => $code_talent,
-		// 		'SecLogUser' => $this->session->userdata('nama_lengkap'),
-		// 		'SecLogDate' => date('Y-m-d H:i:s'),
-		// 	);
-		// 	array_push($prestasi_array, $data_prestasi);
-		// 	$index++;
-		// }
 		$this->Tbl_talent_model->insert_prestasi($data_prestasi);
 
 		//buat array tags
@@ -192,8 +182,8 @@ class Tbl_talent extends CI_Controller
 						//flashMsg($errors);
 					} else {
 						// Code After Files Upload Success GOES HERE
-		// 				print_r($this->upload->data());
-		// die;
+						// print_r($this->upload->data());
+						// die;
 						$fileData = $this->upload->data();
 						$data_photo['photo'] = $fileData['file_name'];
 						$data_photo['code_talent'] = $code_talent;

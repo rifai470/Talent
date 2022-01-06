@@ -45,6 +45,7 @@
 <link rel="stylesheet" href="<?php echo base_url() ?>assets/adminlte/select2/dist/css/select2.min.css">
 <!-- Google Font: Source Sans Pro -->
 <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+<link rel="stylesheet" href="<?php echo base_url() ?>assets/tagify/dist/tagify.css">
 </head>
 
 <body class="hold-transition sidebar-mini sidebar-collapse">
@@ -118,7 +119,7 @@
 <script src="<?php echo base_url(); ?>assets/adminlte/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script> 
 <script src="<?php echo base_url(); ?>assets/adminlte/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script> 
 <script src="<?php echo base_url(); ?>assets/adminlte/plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script> 
-<script src="<?php echo base_url() ?>assets/adminlte/select2/dist/js/select2.full.min.js"></script> 
+<script src="<?php echo base_url() ?>assets/adminlte/select2/dist/js/select2.full.min.js"></script>
 <!-- page script --> 
 <script>
     $(function() {

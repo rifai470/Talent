@@ -116,90 +116,90 @@
 								<div class="input-group-prepend">
 									<span class="input-group-text"><i class="fas fa-tags"></i></span>
 								</div>
-								<input type="text" name="tags" class="form-control" placeholder="tags" value="<?php echo $tags; ?>" data-role="tagsinput">
+								<input type="text" name="tags" id="tags" class="form-control" placeholder="tags" value="" />
 							</div>
 						</div>
 					</div>
-						<!-- Card Sosial Media -->
-						
-							<div class="card card-default">
-								<div class="card-header">
-									<h3 class="card-title">SOSIAL MEDIA</h3>
+					<!-- Card Sosial Media -->
+
+					<div class="card card-default">
+						<div class="card-header">
+							<h3 class="card-title">SOSIAL MEDIA</h3>
+						</div>
+						<div class="card-body">
+							<div class="input-group mb-3">
+								<div class="input-group-prepend">
+									<span class="input-group-text"><i class="fab fa-instagram-square"></i></span>
 								</div>
-								<div class="card-body">
-									<div class="input-group mb-3">
-										<div class="input-group-prepend">
-											<span class="input-group-text"><i class="fab fa-instagram-square"></i></span>
-										</div>
-										<input type="text" name="instagram" class="form-control" placeholder="URL Instagram" value="<?php echo $instagram; ?>">
-									</div>
-									<div class="input-group mb-3">
-										<div class="input-group-prepend">
-											<span class="input-group-text"><i class="fab fa-facebook-square"></i></span>
-										</div>
-										<input type="text" name="facebook" class="form-control" placeholder="URL Facebook" value="<?php echo $facebook; ?>">
-									</div>
-									<div class="input-group mb-3">
-										<div class="input-group-prepend">
-											<span class="input-group-text"><i class="fab fa-twitter-square"></i></span>
-										</div>
-										<input type="text" name="twitter" class="form-control" placeholder="URL Twitter" value="<?php echo $twitter; ?>">
-									</div>
-									<div class="input-group mb-3">
-										<div class="input-group-prepend">
-											<span class="input-group-text"><i class="fa fa-plus-square"></i></span>
-										</div>
-										<input type="text" name="other" class="form-control" placeholder="URL Other" value="<?php echo $other; ?>">
+								<input type="text" name="instagram" class="form-control" placeholder="URL Instagram" value="<?php echo $instagram; ?>">
+							</div>
+							<div class="input-group mb-3">
+								<div class="input-group-prepend">
+									<span class="input-group-text"><i class="fab fa-facebook-square"></i></span>
+								</div>
+								<input type="text" name="facebook" class="form-control" placeholder="URL Facebook" value="<?php echo $facebook; ?>">
+							</div>
+							<div class="input-group mb-3">
+								<div class="input-group-prepend">
+									<span class="input-group-text"><i class="fab fa-twitter-square"></i></span>
+								</div>
+								<input type="text" name="twitter" class="form-control" placeholder="URL Twitter" value="<?php echo $twitter; ?>">
+							</div>
+							<div class="input-group mb-3">
+								<div class="input-group-prepend">
+									<span class="input-group-text"><i class="fa fa-plus-square"></i></span>
+								</div>
+								<input type="text" name="other" class="form-control" placeholder="URL Other" value="<?php echo $other; ?>">
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- Card Photo -->
+				<div class="col-md-6">
+					<div class="row-md-6">
+						<div class="card card-default">
+							<div class="card-header">
+								<h3 class="card-title">Photo *</h3>
+							</div>
+							<div class="card-body">
+								<div class="input-group" id="upload">
+									<div class="custom-file">
+										<input type="file" class="form-control" name="upload" value="<?php echo $photo; ?>" required>
+
 									</div>
 								</div>
 							</div>
-				</div>
-						<!-- Card Photo -->
-						<div class="col-md-6">
-							<div class="row-md-6">
+						</div>
+						<!-- Card Prestation -->
+						<div class="row">
+							<div class="col-md-12">
 								<div class="card card-default">
 									<div class="card-header">
-										<h3 class="card-title">Photo *</h3>
+										<h3 class="card-title">
+											PRESTASI
+										</h3>
 									</div>
+									<!-- /.card-header -->
 									<div class="card-body">
-										<div class="input-group" id="upload">
-											<div class="custom-file">
-												<input type="file" class="form-control" name="upload" value="<?php echo $photo; ?>" required>
-
-											</div>
-										</div>
-									</div>
-								</div>
-								<!-- Card Prestation -->
-								<div class="row">
-									<div class="col-md-12">
-										<div class="card card-default">
-											<div class="card-header">
-												<h3 class="card-title">
-													PRESTASI
-												</h3>
-											</div>
-											<!-- /.card-header -->
-											<div class="card-body">
-												<textarea id="prestasi" name='prestasi' ><?php echo $prestasi; ?></textarea>
-											</div>
-										</div>
+										<textarea id="prestasi" name='prestasi'><?php echo $prestasi; ?></textarea>
 									</div>
 								</div>
 							</div>
 						</div>
 					</div>
-
-					<div class="card-footer">
-						<div class="float-right d-none d-sm-block">
-							<input type="hidden" name="id_talent" value="<?php echo $id_talent; ?>" />
-							<input type="hidden" name="code_talent" value="<?php echo $code_talent; ?>" />
-							<a href="<?php echo site_url('tbl_talent') ?>" class="btn btn-danger"><i class="fa fa-sign-out"></i> Cancel</a>
-							<button type="submit" class="btn btn-info"><i class="fa fa-floppy-o"></i> <?php echo $button ?></button>
-						</div>
-					</div>
 				</div>
-				</form>
+			</div>
+
+			<div class="card-footer">
+				<div class="float-right d-none d-sm-block">
+					<input type="hidden" name="id_talent" value="<?php echo $id_talent; ?>" />
+					<input type="hidden" name="code_talent" value="<?php echo $code_talent; ?>" />
+					<a href="<?php echo site_url('tbl_talent') ?>" class="btn btn-danger"><i class="fa fa-sign-out"></i> Cancel</a>
+					<button type="submit" class="btn btn-info"><i class="fa fa-floppy-o"></i> <?php echo $button ?></button>
+				</div>
+			</div>
+		</div>
+		</form>
 	</section>
 </div>
 
@@ -235,12 +235,83 @@
 <script src="<?php echo base_url() . 'assets/tagify/dist/tagify.js' ?>"></script>
 <script src="<?php echo base_url() . 'assets/tagify/dist/jQuery.tagify.min.js' ?>"></script>
 
-<script>
-	$(function() {
-		// tagify
-		$('[name=tags]').tagify({duplicates :false});
-	})
-</script>
-
 <!-- Taginput -->
 <script src="<?php echo base_url() . 'assets/tags/dist/bootstrap-tagsinput.js' ?>"></script>
+
+<script>
+	$(function() {
+
+		var input = document.querySelector('input[name=tags]'),
+			// init Tagify script on the above inputs
+			tagify = new Tagify(input, {
+				whitelist: [<?php $no = 0; foreach ($row_tags as $tags) : $no++; ?> "<?php echo $tags['tags']; ?>", <?php endforeach; ?>],
+			});
+
+		// "remove all tags" button event listener
+		// document.querySelector('.tags--removeAllBtn')
+		// 	.addEventListener('click', tagify.removeAllTags.bind(tagify))
+		var value = tagify.value;
+		var tagArray = [];
+		for (var i=0; i < value.length; i++){
+			tagArray = value[i]['value'];
+		}
+		console.log('value: ',value);
+		console.log('tag array: ',tagArray);
+		
+		// Chainable event listeners
+		tagify.on('add', onAddTag)
+			.on('remove', onRemoveTag)
+			.on('input', onInput)
+			.on('edit', onTagEdit)
+			.on('invalid', onInvalidTag)
+			.on('click', onTagClick)
+			.on('dropdown:show', onDropdownShow)
+			.on('dropdown:hide', onDropdownHide);
+
+		// tag added callback
+		function onAddTag(e) {
+			var add = input.value;
+			var add1 = e;
+			console.log("input: ",add);
+			console.log("input1: ",add1);
+			console.log("onAddTag: ", e.detail);
+			console.log("original input value: ", input.value)
+			tagify.off('add', onAddTag) // exmaple of removing a custom Tagify event
+		}
+
+		// tag remvoed callback
+		function onRemoveTag(e) {
+			console.log(e.detail);
+			console.log("tagify instance value:", tagify.value)
+		}
+
+		// on character(s) added/removed (user is typing/deleting)
+		function onInput(e) {
+			console.log(e.detail);
+			console.log("onInput: ", e.detail);
+		}
+
+		function onTagEdit(e) {
+			console.log("onTagEdit: ", e.detail);
+		}
+
+		// invalid tag added callback
+		function onInvalidTag(e) {
+			console.log("onInvalidTag: ", e.detail);
+		}
+
+		// invalid tag added callback
+		function onTagClick(e) {
+			console.log(e.detail);
+			console.log("onTagClick: ", e.detail);
+		}
+
+		function onDropdownShow(e) {
+			console.log("onDropdownShow: ", e.detail)
+		}
+
+		function onDropdownHide(e) {
+			console.log("onDropdownHide: ", e.detail)
+		}
+	})
+</script>
