@@ -135,7 +135,6 @@ class Tbl_talent_model extends CI_Model
 
     //buat function insert photo
     function insert_photo($data_photo)
-
     {
         $this->db->insert('tbl_photo', $data_photo);
     }
@@ -207,13 +206,15 @@ class Tbl_talent_model extends CI_Model
 
     function get_kategori_talent($id_kategori)
     {
-        $this->db->select('tbl_talent.*, tbl_photo.*, tbl_kategori.*, tbl_tarif.*,tbl_tags.*,tbl_sosmed.*');
+        $this->db->select('tbl_talent.*, tbl_photo.*, tbl_kategori.*, tbl_tarif.*,tbl_tags.*,tbl_sosmed.*,tbl_prestasi.*');
         $this->db->join('tbl_photo','tbl_talent.code_talent=tbl_photo.code_talent','left');
         $this->db->join('tbl_kategori','tbl_talent.id_kategori=tbl_kategori.id_kategori','left');
         $this->db->join('tbl_tarif','tbl_talent.id_tarif=tbl_tarif.id_tarif','left');
         $this->db->join('tbl_tags','tbl_talent.code_talent=tbl_tags.code_talent','left');
         $this->db->join('tbl_sosmed','tbl_talent.code_talent=tbl_sosmed.code_talent','left');
+        $this->db->join('tbl_prestasi','tbl_talent.code_talent=tbl_prestasi.code_talent','left');
         $this->db->where('tbl_talent.id_kategori', $id_kategori);
+        $this->db->group_by('tbl_talent.code_talent');
         return $this->db->get('tbl_talent')->result();
     }
 
@@ -229,6 +230,19 @@ class Tbl_talent_model extends CI_Model
         $this->db->join('tbl_sosmed','tbl_talent.code_talent=tbl_sosmed.code_talent','left');
         $this->db->where('tbl_talent.code_talent', $code_talent);
         return $this->db->get('tbl_talent')->result();
+    }
+    
+    function image($code_talent)
+    {
+        $this->db->select('id_photo, photo, code_talent');
+        $this->db->where_in('code_talent', $code_talent);
+        return $this->db->get('tbl_photo')->result();
+
+        
+        //  print_r($this->db->last_query());
+        // echo "<pre>";
+        // print_r($data);
+        // exit;
     }
     
 }

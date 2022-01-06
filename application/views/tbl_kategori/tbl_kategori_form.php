@@ -13,7 +13,17 @@
 									<label for="kategori">Kategori <?php echo form_error('kategori') ?></label>
 									<input type="text" class="form-control" name="kategori" id="kategori" placeholder="Kategori" value="<?php echo $kategori; ?>" />
 								</div>
+									<div class="input-group" id="upload">
+											<div class="custom-file">
+												<input type="file" class="form-control" name="icon" value="<?php echo $icon; ?>" required>
+
+											</div>
+										</div>
+								</div>
 							</div>
+							
+							
+						
 							<div class="card-footer">
 								<input type="hidden" name="id_kategori" value="<?php echo $id_kategori; ?>" />
 								<button type="submit" class="btn btn-info"><i class="fa fa-floppy-o"></i> <?php echo $button ?></button>

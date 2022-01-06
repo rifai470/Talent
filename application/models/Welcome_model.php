@@ -51,4 +51,5 @@ class Welcome_model extends CI_Model
         $this->db->limit($limit, $start);
         return $this->db->get($this->table)->result();
     }
+
 }

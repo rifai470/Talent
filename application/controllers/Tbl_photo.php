@@ -31,7 +31,7 @@ class Tbl_photo extends CI_Controller
             $data = array(
 		'id_photo' => $row->id_photo,
 		'photo' => $row->photo,
-		'id_talent' => $row->id_talent,
+		'code_talent' => $row->code_talent,
 		'SecLogUser' => $row->SecLogUser,
 		'SecLogDate' => $row->SecLogDate,
 	    );
@@ -49,7 +49,7 @@ class Tbl_photo extends CI_Controller
             'action' => site_url('tbl_photo/create_action'),
 	    'id_photo' => set_value('id_photo'),
 	    'photo' => set_value('photo'),
-	    'id_talent' => set_value('id_talent'),
+	    'code_talent' => set_value('code_talent'),
 	    'SecLogUser' => set_value('SecLogUser'),
 	    'SecLogDate' => set_value('SecLogDate'),
 	);
@@ -65,7 +65,7 @@ class Tbl_photo extends CI_Controller
         } else {
             $data = array(
 		'photo' => $this->input->post('photo',TRUE),
-		'id_talent' => $this->input->post('id_talent',TRUE),
+		'code_talent' => $this->input->post('code_talent',TRUE),
 		'SecLogUser' => $this->input->post('SecLogUser',TRUE),
 		'SecLogDate' => $this->input->post('SecLogDate',TRUE),
 	    );
@@ -86,7 +86,7 @@ class Tbl_photo extends CI_Controller
                 'action' => site_url('tbl_photo/update_action'),
 		'id_photo' => set_value('id_photo', $row->id_photo),
 		'photo' => set_value('photo', $row->photo),
-		'id_talent' => set_value('id_talent', $row->id_talent),
+		'code_talent' => set_value('code_talent', $row->id_talent),
 		'SecLogUser' => set_value('SecLogUser', $row->SecLogUser),
 		'SecLogDate' => set_value('SecLogDate', $row->SecLogDate),
 	    );
@@ -106,7 +106,7 @@ class Tbl_photo extends CI_Controller
         } else {
             $data = array(
 		'photo' => $this->input->post('photo',TRUE),
-		'id_talent' => $this->input->post('id_talent',TRUE),
+		'code_talent' => $this->input->post('code_talent',TRUE),
 		'SecLogUser' => $this->input->post('SecLogUser',TRUE),
 		'SecLogDate' => $this->input->post('SecLogDate',TRUE),
 	    );
@@ -134,7 +134,7 @@ class Tbl_photo extends CI_Controller
     public function _rules() 
     {
 	$this->form_validation->set_rules('photo', 'photo', 'trim|required');
-	$this->form_validation->set_rules('id_talent', 'id talent', 'trim|required');
+	$this->form_validation->set_rules('code_talent', 'code talent', 'trim|required');
 	$this->form_validation->set_rules('SecLogUser', 'secloguser', 'trim|required');
 	$this->form_validation->set_rules('SecLogDate', 'seclogdate', 'trim|required');
 

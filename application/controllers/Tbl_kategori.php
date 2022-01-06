@@ -44,8 +44,9 @@ class Tbl_kategori extends CI_Controller
         $data = array(
             'button' => 'Save',
             'action' => site_url('tbl_kategori/create_action'),
-	    'id_kategori' => set_value('id_kategori'),
-	    'kategori' => set_value('kategori'),
+	        'id_kategori' => set_value('id_kategori'),
+	        'kategori' => set_value('kategori'),
+            'icon' => set_value('icon'),
 	);
         $this->template->load('template','tbl_kategori/tbl_kategori_form', $data);
     }
@@ -59,14 +60,51 @@ class Tbl_kategori extends CI_Controller
         } else {
             $data = array(
 		'kategori' => $this->input->post('kategori',TRUE),
+        'icon' => $this->input->post('icon',TRUE),
 	    );
 
             $this->Tbl_kategori_model->insert($data);
             $this->session->set_flashdata('message', 'Create Record Success 2');
             redirect(site_url('tbl_kategori'));
         }
+
+        //array photo
+		if ($_FILES['upload']['name'] == '') {
+			$this->session->set_flashdata('massage','file harus diisi');
+		}else {
+			$config['upload_path'] = './assets/img/'; 
+			$config['allowed_types'] = 'gif|jpg|jpeg|png';
+			// $config['max_size'] = '1024';
+			// $config['max_width'] = '1920';
+			// $config['max_height'] = '1280';
+			$this->load->library('upload', $config);
+
+			// foreach ($_FILES as $fieldname => $fileObject)  //fieldname is the form field name
+			// {
+				// if (!empty($fileObject['upload'])) {
+					$this->upload->initialize($config);
+					$upload='upload';
+					if (!$this->upload->do_upload($upload)) {
+						$errors = $this->upload->display_errors();
+						//flashMsg($errors);
+					} else {
+						// Code After Files Upload Success GOES HERE
+		// 				print_r($this->upload->data());
+		// die;
+						$fileData = $this->upload->data();
+						$data_icon['icon'] = $fileData['file_name'];
+					}
+				// }
+			// }
+			if (!empty($data_icon)) {
+				// Insert files data into the database 
+				$this->Tbl_kategori_model->insert_icon($data_icon);
+			}
+		}
     }
     
+    
+
     public function update($id) 
     {
         $row = $this->Tbl_kategori_model->get_by_id($id);
@@ -75,8 +113,9 @@ class Tbl_kategori extends CI_Controller
             $data = array(
                 'button' => 'Update',
                 'action' => site_url('tbl_kategori/update_action'),
-		'id_kategori' => set_value('id_kategori', $row->id_kategori),
-		'kategori' => set_value('kategori', $row->kategori),
+		        'id_kategori' => set_value('id_kategori', $row->id_kategori),
+		        'kategori' => set_value('kategori', $row->kategori),
+                'icon' => set_value('icon', $row->icon),
 	    );
             $this->template->load('template','tbl_kategori/tbl_kategori_form', $data);
         } else {
@@ -93,7 +132,8 @@ class Tbl_kategori extends CI_Controller
             $this->update($this->input->post('id_kategori', TRUE));
         } else {
             $data = array(
-		'kategori' => $this->input->post('kategori',TRUE),
+		        'kategori' => $this->input->post('kategori',TRUE),
+                'icon' => $this->input->post('icon',TRUE),
 	    );
 
             $this->Tbl_kategori_model->update($this->input->post('id_kategori', TRUE), $data);
@@ -123,6 +163,8 @@ class Tbl_kategori extends CI_Controller
 	$this->form_validation->set_rules('id_kategori', 'id_kategori', 'trim');
 	$this->form_validation->set_error_delimiters('<span class="text-danger">', '</span>');
     }
+
+    
 
 }
 

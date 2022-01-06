@@ -15,16 +15,8 @@
 			<textarea class="form-control" name="photo" id="photo" placeholder="Photo"><?php echo $photo; ?></textarea>
 		</div>
 	<div class="form-group">
-			<label for="id_talent">Id Talent <?php echo form_error('id_talent') ?></label>
-			<input type="text" class="form-control" name="id_talent" id="id_talent" placeholder="Id Talent" value="<?php echo $id_talent; ?>"/>
-		</div>
-	<div class="form-group">
-			<label for="SecLogUser">SecLogUser <?php echo form_error('SecLogUser') ?></label>
-			<input type="text" class="form-control" name="SecLogUser" id="SecLogUser" placeholder="SecLogUser" value="<?php echo $SecLogUser; ?>"/>
-		</div>
-	<div class="form-group">
-			<label for="SecLogDate">SecLogDate <?php echo form_error('SecLogDate') ?></label>
-			<input type="date" class="form-control" name="SecLogDate" id="SecLogDate" placeholder="SecLogDate" value="<?php echo $SecLogDate; ?>" />
+			<label for="id_talent">Code Talent <?php echo form_error('code_talent') ?></label>
+			<input type="text" class="form-control" name="id_talent" id="code_talent" placeholder="Code Talent" value="<?php echo $code_talent; ?>"/>
 		</div>
 	</div>
 			<div class="card-footer">

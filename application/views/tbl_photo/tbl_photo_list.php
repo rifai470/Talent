@@ -26,7 +26,7 @@
                 		<tr>
                     		<th width="30px">#</th>
 		    <th>Photo</th>
-		    <th>Id Talent</th>
+		    <th>Code Talent</th>
 		    <th>SecLogUser</th>
 		    <th>SecLogDate</th>
 		    <th width="150px">&nbsp;</th>
@@ -84,7 +84,7 @@
                         {
                             "data": "id_photo",
                             "orderable": false
-                        },{"data": "photo"},{"data": "id_talent"},{"data": "SecLogUser"},{"data": "SecLogDate"},
+                        },{"data": "photo"},{"data": "code_talent"},{"data": "SecLogUser"},{"data": "SecLogDate"},
                         {
                             "data" : "action",
                             "orderable": false,

@@ -17,7 +17,7 @@ class Tbl_photo_model extends CI_Model
 
     // datatables
     function json() {
-        $this->datatables->select('id_photo,photo,id_talent,SecLogUser,SecLogDate');
+        $this->datatables->select('id_photo,photo,code_talent,SecLogUser,SecLogDate');
         $this->datatables->from('tbl_photo');
         //add this line for join
         //$this->datatables->join('table2', 'tbl_photo.field = table2.field');
@@ -45,7 +45,7 @@ class Tbl_photo_model extends CI_Model
     function total_rows($q = NULL) {
         $this->db->like('id_photo', $q);
 	$this->db->or_like('photo', $q);
-	$this->db->or_like('id_talent', $q);
+	$this->db->or_like('code_talent', $q);
 	$this->db->or_like('SecLogUser', $q);
 	$this->db->or_like('SecLogDate', $q);
 	$this->db->from($this->table);
@@ -57,7 +57,7 @@ class Tbl_photo_model extends CI_Model
         $this->db->order_by($this->id, $this->order);
         $this->db->like('id_photo', $q);
 	$this->db->or_like('photo', $q);
-	$this->db->or_like('id_talent', $q);
+	$this->db->or_like('code_talent', $q);
 	$this->db->or_like('SecLogUser', $q);
 	$this->db->or_like('SecLogDate', $q);
 	$this->db->limit($limit, $start);

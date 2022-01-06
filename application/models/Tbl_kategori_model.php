@@ -64,12 +64,25 @@ class Tbl_kategori_model extends CI_Model
         $this->db->insert($this->table, $data);
     }
 
+    //buat function insert photo
+    function insert_icon($data_icon)
+    {
+        $this->db->insert('tbl_kategori', $data_icon);
+    }
+
     // update data
     function update($id, $data)
     {
         $this->db->where($this->id, $id);
         $this->db->update($this->table, $data);
     }
+
+    // function update_icon($code_talent, $data_update_icon)
+    // {
+    //     $this->db->where('code_talent',$code_talent);
+    //     $this->db->update('tbl_kategori', $data_update_icon);
+       
+    // }
 
     // delete data
     function delete($id)
