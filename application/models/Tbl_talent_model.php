@@ -231,6 +231,18 @@ class Tbl_talent_model extends CI_Model
         $this->db->where('tbl_talent.code_talent', $code_talent);
         return $this->db->get('tbl_talent')->result();
     }
+
+    function get_tags()
+    {
+        $this->db->select('tags', FALSE);
+        $this->db->group_by('tags');
+        $data = $this->db->get('tbl_tags')->result_array();
+        return $data;
+        // print_r($this->db->last_query());
+        // echo "<pre>";
+        // print_r($data);
+        // exit;
+    }
     
     function image($code_talent)
     {

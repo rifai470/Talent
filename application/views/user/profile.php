@@ -192,7 +192,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 <input type="text" class="form-control form-control-md" name="nama_lengkap" placeholder="Nama Lengkap" value="<?php echo $nama_lengkap; ?>" required />
               </div>
               <div class="input-group mb-3">
-                <input type="text" class="form-control form-control-md" name="username" placeholder="Email" value="<?php echo $username; ?>" required />
+                <input type="text" class="form-control form-control-md" name="username" placeholder="Email" value="<?php echo $username; ?>" required disabled/>
               </div>
               <div class="input-group mb-3">
                 <input type="text" class="form-control form-control-md" name="kontak" placeholder="No Whatsapp" value="<?php echo $kontak; ?>" required />

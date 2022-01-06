@@ -18,17 +18,50 @@
   <link rel="icon" type="image/png" sizes="32x32" href="<?php echo base_url(); ?>assets\images\favicon.ico\favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="96x96" href="<?php echo base_url(); ?>assets\images\favicon.ico\favicon-96x96.png">
   <link rel="icon" type="image/png" sizes="16x16" href="<?php echo base_url(); ?>assets\images\favicon.ico\favicon-16x16.png">
-  <!-- Google Font: Source Sans Pro -->
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
   <!-- Font Awesome -->
-  <link rel="stylesheet" href="<?php echo base_url(); ?>assets\adminlte\plugins\fontawesome-free\css\all.min.css">
-  <!-- icheck bootstrap -->
-  <link rel="stylesheet" href="<?php echo base_url(); ?>assets\adminlte\plugins\icheck-bootstrap\icheck-bootstrap.min.css">
+  <link rel="stylesheet" href="<?php echo base_url(); ?>assets/adminlte/plugins/fontawesome-free/css/all.min.css">
+  <link rel="stylesheet" href="<?php echo base_url(); ?>assets/js/morris.css">
+  <!-- Ionicons -->
+  <link rel="stylesheet" href="<?php echo base_url(); ?>assets/adminlte/plugins/ionicons.min.css">
+  <!-- Tempusdominus Bbootstrap 4 -->
+  <link rel="stylesheet" href="<?php echo base_url(); ?>assets/adminlte/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css">
+  <!-- iCheck -->
+  <link rel="stylesheet" href="<?php echo base_url(); ?>assets/adminlte/plugins/icheck-bootstrap/icheck-bootstrap.min.css">
+  <!-- JQVMap -->
+  <link rel="stylesheet" href="<?php echo base_url(); ?>assets/adminlte/plugins/jqvmap/jqvmap.min.css">
   <!-- Theme style -->
-  <link rel="stylesheet" href="<?php echo base_url(); ?>assets\adminlte\dist\css\adminlte.min.css">
+  <link rel="stylesheet" href="<?php echo base_url(); ?>assets/adminlte/dist/css/adminlte.min.css">
+  <!-- overlayScrollbars -->
+  <link rel="stylesheet" href="<?php echo base_url(); ?>assets/adminlte/plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
+  <!-- Daterange picker -->
+  <link rel="stylesheet" href="<?php echo base_url(); ?>assets/adminlte/plugins/daterangepicker/daterangepicker.css">
+  <!-- summernote -->
+  <link rel="stylesheet" href="<?php echo base_url(); ?>assets/adminlte/plugins/summernote/summernote-bs4.css">
+  <!-- DataTables -->
+  <link rel="stylesheet" href="<?php echo base_url(); ?>assets/adminlte/plugins/datatables-bs4/css/dataTables.bootstrap4.css">
+  <link rel="stylesheet" href="<?php echo base_url(); ?>assets/adminlte/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
+  <link rel="stylesheet" href="<?php echo base_url() ?>assets/adminlte/select2/dist/css/select2.min.css">
+  <!-- Google Font: Source Sans Pro -->
+  <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
 </head>
 
 <body class="hold-transition login-page">
+<div class="login-box">
+  <?php if ($this->session->userdata('status_login')) { ?>
+    <div class="alert alert-danger alert-dismissible" style="padding-right: 20px;">
+      <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+      <h5><i class="icon fas fa-times"></i> Alert!</h5>
+      <?php echo $this->session->userdata('status_login') <> '' ? $this->session->userdata('status_login') : ''; ?>
+    </div>
+  <?php } ?>
+  <?php if ($this->session->userdata('status_register')) { ?>
+    <div class="alert alert-success alert-dismissible" style="padding-right: 20px;">
+      <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+      <h5><i class="icon fas fa-check"></i> Alert!</h5>
+      <?php echo $this->session->userdata('status_register') <> '' ? $this->session->userdata('status_register') : ''; ?>
+    </div>
+  <?php } ?>
+</div>
   <div class="login-box">
     <!-- /.login-logo -->
     <div class="card card-outline card-primary">
@@ -36,23 +69,6 @@
         <a href="" class="h1"><b>LOGIN</b></a>
       </div>
       <div class="card-body">
-        <?php
-        $status_login = $this->session->userdata('status_login');
-        if (empty($status_login)) {
-          $message = "";
-        } else {
-          $message = $status_login;
-        }
-
-        $status_register = $this->session->userdata('status_register');
-        if (empty($status_register)) {
-          $message_r = "";
-        } else {
-          $message_r = $status_register;
-        }
-        ?>
-        <p class="login-box-msg" style="color: red;"><?php echo $message; ?></p>
-        <p class="login-box-msg" style="color: green;"><?php echo $message_r; ?></p>
         <?php $attributes = array('class' => 'margin-bottom-0');
         echo form_open('auth/cheklogin', $attributes); ?>
         <div class="input-group mb-3">
@@ -73,9 +89,9 @@
         </div>
         <div class="row">
           <div class="col-8">
-              <label for="remember">
+            <label for="remember">
               <?php echo form_checkbox('remember', TRUE, $remember) ?> Remember Me
-              </label>
+            </label>
           </div>
           <!-- /.col -->
           <div class="col-4">
@@ -85,9 +101,9 @@
         </div>
         </form>
 
-      </br>
+        </br>
         <p class="mb-0">
-        Belum pernah daftar? <a href="<?php echo base_url('auth/register'); ?>" class="text-center">Daftar di sini​</a>
+          Belum pernah daftar? <a href="<?php echo base_url('auth/register'); ?>" class="text-center">Daftar di sini​</a>
         </p>
       </div>
       <!-- /.card-body -->
