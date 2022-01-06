@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 31, 2021 at 07:48 AM
+-- Generation Time: Jan 06, 2022 at 03:10 AM
 -- Server version: 10.4.22-MariaDB
 -- PHP Version: 7.4.27
 
@@ -83,8 +83,14 @@ CREATE TABLE `tbl_kategori` (
 --
 
 INSERT INTO `tbl_kategori` (`id_kategori`, `kategori`, `icon`) VALUES
-(1, 'Influencer', '<i class=\"fas fa-user-astronaut\"></i>'),
-(2, 'MC', '<i class=\"fas fa-microphone-alt\"></i>');
+(1, 'Influencer', 'influencer.jpg'),
+(2, 'MC', 'mc.jpg'),
+(3, 'Model', 'model.jpg'),
+(4, 'Make Up', 'make up.jpg'),
+(5, 'Fotografi', 'fotografi.jpg'),
+(6, 'test', 'wilda2.jpg'),
+(7, 'kecewa', 'kecewa.jpg'),
+(10, 'bagus', 'bagus.jpg');
 
 -- --------------------------------------------------------
 
@@ -127,7 +133,7 @@ INSERT INTO `tbl_menu` (`id_menu`, `title`, `url`, `icon`, `is_main_menu`, `is_a
 
 CREATE TABLE `tbl_photo` (
   `id_photo` int(11) NOT NULL,
-  `photo` text NOT NULL,
+  `photo` text DEFAULT NULL,
   `code_talent` varchar(9) NOT NULL,
   `SecLogUser` varchar(250) NOT NULL,
   `SecLogDate` date NOT NULL
@@ -143,7 +149,10 @@ INSERT INTO `tbl_photo` (`id_photo`, `photo`, `code_talent`, `SecLogUser`, `SecL
 (4, 'belinda2.JPG', 'TLN-3', 'admin', '2021-12-29'),
 (5, 'MEGHNA_SHARMA.jpg', 'TLN-4', 'admin', '2021-12-29'),
 (6, 'KALISTA_ISKANDAR.jpg', 'TLN-5', 'admin', '2021-12-29'),
-(7, 'ayu.png', 'TLN-6', 'admin', '2021-12-29');
+(7, 'ayu.png', 'TLN-6', 'admin', '2021-12-29'),
+(8, 'ayu2.jpg', 'TLN-6', '', '0000-00-00'),
+(9, 'jihan3.jpeg', 'TLN-1', '', '0000-00-00'),
+(10, 'jihan4.png', 'TLN-1', '', '0000-00-00');
 
 -- --------------------------------------------------------
 
@@ -153,7 +162,7 @@ INSERT INTO `tbl_photo` (`id_photo`, `photo`, `code_talent`, `SecLogUser`, `SecL
 
 CREATE TABLE `tbl_prestasi` (
   `id_prestasi` int(11) NOT NULL,
-  `prestasi` varchar(250) NOT NULL,
+  `prestasi` varchar(250) DEFAULT NULL,
   `code_talent` varchar(9) NOT NULL,
   `SecLogUser` varchar(250) NOT NULL,
   `SecLogDate` date NOT NULL
@@ -199,10 +208,10 @@ INSERT INTO `tbl_setting` (`id_setting`, `nama_setting`, `value`) VALUES
 
 CREATE TABLE `tbl_sosmed` (
   `id_sosmed` int(11) NOT NULL,
-  `instagram` text NOT NULL,
-  `facebook` text NOT NULL,
-  `twitter` text NOT NULL,
-  `other` text NOT NULL,
+  `instagram` text DEFAULT NULL,
+  `facebook` text DEFAULT NULL,
+  `twitter` text DEFAULT NULL,
+  `other` text DEFAULT NULL,
   `code_talent` varchar(9) NOT NULL,
   `SecLogUser` varchar(250) NOT NULL,
   `SecLogDate` date NOT NULL
@@ -229,7 +238,7 @@ INSERT INTO `tbl_sosmed` (`id_sosmed`, `instagram`, `facebook`, `twitter`, `othe
 
 CREATE TABLE `tbl_tags` (
   `id_tags` int(11) NOT NULL,
-  `tags` varchar(225) NOT NULL,
+  `tags` varchar(225) DEFAULT NULL,
   `code_talent` varchar(9) NOT NULL,
   `SecLogUser` varchar(250) NOT NULL,
   `SecLogDate` date NOT NULL
@@ -270,14 +279,14 @@ CREATE TABLE `tbl_talent` (
   `tanggal_lahir` date NOT NULL,
   `usia` int(2) NOT NULL,
   `jenis_kelamin` varchar(15) NOT NULL,
-  `hobby` text NOT NULL,
+  `hobby` text DEFAULT NULL,
   `pendidikan` varchar(250) NOT NULL,
   `pekerjaan` varchar(250) NOT NULL,
   `bahasa` varchar(150) NOT NULL,
   `tinggi_badan` int(5) NOT NULL,
   `berat_badan` int(5) NOT NULL,
   `id_kategori` int(11) NOT NULL,
-  `tentang` text NOT NULL,
+  `tentang` text DEFAULT NULL,
   `id_tarif` int(11) NOT NULL,
   `SecLogUser` varchar(250) NOT NULL,
   `SecLogDate` date NOT NULL
@@ -326,6 +335,7 @@ CREATE TABLE `tbl_user` (
   `nama_lengkap` varchar(250) NOT NULL,
   `kontak` varchar(50) NOT NULL,
   `id_user_level` int(11) NOT NULL,
+  `code` text NOT NULL,
   `is_aktif` enum('y','n') NOT NULL,
   `cookie` varchar(255) NOT NULL,
   `perusahaan` varchar(100) DEFAULT NULL,
@@ -336,17 +346,17 @@ CREATE TABLE `tbl_user` (
 -- Dumping data for table `tbl_user`
 --
 
-INSERT INTO `tbl_user` (`id_users`, `username`, `password`, `nama_lengkap`, `kontak`, `id_user_level`, `is_aktif`, `cookie`, `perusahaan`, `images`) VALUES
-(1, 'admin@gmail.com', '$2y$04$ynPLGl2vPQvwBpM40SiWn.QvTWqvxZW1AeFK.xz5.XrKI.UYBOtOy', 'admin', '', 1, 'y', 'zjPm8Sb9ewcGsY1GENRtwNSO2xXeLW3vQZtBfAFhopQIz9MUfKyi8JAakbXUdVn5', NULL, NULL),
-(2, 'development@mustika-ratu.co.id', '$2y$04$ynPLGl2vPQvwBpM40SiWn.QvTWqvxZW1AeFK.xz5.XrKI.UYBOtOy', '', '', 1, 'y', '', NULL, NULL),
-(3, 'elfarida@mustika-ratu.co.id', '$2y$04$qyvjI4N6zPYM0cs89zFvwu61vOeA9bpGwZvuBWunvbSijXA/4yeTW', '', '', 3, 'y', '', NULL, NULL),
-(4, 'nisha.wulandari@mustika-ratu.co.id', '$2y$04$qyvjI4N6zPYM0cs89zFvwu61vOeA9bpGwZvuBWunvbSijXA/4yeTW', '', '', 4, 'y', '', 'PT. Mustika Ratu', NULL),
-(5, 'iis@mustika-ratu.co.id', '$2y$04$qyvjI4N6zPYM0cs89zFvwu61vOeA9bpGwZvuBWunvbSijXA/4yeTW', '', '', 3, 'y', '', NULL, NULL),
-(6, 'alfan.nr@mustika-ratu.co.id', '$2y$04$qyvjI4N6zPYM0cs89zFvwu61vOeA9bpGwZvuBWunvbSijXA/4yeTW', '', '', 4, 'y', '', 'PT. MECAYYA', NULL),
-(7, 'lakky@gmail.com', '$2y$04$8l0e4aIGyk07Nd48VtEN7uh4ASJmbeELM5RmuR55aKECOaRiRG6Nu', '', '', 4, 'y', '', 'PT. MECCAYA', NULL),
-(8, '', '$2y$04$gPSFs1yMm07A7PYYSaXeyeGyWuDaMRnXF2kHpFK4rxmxk/ErYHL/6', '', '', 3, 'y', '', NULL, NULL),
-(9, 'demo@sehat.com', '$2y$04$zzRd70SxPba1yqi53D/nj.RnygQ4jHiIzOUSlyBFl4b.yoxlUPnZC', '', '', 5, 'y', '', 'Demo', NULL),
-(10, 'daniel@mustika-ratu.co.id', '$2y$04$7crHBa9hRXahsW8WV./sz.lOcM.8DhdAK3H9M.X0.Z8d6OQR36jMG', '', '', 3, 'y', '', NULL, NULL);
+INSERT INTO `tbl_user` (`id_users`, `username`, `password`, `nama_lengkap`, `kontak`, `id_user_level`, `code`, `is_aktif`, `cookie`, `perusahaan`, `images`) VALUES
+(1, 'admin@gmail.com', '$2y$04$ynPLGl2vPQvwBpM40SiWn.QvTWqvxZW1AeFK.xz5.XrKI.UYBOtOy', 'admin', '', 1, '', 'y', 'zjPm8Sb9ewcGsY1GENRtwNSO2xXeLW3vQZtBfAFhopQIz9MUfKyi8JAakbXUdVn5', NULL, NULL),
+(2, 'development@mustika-ratu.co.id', '$2y$04$ynPLGl2vPQvwBpM40SiWn.QvTWqvxZW1AeFK.xz5.XrKI.UYBOtOy', '', '', 1, '', 'y', '', NULL, NULL),
+(3, 'elfarida@mustika-ratu.co.id', '$2y$04$qyvjI4N6zPYM0cs89zFvwu61vOeA9bpGwZvuBWunvbSijXA/4yeTW', '', '', 3, '', 'y', '', NULL, NULL),
+(4, 'nisha.wulandari@mustika-ratu.co.id', '$2y$04$qyvjI4N6zPYM0cs89zFvwu61vOeA9bpGwZvuBWunvbSijXA/4yeTW', '', '', 4, '', 'y', '', 'PT. Mustika Ratu', NULL),
+(5, 'iis@mustika-ratu.co.id', '$2y$04$qyvjI4N6zPYM0cs89zFvwu61vOeA9bpGwZvuBWunvbSijXA/4yeTW', '', '', 3, '', 'y', '', NULL, NULL),
+(6, 'alfan.nr@mustika-ratu.co.id', '$2y$04$qyvjI4N6zPYM0cs89zFvwu61vOeA9bpGwZvuBWunvbSijXA/4yeTW', '', '', 4, '', 'y', '', 'PT. MECAYYA', NULL),
+(7, 'lakky@gmail.com', '$2y$04$8l0e4aIGyk07Nd48VtEN7uh4ASJmbeELM5RmuR55aKECOaRiRG6Nu', '', '', 4, '', 'y', '', 'PT. MECCAYA', NULL),
+(8, '', '$2y$04$gPSFs1yMm07A7PYYSaXeyeGyWuDaMRnXF2kHpFK4rxmxk/ErYHL/6', '', '', 3, '', 'y', '', NULL, NULL),
+(9, 'demo@sehat.com', '$2y$04$zzRd70SxPba1yqi53D/nj.RnygQ4jHiIzOUSlyBFl4b.yoxlUPnZC', '', '', 5, '', 'y', '', 'Demo', NULL),
+(10, 'daniel@mustika-ratu.co.id', '$2y$04$7crHBa9hRXahsW8WV./sz.lOcM.8DhdAK3H9M.X0.Z8d6OQR36jMG', '', '', 3, '', 'y', '', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -457,7 +467,7 @@ ALTER TABLE `tbl_hak_akses`
 -- AUTO_INCREMENT for table `tbl_kategori`
 --
 ALTER TABLE `tbl_kategori`
-  MODIFY `id_kategori` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_kategori` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `tbl_menu`
@@ -469,7 +479,7 @@ ALTER TABLE `tbl_menu`
 -- AUTO_INCREMENT for table `tbl_photo`
 --
 ALTER TABLE `tbl_photo`
-  MODIFY `id_photo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id_photo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `tbl_prestasi`
