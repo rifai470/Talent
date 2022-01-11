@@ -235,11 +235,23 @@ foreach ($get_talent as $row) : $no++; ?>
             <?php $no = 1;
             foreach ($row_image as $image) : $no++; ?>
               <?php if ($row->code_talent == $image->code_talent) { ?>
-                <span class="w3-badge demo w3-border w3-transparent w3-hover-white" onclick="currentDiv(<?php echo $no ?>)"></span>
+                <center><img class="mySlides" style="width: 350px;" src="<?php echo base_url('uploads/photo/' . $image->photo . ''); ?>"></center>
               <?php } ?>
+              <!-- sampai sini bener -->
             <?php endforeach; ?>
+            <div class="w3-center w3-container w3-section w3-large w3-text-white w3-display-bottom" style="width:100%">
+              <?php if ($row_image != NULL) { ?>
+                <div class="w3-left w3-hover-text-khaki" onclick="plusDivs(-1)" style="color: #babda0;">&#10094;</div>
+                <div class="w3-right w3-hover-text-khaki" onclick="plusDivs(1)" style="color: #babda0;">&#10095;</div>
+              <?php } ?>
+              <?php $no = 1;
+              foreach ($row_image as $image) : $no++; ?>
+                <?php if ($row->code_talent == $image->code_talent) { ?>
+                  <span class="w3-badge demo w3-border w3-transparent w3-hover-white" onclick="currentDiv(<?php echo $no ?>)"></span>
+                <?php } ?>
+              <?php endforeach; ?>
+            </div>
           </div>
-        </div>
 
           <h3 class="widget-user-username" style="text-align: center;"><b><?php echo $row->nama; ?></b></h3>
           <h6 class="widget-user-desc" style="text-align: center;"><i class="fas fa-map-marker-alt" style="color: grey;"></i> <?php echo $row->tempat; ?></h6>
@@ -248,8 +260,8 @@ foreach ($get_talent as $row) : $no++; ?>
             <div class="col-md-3">
               <div class="description-block">
                 <a target="_blank" href="http://<?php echo $row->instagram; ?>" <button type="button" class="btn btn-block btn-outline-dark fab fa-instagram <?php if ($row->instagram == NULL && $row->instagram == '') {
-                                                                                                                                                              echo 'disabled';
-                                                                                                                                                            } ?>" style="font-size: 12px;"> Instagram</button></a>
+                                                                                                                                                                echo 'disabled';
+                                                                                                                                                              } ?>" style="font-size: 12px;"> Instagram</button></a>
               </div>
             </div>
             <div class="col-md-3">
@@ -268,9 +280,7 @@ foreach ($get_talent as $row) : $no++; ?>
             </div>
             <div class="col-md-3">
               <div class="description-block">
-                <a target="_blank" href="http://<?php echo $row->other; ?>" <button type="button" class="btn btn-block btn-outline-dark <?php if ($row->other == NULL && $row->other == '') {
-                                                                                                                                          echo 'disabled';
-                                                                                                                                        } ?>" style="font-size: 12px;"><i class="fas fa-globe"></i> Other</button></a>
+                <a target="_blank" href="http://<?php echo $row->other; ?>" <button type="button" class="btn btn-block btn-outline-dark <?php if ($row->other == NULL && $row->other == '') { echo 'disabled'; } ?>" style="font-size: 12px;"><i class="fas fa-globe"></i> Other</button></a>
               </div>
             </div>
           </div>
@@ -370,8 +380,6 @@ foreach ($get_talent as $row) : $no++; ?>
 
   function showDivs(n) {
 
-    <?php $no = 1;
-    foreach ($get_talent as $row) : $no++; ?>
       var i;
       var x = document.getElementsByClassName("mySlides");
       var dots = document.getElementsByClassName("demo");
@@ -389,7 +397,7 @@ foreach ($get_talent as $row) : $no++; ?>
       }
       x[slideIndex - 1].style.display = "block";
       dots[slideIndex - 1].className += " w3-white";
-    <?php endforeach; ?>
+
   }
 </script>
 
