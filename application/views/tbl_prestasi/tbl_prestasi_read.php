@@ -26,9 +26,9 @@
 							<td><?php echo $prestasi; ?></td>
 						</tr>
 	    <tr>
-							<td width="20%">Id Talent</td>
+							<td width="20%">Code Talent</td>
 							<td width="2%">:</td>
-							<td><?php echo $id_talent; ?></td>
+							<td><?php echo $code_talent; ?></td>
 						</tr>
 	    <tr>
 							<td width="20%">SecLogUser</td>

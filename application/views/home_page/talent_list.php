@@ -132,6 +132,8 @@
   }
 </style>
 
+
+
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
   <!-- Content Header (Page header) -->
@@ -221,7 +223,7 @@ foreach ($get_talent as $row) : $no++; ?>
           <?php $no = 0;
           foreach ($row_image as $image) : $no++; ?>
             <?php if ($row->code_talent == $image->code_talent) { ?>
-              <center><img class="mySlides" style="width: 350px;" src="<?php echo base_url('uploads/photo/' . $image->photo . ''); ?>"></center>
+              <center><img class="mySlides<?php echo str_replace("-","",$row->code_talent); ?>" style="width: 350px;" src="<?php echo base_url('uploads/photo/' . $image->photo . ''); ?>"></center>
             <?php } ?>
             <!-- sampai sini bener -->
             <?php endforeach; ?>

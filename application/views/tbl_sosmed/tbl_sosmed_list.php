@@ -17,17 +17,19 @@
 					<div class="card card-info">
 						<div class="card-header" style="background: -webkit-gradient(linear, left bottom, left top, color-stop(0, #4d5b76), color-stop(1, #6f80a1));">
 							<h3 class="card-title">SOSMED   </h3>
-							<div class="card-tools">
-								<?php echo anchor(site_url('tbl_sosmed/create'), '<i class="fab fa-wpforms" aria-hidden="true">
-							</i> New', 'class="btn btn-danger btn-sm"'); ?> <button class="btn btn-tool" onclick="window.location.href='<?php echo site_url();?>/tbl_sosmed';"><i class="fas fa-redo-alt"></i></button></div></div>
+							<div class="card-tools"> <button class="btn btn-tool" onclick="window.location.href='<?php echo site_url();?>/tbl_sosmed';"><i class="fas fa-redo-alt"></i></button>
+                            </div>
+                        </div>
 			<div class="card-body">
         		<table class="table table-bordered table-striped" id="mytable">
             		<thead>
                 		<tr>
                     		<th width="30px">#</th>
-		    <th>Sosmed</th>
-		    <th>Url</th>
-		    <th>Id Talent</th>
+		    <th>Instagram</th>
+		    <th>Facebook</th>
+            <th>Twitter</th>
+		    <th>Other</th>
+		    <th>Code Talent</th>
 		    <th>SecLogUser</th>
 		    <th>SecLogDate</th>
 		    <th width="150px">&nbsp;</th>
@@ -85,7 +87,7 @@
                         {
                             "data": "id_sosmed",
                             "orderable": false
-                        },{"data": "sosmed"},{"data": "url"},{"data": "id_talent"},{"data": "SecLogUser"},{"data": "SecLogDate"},
+                        },{"data": "instagram"},{"data": "facebook"},{"data": "twitter"},{"data": "other"},{"data": "code_talent"},{"data": "SecLogUser"},{"data": "SecLogDate"},
                         {
                             "data" : "action",
                             "orderable": false,

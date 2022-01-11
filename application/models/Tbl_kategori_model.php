@@ -77,12 +77,12 @@ class Tbl_kategori_model extends CI_Model
         $this->db->update($this->table, $data);
     }
 
-    // function update_icon($code_talent, $data_update_icon)
-    // {
-    //     $this->db->where('code_talent',$code_talent);
-    //     $this->db->update('tbl_kategori', $data_update_icon);
+    function update_icon($id, $data_update_icon)
+    {
+        $this->db->where($this->id,$id);
+        $this->db->update('tbl_kategori', $data_update_icon);
        
-    // }
+    }
 
     // delete data
     function delete($id)

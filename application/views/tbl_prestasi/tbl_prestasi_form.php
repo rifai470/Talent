@@ -14,14 +14,8 @@
 			<input type="text" class="form-control" name="prestasi" id="prestasi" placeholder="Prestasi" value="<?php echo $prestasi; ?>"/>
 		</div>
 	<div class="form-group">
-			<label for="id_talent">Id Talent <?php echo form_error('id_talent') ?></label>
-			<select class="form-control select2" id="id_talent" name="id_talent" required>
-										<option></option>
-										<?php $no = 0;
-                              foreach ($row_talent as $row) : $no++; ?>
-							  <option value="<?php echo $row->id_talent;?>"><?php echo $row->id_talent;?></option>
-							  <?php endforeach; ?>
-									</select>
+			<label for="code_talent">Code Talent <?php echo form_error('code_talent') ?></label>
+			<input type="text" class="form-control" name="code_talent" id="code_talent" placeholder="Code Talent" value="<?php echo $code_talent; ?>"/>
 		</div>
 			<div class="card-footer">
 			<input type="hidden" name="id_prestasi" value="<?php echo $id_prestasi; ?>" />

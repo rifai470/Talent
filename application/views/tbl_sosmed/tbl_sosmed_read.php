@@ -21,19 +21,29 @@
 						<div class="card-body">
 						<table class="table-read">
 	    <tr>
-							<td width="20%">Sosmed</td>
+							<td width="20%">Instagram</td>
 							<td width="2%">:</td>
-							<td><?php echo $sosmed; ?></td>
+							<td><?php echo $instagram; ?></td>
 						</tr>
 	    <tr>
-							<td width="20%">Url</td>
+							<td width="20%">Facebook</td>
 							<td width="2%">:</td>
-							<td><?php echo $url; ?></td>
+							<td><?php echo $facebook; ?></td>
+						</tr>
+						<tr>
+							<td width="20%">Twitter</td>
+							<td width="2%">:</td>
+							<td><?php echo $twitter; ?></td>
 						</tr>
 	    <tr>
-							<td width="20%">Id Talent</td>
+							<td width="20%">Other</td>
 							<td width="2%">:</td>
-							<td><?php echo $id_talent; ?></td>
+							<td><?php echo $other; ?></td>
+						</tr>
+	    <tr>
+							<td width="20%">Code Talent</td>
+							<td width="2%">:</td>
+							<td><?php echo $code_talent; ?></td>
 						</tr>
 	    <tr>
 							<td width="20%">SecLogUser</td>

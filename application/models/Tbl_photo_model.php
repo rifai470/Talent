@@ -21,9 +21,8 @@ class Tbl_photo_model extends CI_Model
         $this->datatables->from('tbl_photo');
         //add this line for join
         //$this->datatables->join('table2', 'tbl_photo.field = table2.field');
-        $this->datatables->add_column('action', anchor(site_url('tbl_photo/read/$1'),'<i class="fa fa-eye" aria-hidden="true"></i>', array('class' => 'btn btn-success btn-sm'))." 
-            ".anchor(site_url('tbl_photo/update/$1'),'<i class="fa fa-edit" aria-hidden="true"></i>', array('class' => 'btn btn-warning btn-sm'))." 
-                ".anchor(site_url('tbl_photo/delete/$1'),'<i class="fa fa-trash" aria-hidden="true"></i>','class="btn btn-danger btn-sm" onclick="javasciprt: return confirm(\'Are You Sure ?\')"'), 'id_photo');
+        $this->datatables->add_column('action', anchor(site_url('tbl_photo/read/$1'),'<i class="fa fa-eye" aria-hidden="true"></i>', array('class' => 'btn btn-success btn-sm')), 'id_photo'); 
+               
         return $this->datatables->generate();
     }
 

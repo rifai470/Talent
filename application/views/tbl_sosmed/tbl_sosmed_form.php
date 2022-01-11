@@ -10,17 +10,27 @@
 						<form action="<?php echo $action; ?>" method="post">
 							<div class="card-body">
 	<div class="form-group">
-			<label for="sosmed">Sosmed <?php echo form_error('sosmed') ?></label>
-			<input type="text" class="form-control" name="sosmed" id="sosmed" placeholder="Sosmed" value="<?php echo $sosmed; ?>"/>
+			<label for="instagram">Instagram <?php echo form_error('instagram') ?></label>
+			<input type="text" class="form-control" name="instagram" id="instagram" placeholder="instagram" value="<?php echo $instagram; ?>"/>
 		</div>
 	  
 		<div class="form-group">
-			<label for="url">Url <?php echo form_error('url') ?></label>
-			<textarea class="form-control" name="url" id="url" placeholder="Url"><?php echo $url; ?></textarea>
+			<label for="facebook">Facebook <?php echo form_error('facebook') ?></label>
+			<input type="text" class="form-control" name="facebook" id="facebook" placeholder="facebook" value="<?php echo $facebook; ?>"/>
 		</div>
+		<div class="form-group">
+			<label for="twitter">Twitter <?php echo form_error('twitter') ?></label>
+			<input type="text" class="form-control" name="twitter" id="twitter" placeholder="twitter" value="<?php echo $twitter; ?>"/>
+		</div>
+	  
+		<div class="form-group">
+			<label for="other">other <?php echo form_error('other') ?></label>
+			<input type="text" class="form-control" name="other" id="other" placeholder="other" value="<?php echo $other; ?>"/>
+		</div>
+
 	<div class="form-group">
-			<label for="id_talent">Id Talent <?php echo form_error('id_talent') ?></label>
-			<input type="text" class="form-control" name="id_talent" id="id_talent" placeholder="Id Talent" value="<?php echo $id_talent; ?>"/>
+			<label for="code_talent">Code Talent <?php echo form_error('code_talent') ?></label>
+			<input type="text" class="form-control" name="code_talent" id="code_talent" placeholder="Id Talent" value="<?php echo $code_talent; ?>"/>
 		</div>
 	<div class="form-group">
 			<label for="SecLogUser">SecLogUser <?php echo form_error('SecLogUser') ?></label>
