@@ -67,17 +67,9 @@
             } else {
                 // display main menu
                 echo "<li class='nav-item'>";
-				echo "<a href='" . $menu->url . "' class='nav-link' >";
+				echo "<a href='" . base_url($menu->url) . "' class='nav-link' >";
 				echo "<i class='nav-icon fas ".$menu->icon."'></i><p> ". $menu->title ." </p>";
-                echo "</a></li>"; 
-				
-				/*echo "<li "; 
-					if($this->uri->segment(1)=="" . $menu->url . "") {
-				 		echo 'class="active"';
-					}
-				echo	">";
-				 echo "" . anchor($menu->url, "<i class='" . $menu->icon . "'></i>&nbsp; " . $menu->title, array('class' => 'nav-link')  ) . "";
-                echo "</li>";*/
+                echo "</a></li>";
             }
         }
         ?>
