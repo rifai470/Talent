@@ -17,13 +17,15 @@ class Tbl_prestasi_model extends CI_Model
 
     // datatables
     function json() {
-        $this->datatables->select('id_prestasi,prestasi,id_talent,SecLogUser,SecLogDate');
+        $this->datatables->select('id_prestasi,prestasi,code_talent,SecLogUser,SecLogDate');
         $this->datatables->from('tbl_prestasi');
         //add this line for join
         //$this->datatables->join('table2', 'tbl_prestasi.field = table2.field');
-        $this->datatables->add_column('action', anchor(site_url('tbl_prestasi/read/$1'),'<i class="fa fa-eye" aria-hidden="true"></i>', array('class' => 'btn btn-success btn-sm'))." 
-            ".anchor(site_url('tbl_prestasi/update/$1'),'<i class="fa fa-edit" aria-hidden="true"></i>', array('class' => 'btn btn-warning btn-sm'))." 
-                ".anchor(site_url('tbl_prestasi/delete/$1'),'<i class="fa fa-trash" aria-hidden="true"></i>','class="btn btn-danger btn-sm" onclick="javasciprt: return confirm(\'Are You Sure ?\')"'), 'id_prestasi');
+        //(untuk button update) ".anchor(site_url('tbl_prestasi/update/$1'),'<i class="fa fa-edit" aria-hidden="true"></i>', array('class' => 'btn btn-warning btn-sm'))." 
+        //(untuk button delete) ".anchor(site_url('tbl_prestasi/delete/$1'),'<i class="fa fa-trash" aria-hidden="true"></i>','class="btn btn-danger btn-sm" onclick="javasciprt: return confirm(\'Are You Sure ?\')"'), 
+        $this->datatables->add_column('action', anchor(site_url('tbl_prestasi/read/$1'),'<i class="fa fa-eye" aria-hidden="true"></i>', array('class' => 'btn btn-success btn-sm')),'id_prestasi'); 
+          
+              
         return $this->datatables->generate();
     }
 
@@ -45,7 +47,7 @@ class Tbl_prestasi_model extends CI_Model
     function total_rows($q = NULL) {
         $this->db->like('id_prestasi', $q);
 	$this->db->or_like('prestasi', $q);
-	$this->db->or_like('id_talent', $q);
+	$this->db->or_like('code_talent', $q);
 	$this->db->or_like('SecLogUser', $q);
 	$this->db->or_like('SecLogDate', $q);
 	$this->db->from($this->table);
@@ -57,7 +59,7 @@ class Tbl_prestasi_model extends CI_Model
         $this->db->order_by($this->id, $this->order);
         $this->db->like('id_prestasi', $q);
 	$this->db->or_like('prestasi', $q);
-	$this->db->or_like('id_talent', $q);
+	$this->db->or_like('code_talent', $q);
 	$this->db->or_like('SecLogUser', $q);
 	$this->db->or_like('SecLogDate', $q);
 	$this->db->limit($limit, $start);

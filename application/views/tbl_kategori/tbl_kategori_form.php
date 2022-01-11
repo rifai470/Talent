@@ -7,7 +7,7 @@
 						<div class="card-header" style="background: -webkit-gradient(linear, left bottom, left top, color-stop(0, #4d5b76), color-stop(1, #6f80a1));">
 							<h3 class="card-title">KATEGORI </h3>
 						</div>
-						<form action="<?php echo $action; ?>" method="post">
+						<form action="<?php echo $action; ?>" method="post" enctype="multipart/form-data">
 							<div class="card-body">
 								<div class="form-group">
 									<label for="kategori">Kategori <?php echo form_error('kategori') ?></label>
@@ -15,7 +15,7 @@
 								</div>
 									<div class="input-group" id="upload">
 											<div class="custom-file">
-												<input type="file" class="form-control" name="icon" value="<?php echo $icon; ?>" required>
+												<input type="file" class="form-control" name="upload" required>
 
 											</div>
 										</div>

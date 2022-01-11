@@ -30,9 +30,11 @@ class Tbl_sosmed extends CI_Controller
         if ($row) {
             $data = array(
 		'id_sosmed' => $row->id_sosmed,
-		'sosmed' => $row->sosmed,
-		'url' => $row->url,
-		'id_talent' => $row->id_talent,
+		'instagram' => $row->instagram,
+		'facebook' => $row->facebook,
+        'twitter' => $row->twitter,
+        'other' => $row->other,
+		'code_talent' => $row->code_talent,
 		'SecLogUser' => $row->SecLogUser,
 		'SecLogDate' => $row->SecLogDate,
 	    );
@@ -49,9 +51,11 @@ class Tbl_sosmed extends CI_Controller
             'button' => 'Save',
             'action' => site_url('tbl_sosmed/create_action'),
 	    'id_sosmed' => set_value('id_sosmed'),
-	    'sosmed' => set_value('sosmed'),
-	    'url' => set_value('url'),
-	    'id_talent' => set_value('id_talent'),
+	    'instagram' => set_value('instagram'),
+        'facebook' => set_value('facebook'),
+        'twitter' => set_value('twitter'),
+        'other' => set_value('other'),
+	    'code_talent' => set_value('code_talent'),
 	    'SecLogUser' => set_value('SecLogUser'),
 	    'SecLogDate' => set_value('SecLogDate'),
 	);
@@ -60,15 +64,17 @@ class Tbl_sosmed extends CI_Controller
     
     public function create_action() 
     {
-        $this->_rules();
+        // $this->_rules();
 
         if ($this->form_validation->run() == FALSE) {
             $this->create();
         } else {
             $data = array(
-		'sosmed' => $this->input->post('sosmed',TRUE),
-		'url' => $this->input->post('url',TRUE),
-		'id_talent' => $this->input->post('id_talent',TRUE),
+		'instagram' => $this->input->post('instagram',TRUE),
+		'facebook' => $this->input->post('facebook',TRUE),
+        'twitter' => $this->input->post('twitter',TRUE),
+		'other' => $this->input->post('other',TRUE),
+		'code_talent' => $this->input->post('code_talent',TRUE),
 		'SecLogUser' => $this->input->post('SecLogUser',TRUE),
 		'SecLogDate' => $this->input->post('SecLogDate',TRUE),
 	    );
@@ -88,9 +94,11 @@ class Tbl_sosmed extends CI_Controller
                 'button' => 'Update',
                 'action' => site_url('tbl_sosmed/update_action'),
 		'id_sosmed' => set_value('id_sosmed', $row->id_sosmed),
-		'sosmed' => set_value('sosmed', $row->sosmed),
-		'url' => set_value('url', $row->url),
-		'id_talent' => set_value('id_talent', $row->id_talent),
+		'instagram' => set_value('instagram', $row->instagram),
+		'facebook' => set_value('facebook', $row->facebook),
+        'twitter' => set_value('twitter', $row->twitter),
+		'other' => set_value('other', $row->other),
+		'code_talent' => set_value('code_talent', $row->code_talent),
 		'SecLogUser' => set_value('SecLogUser', $row->SecLogUser),
 		'SecLogDate' => set_value('SecLogDate', $row->SecLogDate),
 	    );
@@ -103,15 +111,17 @@ class Tbl_sosmed extends CI_Controller
     
     public function update_action() 
     {
-        $this->_rules();
+        // $this->_rules();
 
         if ($this->form_validation->run() == FALSE) {
             $this->update($this->input->post('id_sosmed', TRUE));
         } else {
             $data = array(
-		'sosmed' => $this->input->post('sosmed',TRUE),
-		'url' => $this->input->post('url',TRUE),
-		'id_talent' => $this->input->post('id_talent',TRUE),
+		'instagram' => $this->input->post('instagram',TRUE),
+		'facebook' => $this->input->post('facebook',TRUE),
+        'twitter' => $this->input->post('twitter',TRUE),
+		'other' => $this->input->post('other',TRUE),
+		'code_talent' => $this->input->post('code_talent',TRUE),
 		'SecLogUser' => $this->input->post('SecLogUser',TRUE),
 		'SecLogDate' => $this->input->post('SecLogDate',TRUE),
 	    );
@@ -138,14 +148,16 @@ class Tbl_sosmed extends CI_Controller
 
     public function _rules() 
     {
-	$this->form_validation->set_rules('sosmed', 'sosmed', 'trim|required');
-	$this->form_validation->set_rules('url', 'url', 'trim|required');
-	$this->form_validation->set_rules('id_talent', 'id talent', 'trim|required');
-	$this->form_validation->set_rules('SecLogUser', 'secloguser', 'trim|required');
-	$this->form_validation->set_rules('SecLogDate', 'seclogdate', 'trim|required');
+	// $this->form_validation->set_rules('instagram', 'instagram', 'trim|required');
+	// $this->form_validation->set_rules('facebook', 'facebook', 'trim|required');
+    // $this->form_validation->set_rules('twitter', 'twitter', 'trim|required');
+	// $this->form_validation->set_rules('other', 'other', 'trim|required');
+	// $this->form_validation->set_rules('code_talent', 'code talent', 'trim|required');
+	// $this->form_validation->set_rules('SecLogUser', 'secloguser', 'trim|required');
+	// $this->form_validation->set_rules('SecLogDate', 'seclogdate', 'trim|required');
 
-	$this->form_validation->set_rules('id_sosmed', 'id_sosmed', 'trim');
-	$this->form_validation->set_error_delimiters('<span class="text-danger">', '</span>');
+	// $this->form_validation->set_rules('id_sosmed', 'id_sosmed', 'trim');
+	// $this->form_validation->set_error_delimiters('<span class="text-danger">', '</span>');
     }
 
 }

@@ -18,8 +18,9 @@
 						<div class="card-header" style="background: -webkit-gradient(linear, left bottom, left top, color-stop(0, #4d5b76), color-stop(1, #6f80a1));">
 							<h3 class="card-title">PHOTO   </h3>
 							<div class="card-tools">
-								<?php echo anchor(site_url('tbl_photo/create'), '<i class="fab fa-wpforms" aria-hidden="true">
-							</i> New', 'class="btn btn-danger btn-sm"'); ?> <button class="btn btn-tool" onclick="window.location.href='<?php echo site_url();?>/tbl_photo';"><i class="fas fa-redo-alt"></i></button></div></div>
+								<button class="btn btn-tool" onclick="window.location.href='<?php echo site_url();?>/tbl_photo';"><i class="fas fa-redo-alt"></i></button>
+                            </div>
+                        </div>
 			<div class="card-body">
         		<table class="table table-bordered table-striped" id="mytable">
             		<thead>

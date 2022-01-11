@@ -32,7 +32,7 @@ class Tbl_prestasi extends CI_Controller
             $data = array(
 		'id_prestasi' => $row->id_prestasi,
 		'prestasi' => $row->prestasi,
-		'id_talent' => $row->id_talent,
+		'code_talent' => $row->code_talent,
 		'SecLogUser' => $row->SecLogUser,
 		'SecLogDate' => $row->SecLogDate,
 	    );
@@ -51,7 +51,7 @@ class Tbl_prestasi extends CI_Controller
             'action' => site_url('tbl_prestasi/create_action'),
 	    'id_prestasi' => set_value('id_prestasi'),
 	    'prestasi' => set_value('prestasi'),
-	    'id_talent' => set_value('id_talent'),
+	    'code_talent' => set_value('code_talent'),
         'row_talent' => $row_talent,
 	);
         $this->template->load('template','tbl_prestasi/tbl_prestasi_form', $data);
@@ -66,7 +66,7 @@ class Tbl_prestasi extends CI_Controller
         } else {
             $data = array(
 		'prestasi' => $this->input->post('prestasi',TRUE),
-		'id_talent' => $this->input->post('id_talent',TRUE),
+		'code_talent' => $this->input->post('code_talent',TRUE),
 		'SecLogUser' => $this->session->userdata('full_name'),
 		'SecLogDate' => date('Y-m-d H:i:s'),
 	    );
@@ -87,7 +87,7 @@ class Tbl_prestasi extends CI_Controller
                 'action' => site_url('tbl_prestasi/update_action'),
 		'id_prestasi' => set_value('id_prestasi', $row->id_prestasi),
 		'prestasi' => set_value('prestasi', $row->prestasi),
-		'id_talent' => set_value('id_talent', $row->id_talent),
+		'code_talent' => set_value('code_talent', $row->code_talent),
 		
         );
             $this->template->load('template','tbl_prestasi/tbl_prestasi_form', $data);
@@ -106,7 +106,7 @@ class Tbl_prestasi extends CI_Controller
         } else {
             $data = array(
 		'prestasi' => $this->input->post('prestasi',TRUE),
-		'id_talent' => $this->input->post('id_talent',TRUE),
+		'code_talent' => $this->input->post('code_talent',TRUE),
 		'SecLogUser' => $this->session->userdata('full_name'),
 		'SecLogDate' => date('Y-m-d H:i:s'),
         );
@@ -134,7 +134,7 @@ class Tbl_prestasi extends CI_Controller
     public function _rules() 
     {
 	$this->form_validation->set_rules('prestasi', 'prestasi', 'trim|required');
-	$this->form_validation->set_rules('id_talent', 'id talent', 'trim|required');
+	$this->form_validation->set_rules('code_talent', 'code talent', 'trim|required');
 	$this->form_validation->set_rules('SecLogUser', 'secloguser', 'trim|required');
 	$this->form_validation->set_rules('SecLogDate', 'seclogdate', 'trim|required');
 

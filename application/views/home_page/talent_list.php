@@ -132,6 +132,8 @@
   }
 </style>
 
+
+
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
   <!-- Content Header (Page header) -->
@@ -217,8 +219,20 @@ foreach ($get_talent as $row) : $no++; ?>
           </button>
         </div>
         <div class="modal-body">
-          <div class="card card-widget widget-user">
-            <?php $no = 0;
+        <div class="card card-widget widget-user">
+          <?php $no = 0;
+          foreach ($row_image as $image) : $no++; ?>
+            <?php if ($row->code_talent == $image->code_talent) { ?>
+              <center><img class="mySlides<?php echo str_replace("-","",$row->code_talent); ?>" style="width: 350px;" src="<?php echo base_url('uploads/photo/' . $image->photo . ''); ?>"></center>
+            <?php } ?>
+            <!-- sampai sini bener -->
+            <?php endforeach; ?>
+          <div class="w3-center w3-container w3-section w3-large w3-text-white w3-display-bottom" style="width:100%">
+          <?php if ($row_image != NULL) { ?>
+              <div class="w3-left w3-hover-text-khaki" onclick="plusDivs<?php echo str_replace('-', '', $row->code_talent); ?>(-1)" style="color: #babda0;">&#10094;</div>
+              <div class="w3-right w3-hover-text-khaki" onclick="plusDivs<?php echo str_replace('-', '', $row->code_talent); ?>(1)" style="color: #babda0;">&#10095;</div>
+            <?php } ?>      
+            <?php $no = 1;
             foreach ($row_image as $image) : $no++; ?>
               <?php if ($row->code_talent == $image->code_talent) { ?>
                 <center><img class="mySlides" style="width: 350px;" src="<?php echo base_url('uploads/photo/' . $image->photo . ''); ?>"></center>

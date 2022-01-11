@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 06, 2022 at 03:10 AM
+-- Generation Time: Jan 11, 2022 at 04:41 AM
 -- Server version: 10.4.22-MariaDB
 -- PHP Version: 7.4.27
 
@@ -84,13 +84,10 @@ CREATE TABLE `tbl_kategori` (
 
 INSERT INTO `tbl_kategori` (`id_kategori`, `kategori`, `icon`) VALUES
 (1, 'Influencer', 'influencer.jpg'),
-(2, 'MC', 'mc.jpg'),
+(2, 'MC', 'mc1.jpg'),
 (3, 'Model', 'model.jpg'),
 (4, 'Make Up', 'make up.jpg'),
-(5, 'Fotografi', 'fotografi.jpg'),
-(6, 'test', 'wilda2.jpg'),
-(7, 'kecewa', 'kecewa.jpg'),
-(10, 'bagus', 'bagus.jpg');
+(5, 'Fotografi', 'fotografi.jpg');
 
 -- --------------------------------------------------------
 
@@ -227,7 +224,6 @@ INSERT INTO `tbl_sosmed` (`id_sosmed`, `instagram`, `facebook`, `twitter`, `othe
 (4, 'www.instagram.com/belindatirps', '', '', '', 'TLN-3', 'admin', '2021-12-29'),
 (5, 'www.instagram.com/meghnavs', '', '', '', 'TLN-4', 'admin', '2021-12-29'),
 (6, 'www.instagram.com/kalistaiskandar', '', '', '', 'TLN-5', 'admin', '2021-12-29'),
-(7, 'www.instagram.com/ayumaulida97', '', '', '', 'TLN-6', 'admin', '2021-12-29'),
 (8, 'www.instagram.com/ayumaulida97', '', '', '', 'TLN-7', 'admin', '2021-12-29');
 
 -- --------------------------------------------------------
@@ -301,7 +297,7 @@ INSERT INTO `tbl_talent` (`id_talent`, `code_talent`, `nama`, `nama_panggilan`, 
 (3, 'TLN-2', 'PUTU AYU SARASWATI', 'PUTU', 'Denpasar', '1997-07-06', 24, 'Wanita', '-', 'Sarjana Kedokteran', 'Model', 'Indonesia', 175, 50, 1, '-', 1, 'admin', '2021-12-28'),
 (4, 'TLN-3', 'BELINDA PRITASARI  ', 'BELINDA', 'Jakarta', '1994-08-06', 27, 'Wanita', '-', 'Sarjana Kedokteran', 'Doctor', 'Inggris', 171, 48, 1, '--', 1, '', '2021-12-29'),
 (5, 'TLN-4', 'MEGHNA SHARMA', 'MEGHNA ', 'Medan', '1995-11-06', 25, 'Wanita', '-', 'Sarjana Fashion Design', 'Host', 'Indonesia', 173, 55, 1, '--', 1, 'admin', '2021-12-29'),
-(6, 'TLN-5', 'KALISTA ISKANDAR', 'KALISTA', 'Sumatra Barat', '1998-07-14', 23, 'Wanita', '-', 'Sarjana Hukum', 'Host', 'Indonesia', 175, 50, 1, '--', 1, 'admin', '2021-12-29'),
+(6, 'TLN-5', 'KALISTA ISKANDAR', 'KALISTA', 'Sumatra Barat', '1998-07-14', 23, 'Wanita', '-', 'Sarjana Hukum', 'Host', 'Indonesia', 175, 50, 2, '--', 1, 'admin', '2021-12-29'),
 (7, 'TLN-6', ' AYU MAULIDA PUTRI ', 'AYU', 'Surabaya', '1997-07-11', 23, 'Wanita', '-', 'Sarjana Hukum', 'Modeling', 'Indonesia', 179, 54, 1, '--', 1, 'admin', '2021-12-29');
 
 -- --------------------------------------------------------
@@ -320,7 +316,8 @@ CREATE TABLE `tbl_tarif` (
 --
 
 INSERT INTO `tbl_tarif` (`id_tarif`, `tarif`) VALUES
-(1, 10000);
+(1, 20000),
+(2, 500000);
 
 -- --------------------------------------------------------
 
@@ -467,7 +464,7 @@ ALTER TABLE `tbl_hak_akses`
 -- AUTO_INCREMENT for table `tbl_kategori`
 --
 ALTER TABLE `tbl_kategori`
-  MODIFY `id_kategori` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id_kategori` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT for table `tbl_menu`
@@ -515,7 +512,7 @@ ALTER TABLE `tbl_talent`
 -- AUTO_INCREMENT for table `tbl_tarif`
 --
 ALTER TABLE `tbl_tarif`
-  MODIFY `id_tarif` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_tarif` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `tbl_user`
