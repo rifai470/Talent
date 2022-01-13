@@ -105,8 +105,7 @@
 			</div>
 
 			<div class="row">
-				<!-- Card Tag Media -->
-				<div class="col-md-6">
+				<div class="col-md-12">
 					<div class="card card-default">
 						<div class="card-header">
 							<h3 class="card-title">Tag</h3>
@@ -116,10 +115,16 @@
 								<div class="input-group-prepend">
 									<span class="input-group-text"><i class="fas fa-tags"></i></span>
 								</div>
-								<input type="text" name="tags" id="tags" class="form-control" placeholder="tags" value="" />
+								<input type="text" name="tags" id="tags" class="form-control" placeholder="tags" value="" required />
 							</div>
 						</div>
 					</div>
+				</div>
+			</div>
+
+			<div class="row">
+				<!-- Card Tag Media -->
+				<div class="col-md-6">
 					<!-- Card Sosial Media -->
 
 					<div class="card card-default">
@@ -164,8 +169,7 @@
 							<div class="card-body">
 								<div class="input-group" id="upload">
 									<div class="custom-file">
-										<input type="file" class="form-control" name="upload" value="<?php echo $photo; ?>" required>
-
+										<input type="file" class="form-control" name="upload[]" multiple required>
 									</div>
 								</div>
 							</div>
@@ -206,6 +210,14 @@
 <!-- untuk multi prestasi -->
 <script type="text/javascript" src="<?php echo base_url() . 'assets/js/jquery-3.3.1.js' ?>"></script>
 <script type="text/javascript" src="<?php echo base_url() . 'assets/js/jquery-1.10.2.js' ?>"></script>
+<!-- Summernote -->
+<script src="<?php echo base_url() . 'assets/adminlte/plugins/summernote/summernote-bs4.min.js' ?>"></script>
+<!-- Tagify -->
+<script src="<?php echo base_url() . 'assets/tagify/dist/tagify.js' ?>"></script>
+<script src="<?php echo base_url() . 'assets/tagify/dist/jQuery.tagify.min.js' ?>"></script>
+<!-- Taginput -->
+<script src="<?php echo base_url() . 'assets/tags/dist/bootstrap-tagsinput.js' ?>"></script>
+
 <script>
 	$(document).ready(function() {
 		var i = 1;
@@ -221,9 +233,6 @@
 	});
 </script>
 
-<!-- Summernote -->
-<script src="<?php echo base_url() . 'assets/adminlte/plugins/summernote/summernote-bs4.min.js' ?>"></script>
-
 <script>
 	$(function() {
 		// Summernote
@@ -231,33 +240,24 @@
 	})
 </script>
 
-<!-- Tagify -->
-<script src="<?php echo base_url() . 'assets/tagify/dist/tagify.js' ?>"></script>
-<script src="<?php echo base_url() . 'assets/tagify/dist/jQuery.tagify.min.js' ?>"></script>
-
-<!-- Taginput -->
-<script src="<?php echo base_url() . 'assets/tags/dist/bootstrap-tagsinput.js' ?>"></script>
-
 <script>
 	$(function() {
 
 		var input = document.querySelector('input[name=tags]'),
 			// init Tagify script on the above inputs
 			tagify = new Tagify(input, {
-				whitelist: [<?php $no = 0; foreach ($row_tags as $tags) : $no++; ?> "<?php echo $tags['tags']; ?>", <?php endforeach; ?>],
+				whitelist: [<?php $no = 0;
+							foreach ($row_tags as $tags) : $no++; ?> "<?php echo $tags['tags']; ?>", <?php endforeach; ?>],
 			});
 
-		// "remove all tags" button event listener
-		// document.querySelector('.tags--removeAllBtn')
-		// 	.addEventListener('click', tagify.removeAllTags.bind(tagify))
 		var value = tagify.value;
 		var tagArray = [];
-		for (var i=0; i < value.length; i++){
+		for (var i = 0; i < value.length; i++) {
 			tagArray = value[i]['value'];
 		}
-		console.log('value: ',value);
-		console.log('tag array: ',tagArray);
-		
+		console.log('value: ', value);
+		console.log('tag array: ', tagArray);
+
 		// Chainable event listeners
 		tagify.on('add', onAddTag)
 			.on('remove', onRemoveTag)
@@ -272,8 +272,8 @@
 		function onAddTag(e) {
 			var add = input.value;
 			var add1 = e;
-			console.log("input: ",add);
-			console.log("input1: ",add1);
+			console.log("input: ", add);
+			console.log("input1: ", add1);
 			console.log("onAddTag: ", e.detail);
 			console.log("original input value: ", input.value)
 			tagify.off('add', onAddTag) // exmaple of removing a custom Tagify event
