@@ -95,8 +95,22 @@
         <div class="input-group mb-1">
           <p id='message'></p>
         </div>
-        <div class="row">
-          <div class="col-4">
+
+        <div class="row" style="text-align: center;">
+        <div class="col">
+        <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                  <label class="btn btn-secondary active">
+                    <input type="radio" name="user_level" id="talent" autocomplete="off" value="3" checked> Talent
+                  </label>
+                  <label class="btn btn-secondary">
+                    <input type="radio" name="user_level" id="client" autocomplete="off" value="4" > Client
+                  </label>
+                </div>
+        </div>
+        </div>
+
+        <div class="row" style="padding-top: 20px;">
+          <div class="col">
             <button type="submit" class="btn btn-primary btn-block">Daftar</button>
           </div>
           <!-- /.col -->
@@ -104,7 +118,7 @@
         </form>
 
         </br>
-        <p class="mb-0">
+        <p class="mb-0" style="text-align: center;">
           Sudah pernah daftar? <a href="<?php echo base_url('auth'); ?>" class="text-center">Login di sini​</a>
         </p>
       </div>

@@ -270,7 +270,7 @@ foreach ($get_talent as $row) : $no++; ?>
   }
 
   function checkLogin() {
-    if(<?php echo $logged; ?> == 1) {
+    if (<?php echo $logged; ?> == 1) {
       var loc = window.open('https://api.whatsapp.com/send?phone=6287887448691', '_blank');
       console.log(loc);
     } else {

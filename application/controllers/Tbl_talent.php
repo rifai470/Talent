@@ -125,6 +125,7 @@ class Tbl_talent extends CI_Controller
 			'id_kategori' => $this->input->post('id_kategori', TRUE),
 			'tentang' => $this->input->post('tentang', TRUE),
 			'id_tarif' => $this->input->post('id_tarif', TRUE),
+			'status' => 'inactive',
 			'SecLogUser' => $this->session->userdata('nama_lengkap'),
 			'SecLogDate' => date('Y-m-d H:i:s'),
 		);

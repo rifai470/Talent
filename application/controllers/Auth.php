@@ -114,6 +114,7 @@ class Auth extends CI_Controller
             'nama_lengkap' => set_value('nama_lengkap'),
             'kontak' => set_value('kontak'),
             'perusahaan' => set_value('perusahaan'),
+            'user_level' => set_value('user_level'),
             'message' => $this->session->flashdata('message'),
         );
         $this->load->view('auth/register', $data);
@@ -135,6 +136,10 @@ class Auth extends CI_Controller
             $password = $this->input->post('password', TRUE);
             $options = array("cost" => 4);
             $hashPassword = password_hash($password, PASSWORD_BCRYPT, $options);
+            $user_level = $this->input->post('user_level', TRUE);
+
+            // print_r($user_level);
+            // die;
 
             //generate simple random code
             $set = $nama_lengkap.$kontak."TalentManagement"."MustikaRatu";
@@ -146,7 +151,7 @@ class Auth extends CI_Controller
                     'kontak' => $kontak,
                     'username' => $username,
                     'password' => $hashPassword,
-                    'id_user_level' => 3,
+                    'id_user_level' => $user_level,
                     'is_aktif' => 'n',
                     'code' => $code
                 );
@@ -187,6 +192,7 @@ class Auth extends CI_Controller
     public function send_activation($data, $id)
 	{
 		//Load data
+        $mail = $data['username'];
 
 		$message = "
         <html>
@@ -208,7 +214,7 @@ class Auth extends CI_Controller
 		$config['smtp_host'] = 'ssl://smtp.googlemail.com';
 		$config['smtp_port'] = 465;
 		$config['smtp_user'] = 'mustikaratu.mailer@gmail.com';
-		$config['smtp_pass'] = 'mustikagoogle';
+		$config['smtp_pass'] = 'mustikagoogle@2022';
 		$config['mailtype'] = 'html';
 
 		$this->load->library('email', $config);
@@ -218,7 +224,7 @@ class Auth extends CI_Controller
 		$this->email->set_newline("\r\n");
 		$this->email->from('mustikaratu.mailer@gmail.com', 'Mustika Ratu Talent');
 		// $this->email->to($data['username']);
-		$this->email->to('development@mustika-ratu.co.id');
+		$this->email->to($mail);
 		$this->email->subject('Signup Verification Email');
 		$this->email->message($message);
 

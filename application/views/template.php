@@ -52,10 +52,13 @@
 <div class="wrapper"> 
   <!-- Navbar -->
   <nav class="main-header navbar navbar-expand navbar-white navbar-light" >
-    <ul class="navbar-nav">
+ 
+      <ul class="order-1 order-md-3 navbar-nav navbar-no-expand">
       <li class="nav-item"> <a class="nav-link" data-widget="pushmenu" href="#"><i class="fas fa-bars"></i></a> </li>
-      <!--li class="nav-item d-none d-sm-inline-block"> <a href="?php echo base_url(); ?>" class="nav-link">Home</a> </li-->
+      <!-- jadiin di kanan dan tambahin if else sesuai user level -->
+      <li class="nav-item d-none d-sm-inline-block"> <a href=<?php echo base_url(); ?> class="nav-link">Talent Home Page</a> </li>
     </ul>
+  <!-- </ul> -->
   </nav>
   <!-- /.navbar --> 
   

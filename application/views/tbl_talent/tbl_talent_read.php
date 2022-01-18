@@ -99,6 +99,11 @@
 									<td><?php echo $id_tarif; ?></td>
 								</tr>
 								<tr>
+									<td width="20%">Status</td>
+									<td width="2%">:</td>
+									<td><?php echo $status; ?></td>
+								</tr>
+								<tr>
 									<td width="20%">SecLogUser</td>
 									<td width="2%">:</td>
 									<td><?php echo $SecLogUser; ?></td>
@@ -152,7 +157,7 @@
 						</div>
 						<div class="card-footer">
 						<div class="float-right d-none d-sm-block">
-							<a href="<?php echo site_url('tbl_talent') ?>" class="btn btn-info"><i class="fa fa-sign-out"></i> Back</a>
+							<a href="<?php echo site_url('tbl_talent_verify') ?>" class="btn btn-info"><i class="fa fa-sign-out"></i> Back</a>
 						</div>
 						</div>
 					</div>

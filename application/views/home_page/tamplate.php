@@ -74,6 +74,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
           <!-- Right navbar links -->
           <ul class="order-1 order-md-3 navbar-nav navbar-no-expand ml-auto">
             <?php if($this->session->userdata('logged')) { ?>
+              <?php if($this->session->userdata('id_user_level')==1 || $this->session->userdata('id_user_level')==2) { ?>
+                <li class="nav-item d-none d-sm-inline-block"> <a href=<?php echo base_url('welcome'); ?> class="nav-link" >Console</a> </li>
+                <?php } ?>
               <li class="nav-item dropdown">
                 <a id="dropdownSubMenu1" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle"><?php echo $this->session->userdata('nama_lengkap'); ?></a>
                 <ul aria-labelledby="dropdownSubMenu1" class="dropdown-menu border-0 shadow">
@@ -89,6 +92,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 <a href="<?php echo base_url('auth/register'); ?>" class="nav-link">Daftar</a>
               </li>
             <?php } ?>
+         
           </ul>
         </div>
     </nav>
