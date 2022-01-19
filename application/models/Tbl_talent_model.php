@@ -31,9 +31,10 @@ class Tbl_talent_model extends CI_Model
 
     function json_verify()
     {
-        $this->datatables->select('id_talent,nama,nama_panggilan,tempat,tanggal_lahir,usia,jenis_kelamin,hobby,pendidikan,pekerjaan,bahasa,tinggi_badan,berat_badan,id_kategori,tentang,tarif_minimum,tarif_maximum,status,SecLogUser,SecLogDate');
+        $this->datatables->select('tbl_talent.id_talent,tbl_talent.nama,tbl_talent.nama_panggilan,tbl_talent.tempat,tbl_talent.tanggal_lahir,tbl_talent.usia,tbl_talent.jenis_kelamin,tbl_talent.hobby,pendidikan,tbl_talent.pekerjaan,tbl_talent.bahasa,tbl_talent.tinggi_badan,tbl_talent.berat_badan,tbl_talent.id_kategori,tbl_talent.tentang,tbl_talent.tarif_minimum,tbl_talent.tarif_maximum,tbl_talent.status,tbl_talent.SecLogUser,tbl_talent.SecLogDate,tbl_kategori.kategori');
         $this->datatables->from('tbl_talent');
-        $this->datatables->where('status', 'inactive');
+        $this->datatables->join('tbl_kategori', 'tbl_talent.id_kategori=tbl_kategori.id_kategori', 'left');
+        $this->datatables->where('tbl_talent.status', 'inactive');
         //add this line for join
         //$this->datatables->join('table2', 'tbl_talent.field = table2.field');
         $this->datatables->add_column('action', anchor(site_url('tbl_talent/read/$1'), '<i class="fa fa-eye" aria-hidden="true"></i>', array('class' => 'btn btn-warning btn-sm')) . " 
@@ -44,9 +45,10 @@ class Tbl_talent_model extends CI_Model
 
     function json_rejected()
     {
-        $this->datatables->select('id_talent,nama,nama_panggilan,tempat,tanggal_lahir,usia,jenis_kelamin,hobby,pendidikan,pekerjaan,bahasa,tinggi_badan,berat_badan,id_kategori,tentang,tarif_minimum,tarif_maximum,status,SecLogUser,SecLogDate');
+        $this->datatables->select('tbl_talent.id_talent,tbl_talent.nama,tbl_talent.nama_panggilan,tbl_talent.tempat,tbl_talent.tanggal_lahir,tbl_talent.usia,tbl_talent.jenis_kelamin,tbl_talent.hobby,pendidikan,tbl_talent.pekerjaan,tbl_talent.bahasa,tbl_talent.tinggi_badan,tbl_talent.berat_badan,tbl_talent.id_kategori,tbl_talent.tentang,tbl_talent.tarif_minimum,tbl_talent.tarif_maximum,tbl_talent.status,tbl_talent.SecLogUser,tbl_talent.SecLogDate,tbl_kategori.kategori');
         $this->datatables->from('tbl_talent');
-        $this->datatables->where('status', 'rejected');
+        $this->datatables->join('tbl_kategori', 'tbl_talent.id_kategori=tbl_kategori.id_kategori', 'left');
+        $this->datatables->where('tbl_talent.status', 'rejected');
         //add this line for join
         //$this->datatables->join('table2', 'tbl_talent.field = table2.field');
         $this->datatables->add_column('action', anchor(site_url('tbl_talent/read/$1'), '<i class="fa fa-eye" aria-hidden="true"></i>', array('class' => 'btn btn-warning btn-sm')) . " 
@@ -328,10 +330,9 @@ class Tbl_talent_model extends CI_Model
 
     function get_form_talent_endorse($id_talent)
     {
-        $this->db->select('tbl_talent.*, tbl_photo.*, tbl_kategori.*, tbl_tarif.*,tbl_sosmed.*,tbl_prestasi.*');
+        $this->db->select('tbl_talent.*, tbl_photo.*, tbl_kategori.*,tbl_sosmed.*,tbl_prestasi.*');
         $this->db->join('tbl_photo', 'tbl_talent.code_talent=tbl_photo.code_talent', 'left');
         $this->db->join('tbl_kategori', 'tbl_talent.id_kategori=tbl_kategori.id_kategori', 'left');
-        $this->db->join('tbl_tarif', 'tbl_talent.id_tarif=tbl_tarif.id_tarif', 'left');
         $this->db->join('tbl_sosmed', 'tbl_talent.code_talent=tbl_sosmed.code_talent', 'left');
         $this->db->join('tbl_prestasi', 'tbl_talent.code_talent=tbl_prestasi.code_talent', 'left');
         $this->db->where('tbl_talent.id_talent', $id_talent);

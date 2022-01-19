@@ -37,9 +37,10 @@
                                         <!-- <th>Bahasa</th> -->
                                         <!-- <th>Tinggi Badan</th> -->
                                         <!-- <th>Berat Badan</th> -->
-                                        <th>Id Kategori</th>
+                                        <th>Kategori</th>
                                         <!-- <th>Tentang</th> -->
-                                        <th>Id Tarif</th>
+                                        <th>Tarif Min.</th>
+                                        <th>Tarif Max.</th>
                                         <th width="150px">&nbsp;</th>
                                     </tr>
                                 </thead>
@@ -78,9 +79,10 @@
                                         <!-- <th>Bahasa</th> -->
                                         <!-- <th>Tinggi Badan</th> -->
                                         <!-- <th>Berat Badan</th> -->
-                                        <th>Id Kategori</th>
+                                        <th>Kategori</th>
                                         <!-- <th>Tentang</th> -->
-                                        <th>Id Tarif</th>
+                                        <th>Tarif Min.</th>
+                                        <th>Tarif Max.</th>
                                         <th width="150px">&nbsp;</th>
                                     </tr>
                                 </thead>
@@ -145,10 +147,13 @@
                 }, {
                     "data": "jenis_kelamin"
                 }, {
-                    "data": "id_kategori"
+                    "data": "kategori"
                 }, {
-                    "data": "id_tarif"
-                },
+                    "data": "tarif_minimum",
+					render: $.fn.dataTable.render.number('.', ',', 0)},
+                {
+                    "data": "tarif_maximum",
+					render: $.fn.dataTable.render.number('.', ',', 0)},
                 {
                     "data": "action",
                     "orderable": false,
@@ -220,10 +225,14 @@
                 }, {
                     "data": "jenis_kelamin"
                 }, {
-                    "data": "id_kategori"
+                    "data": "kategori"
                 }, {
-                    "data": "id_tarif"
-                },
+                    "data": "tarif_minimum",
+					render: $.fn.dataTable.render.number('.', ',', 0)},
+                {
+                    "data": "tarif_maximum",
+					render: $.fn.dataTable.render.number('.', ',', 0)},
+                
                 {
                     "data": "action",
                     "orderable": false,

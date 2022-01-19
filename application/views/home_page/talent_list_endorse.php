@@ -19,7 +19,7 @@
                   <div class="widget-user-header text-white" style="background-color: red;">
                   </div>
                   <div class="widget-user-image">
-                    <img class="img-circle" src="<?php echo base_url('uploads/photo/' . $row->photo . ''); ?>">
+                    <img class="img-circle" src="<?php echo base_url('uploads/photo/' . $row->photo . ''); ?>" >
                   </div>
                   <div class="card-footer">
                     <div class="col">

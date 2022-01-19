@@ -54,7 +54,7 @@
                 </div>
                 <button type="button" class="btn btn-block btn-outline-dark" data-toggle="modal" data-target="#modal-talent<?php echo $row->id_talent; ?>">Profile</button>
                 <?php ?>
-                <button class="btn btn-block btn-dark" onclick="checkLogin()"> Endorse</button>
+                <button class="btn btn-block btn-dark" onclick="checkLogin(<?php echo $row->id_talent;?>)"> Endorse</button>
                 <?php ?>
               </div>
             </div>
@@ -117,21 +117,21 @@ foreach ($get_talent as $row) : $no++; ?>
           <div class="row">
             <div class="col-md-3">
               <div class="description-block">
-                <a target="_blank" href="http://<?php echo $row->instagram; ?>" <button type="button" class="btn btn-block btn-outline-dark fab fa-instagram <?php if ($row->instagram == NULL && $row->instagram == '') {
+                <a target="_blank" href="http://www.instagram.com/<?php echo $row->instagram; ?>" <button type="button" class="btn btn-block btn-outline-dark fab fa-instagram <?php if ($row->instagram == NULL && $row->instagram == '') {
                                                                                                                                                                 echo 'disabled';
                                                                                                                                                               } ?>" style="font-size: 12px;"> Instagram</button></a>
               </div>
             </div>
             <div class="col-md-3">
               <div class="description-block">
-                <a target="_blank" href="http://<?php echo $row->facebook; ?>" <button type="button" class="btn btn-block btn-outline-dark fab fa-facebook <?php if ($row->facebook == NULL && $row->facebook == '') {
+                <a target="_blank" href="http://www.facebook.com/<?php echo $row->facebook; ?>" <button type="button" class="btn btn-block btn-outline-dark fab fa-facebook <?php if ($row->facebook == NULL && $row->facebook == '') {
                                                                                                                                                               echo 'disabled';
                                                                                                                                                             } ?>" style="font-size: 12px;"> Facebook</button></a>
               </div>
             </div>
             <div class="col-md-3">
               <div class="description-block">
-                <a target="_blank" href="http://<?php echo $row->twitter; ?>" <button type="button" class="btn btn-block btn-outline-dark fab fa-twitter <?php if ($row->twitter == NULL && $row->twitter == '') {
+                <a target="_blank" href="http://twitter.com/<?php echo $row->twitter; ?>" <button type="button" class="btn btn-block btn-outline-dark fab fa-twitter <?php if ($row->twitter == NULL && $row->twitter == '') {
                                                                                                                                                             echo 'disabled';
                                                                                                                                                           } ?>" style="font-size: 12px;"> Twitter</button></a>
               </div>
@@ -169,10 +169,8 @@ foreach ($get_talent as $row) : $no++; ?>
                 <div class="widget-user-username" style="text-align: left; font-size: 16px;"><b><?php echo $row->jenis_kelamin; ?></b>
                 </div>
               </div>
-              <div class="widget-user-desc" style="text-align: left; font-size: 12px;">Bio
-                <div class="widget-user-username" style="text-align: left; font-size: 16px;"><b><?php echo $row->tentang; ?></b>
-                </div>
-              </div>
+
+              
             </div>
             <div class="col-md-6">
               <div class="widget-user-desc" style="text-align: left; font-size: 12px;">Education
@@ -200,6 +198,14 @@ foreach ($get_talent as $row) : $no++; ?>
                 </div>
               </div>
             </div>
+          </div>
+          <div class="row">
+          <div class="col-md-12">
+          <div class="widget-user-desc" style="text-align: left; font-size: 12px;">Bio
+                <div class="widget-user-username" style="text-align: left; font-size: 16px; word-break: break-all;"><p><b><?php echo $row->tentang; ?></b></p>
+                </div>
+              </div>
+          </div>
           </div>
           <hr>
           <div class="widget-user-desc" style="text-align: left; font-size: 12px"><i class="far fa-star"></i> Portfolio
@@ -269,13 +275,10 @@ foreach ($get_talent as $row) : $no++; ?>
     divObject.slideContents[divObject.slideIndex - 1].style.display = "block";
   }
 
-  function checkLogin() {
+  function checkLogin(id) {
     if (<?php echo $logged; ?> == 1) {
-      <?php $no = 1;
-      foreach ($get_talent as $row) : $no++; ?>
-      var loc = window.open('<?php echo base_url('home_page/talent_list_endorse/' . $row->id_talent . '') ?>', '_blank');
+      var loc = window.open('<?php echo base_url('home_page/talent_list_endorse/') ?>' +id+ '', '_blank');
       console.log(loc);
-      <?php endforeach; ?>
     } else {
       var loc = window.location.href = "<?php echo base_url('Auth'); ?>";
       console.log(loc);
