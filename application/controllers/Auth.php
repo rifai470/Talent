@@ -142,14 +142,14 @@ class Auth extends CI_Controller
             // die;
 
             //generate simple random code
-            $set = $nama_lengkap.$kontak."TalentManagement"."MustikaRatu";
+            $set = str_replace(" ","",$nama_lengkap).trim($kontak)."TalentManagement"."MustikaRatu";
 			$code = substr(str_shuffle($set), 0, 24);
 
             if (empty($row->username)) {
                 $data = array(
-                    'nama_lengkap' => $nama_lengkap,
-                    'kontak' => $kontak,
-                    'username' => $username,
+                    'nama_lengkap' => trim($nama_lengkap),
+                    'kontak' => trim($kontak),
+                    'username' => trim($username),
                     'password' => $hashPassword,
                     'id_user_level' => $user_level,
                     'is_aktif' => 'n',
@@ -223,7 +223,6 @@ class Auth extends CI_Controller
 
 		$this->email->set_newline("\r\n");
 		$this->email->from('mustikaratu.mailer@gmail.com', 'Mustika Ratu Talent');
-		// $this->email->to($data['username']);
 		$this->email->to($mail);
 		$this->email->subject('Signup Verification Email');
 		$this->email->message($message);

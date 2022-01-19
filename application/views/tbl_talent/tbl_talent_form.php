@@ -12,7 +12,7 @@
 							<div class="card-body">
 								<div class="form-group">
 									<label for="nama">Nama * <?php echo form_error('nama') ?></label>
-									<input type="text" class="form-control" name="nama" id="nama" placeholder="Nama" value="<?php echo $nama; ?> " required />
+									<input type="text" class="form-control" name="nama" id="nama" placeholder="Nama" value="<?php echo $nama; ?>" required />
 								</div>
 								<div class="form-group">
 									<label for="nama_panggilan">Nama Panggilan *<?php echo form_error('nama_panggilan') ?></label>
@@ -84,20 +84,23 @@
 								</select>
 							</div>
 							<div class="form-group">
-								<label for="tentang">Tentang <?php echo form_error('tentang') ?></label>
-								<textarea class="form-control" name="tentang" id="tentang" placeholder="Tentang"><?php echo $tentang; ?></textarea>
+								<label for="tarif">Tarif *<?php echo form_error('tarif') ?></label>
+								<div class="row">
+									<div class="col-md-2" style="margin-top: 1%; padding-left: 5%;">Min.</div>
+									<div class="col-md-10">
+										<input type="text" class="form-control" name="tarif_minimum" id="tarif_minimum" placeholder="Tarif Min." value="<?php echo $tarif_minimum; ?>" required />
+									</div>
+								</div>
+								<div class="row" style="padding-top: 1%;">
+									<div class="col-md-2" style="margin-top: 1%; padding-left: 5%;">Max.</div>
+									<div class="col-md-10">
+										<input type="text" class="form-control" name="tarif_maximum" id="tarif_maximum" placeholder="Tarif Max." value="<?php echo $tarif_maximum; ?>" required />
+									</div>
+								</div>
 							</div>
 							<div class="form-group">
-								<label for="id_tarif">Tarif *<?php echo form_error('id_tarif') ?></label>
-								<select class="form-control select2" id="id_tarif" name="id_tarif" required>
-									<option></option>
-									<?php $no = 0;
-									foreach ($row_tarif as $row) : $no++; ?>
-										<option value="<?php echo $row->id_tarif; ?>" <?php if ($row->id_tarif == $id_tarif) {
-																							echo 'selected';
-																						}  ?>><?php echo $row->tarif; ?></option>
-									<?php endforeach; ?>
-								</select>
+								<label for="tentang">Tentang <?php echo form_error('tentang') ?></label>
+								<textarea class="form-control" name="tentang" id="tentang" placeholder="Tentang"><?php echo $tentang; ?></textarea>
 							</div>
 						</div>
 					</div>
@@ -115,7 +118,8 @@
 								<div class="input-group-prepend">
 									<span class="input-group-text"><i class="fas fa-tags"></i></span>
 								</div>
-								<input type="text" name="tags" id="tags" class="form-control" placeholder="tags" value="" required />
+								<input type="text" name="tags" id="tags" class="form-control" placeholder="tags" value="<?php $no = 0;
+																														foreach ($row_tags_by_id as $tags) : $no++; ?> <?php echo $tags['tags']; ?>, <?php endforeach; ?>" required />
 							</div>
 						</div>
 					</div>
@@ -136,19 +140,19 @@
 								<div class="input-group-prepend">
 									<span class="input-group-text"><i class="fab fa-instagram-square"></i></span>
 								</div>
-								<input type="text" name="instagram" class="form-control" placeholder="URL Instagram" value="<?php echo $instagram; ?>">
+								<input type="text" name="instagram" class="form-control" placeholder="Username Instagram" value="<?php echo $instagram; ?>">
 							</div>
 							<div class="input-group mb-3">
 								<div class="input-group-prepend">
 									<span class="input-group-text"><i class="fab fa-facebook-square"></i></span>
 								</div>
-								<input type="text" name="facebook" class="form-control" placeholder="URL Facebook" value="<?php echo $facebook; ?>">
+								<input type="text" name="facebook" class="form-control" placeholder="Username Facebook" value="<?php echo $facebook; ?>">
 							</div>
 							<div class="input-group mb-3">
 								<div class="input-group-prepend">
 									<span class="input-group-text"><i class="fab fa-twitter-square"></i></span>
 								</div>
-								<input type="text" name="twitter" class="form-control" placeholder="URL Twitter" value="<?php echo $twitter; ?>">
+								<input type="text" name="twitter" class="form-control" placeholder="Username Twitter" value="<?php echo $twitter; ?>">
 							</div>
 							<div class="input-group mb-3">
 								<div class="input-group-prepend">
@@ -180,7 +184,7 @@
 								<div class="card card-default">
 									<div class="card-header">
 										<h3 class="card-title">
-											PRESTASI
+											PORTOFOLIO
 										</h3>
 									</div>
 									<!-- /.card-header -->
@@ -255,8 +259,8 @@
 		for (var i = 0; i < value.length; i++) {
 			tagArray = value[i]['value'];
 		}
-		console.log('value: ', value);
-		console.log('tag array: ', tagArray);
+		// console.log('value: ', value);
+		// console.log('tag array: ', tagArray);
 
 		// Chainable event listeners
 		tagify.on('add', onAddTag)

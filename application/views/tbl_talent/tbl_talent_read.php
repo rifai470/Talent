@@ -18,7 +18,7 @@
 				<!-- Card Talent -->
 				<div class="col-md-6">
 					<div class="card card-info">
-						<div class="card-header">
+						<div class="card-header" style="background: -webkit-gradient(linear, left bottom, left top, color-stop(0, #4d5b76), color-stop(1, #6f80a1));">
 							<h3 class="card-title">TALENT </h3>
 						</div>
 						<div class="card-body">
@@ -94,24 +94,14 @@
 									<td><?php echo $tentang; ?></td>
 								</tr>
 								<tr>
-									<td width="20%">Tarif</td>
+									<td width="20%">Tarif Min.</td>
 									<td width="2%">:</td>
-									<td><?php echo $id_tarif; ?></td>
+									<td><?php echo $tarif_minimum; ?></td>
 								</tr>
 								<tr>
-									<td width="20%">Status</td>
+									<td width="20%">Tarif Max.</td>
 									<td width="2%">:</td>
-									<td><?php echo $status; ?></td>
-								</tr>
-								<tr>
-									<td width="20%">SecLogUser</td>
-									<td width="2%">:</td>
-									<td><?php echo $SecLogUser; ?></td>
-								</tr>
-								<tr>
-									<td width="20%">SecLogDate</td>
-									<td width="2%">:</td>
-									<td><?php echo $SecLogDate; ?></td>
+									<td><?php echo $tarif_maximum; ?></td>
 								</tr>
 							</table>
 						</div>
@@ -120,38 +110,71 @@
 		
 					<div class="col-md-6">
 						<div class="card card-info">
-							<div class="card-header">
+							<div class="card-header" style="background: -webkit-gradient(linear, left bottom, left top, color-stop(0, #4d5b76), color-stop(1, #6f80a1));">
 								<h3 class="card-title">PHOTO </h3>
 							</div>
 							<div class="card-body">
 								<table class="table-read">
+									<tr>
+									<?php $no = 0;
+									foreach ($row_photo as $photo) : $no++; ?>
+									<img class="card-widget widget-user" src="<?php echo base_url('uploads/photo/' . $photo->photo . ''); ?>" style="height:180px; width: auto; max-width: 270px; object-fit: cover; padding-right: 10px;">
+									<?php endforeach; ?>
+									</tr>
 								</table>
 							</div>
 						</div>
 						<div class="card card-info">
-							<div class="card-header">
+							<div class="card-header" style="background: -webkit-gradient(linear, left bottom, left top, color-stop(0, #4d5b76), color-stop(1, #6f80a1));">
 								<h3 class="card-title">SOSIAL MEDIA </h3>
 							</div>
 							<div class="card-body">
 								<table class="table-read">
+									<tr>
+										<td width="150px">Instagram</td>
+										<td width="10px">:</td>
+										<td><a href="https://<?php echo $instagram; ?>"></a><?php echo $instagram; ?></td>
+									</tr>
+									<tr>
+										<td>Facebook</td>
+										<td>:</td>
+										<td><a href="https://<?php echo $instagram; ?>"></a><?php echo $facebook; ?></td>
+									</tr>
+									<tr>
+										<td>Twitter</td>
+										<td>:</td>
+										<td><a href="https://<?php echo $instagram; ?>"></a><?php echo $twitter; ?></td>
+									</tr>
+									<tr>
+										<td>Other</td>
+										<td>:</td>
+										<td><a href="https://<?php echo $instagram; ?>"></a><?php echo $other; ?></td>
+									</tr>
 								</table>
 							</div>
 						</div>
 						<div class="card card-info">
-							<div class="card-header">
-								<h3 class="card-title">PRESTASI </h3>
+							<div class="card-header" style="background: -webkit-gradient(linear, left bottom, left top, color-stop(0, #4d5b76), color-stop(1, #6f80a1));">
+								<h3 class="card-title">PORTOFOLIO </h3>
 							</div>
 							<div class="card-body">
 								<table class="table-read">
+								<?php echo $prestasi; ?>
 								</table>
 							</div>
 						</div>
 						<div class="card card-info">
-							<div class="card-header">
+							<div class="card-header" style="background: -webkit-gradient(linear, left bottom, left top, color-stop(0, #4d5b76), color-stop(1, #6f80a1));">
 								<h3 class="card-title">TAGS </h3>
 							</div>
 							<div class="card-body">
 								<table class="table-read">
+									<tr>
+									<?php $no = 0;
+									foreach ($row_tags_by_id as $tags) : $no++; ?> 
+									<button class="btn btn-sm" style="font-size: 14px; background-color: #e6e6e6; border-radius: 15px; padding: 2px 5px 2px 5px; margin-right: 5px;"><?php echo $tags['tags']; ?></button> 
+									<?php endforeach; ?>
+									</tr>
 								</table>
 							</div>
 						</div>

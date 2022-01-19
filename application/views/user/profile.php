@@ -74,10 +74,12 @@ scratch. This page gets rid of all links and provides the needed markup only.
           <!-- Right navbar links -->
           <ul class="order-1 order-md-3 navbar-nav navbar-no-expand ml-auto">
             <?php if ($this->session->userdata('logged')) { ?>
+              <li class="nav-item">
+              <a href="<?php echo base_url('user/profile'); ?>/<?php echo $this->session->userdata('id_users'); ?>" class="nav-link">Profile</a>
+              </li>
               <li class="nav-item dropdown">
                 <a id="dropdownSubMenu1" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle"><?php echo $this->session->userdata('nama_lengkap'); ?></a>
                 <ul aria-labelledby="dropdownSubMenu1" class="dropdown-menu border-0 shadow">
-                  <li><a href="#" class="dropdown-item">Profile</a></li>
                   <li><a href="<?php echo base_url('auth/logout'); ?>" class="dropdown-item">Logout</a></li>
                 </ul>
               </li>

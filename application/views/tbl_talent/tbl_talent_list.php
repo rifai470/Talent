@@ -27,20 +27,11 @@
                                     <tr>
                                         <th width="30px">#</th>
                                         <th>Nama</th>
-                                        <th>Nama Panggilan</th>
                                         <th>Tempat</th>
                                         <th>Tanggal Lahir</th>
                                         <th>Usia</th>
                                         <th>Jenis Kelamin</th>
-                                        <th>Hobby</th>
-                                        <th>Pendidikan</th>
-                                        <th>Pekerjaan</th>
-                                        <th>Bahasa</th>
-                                        <th>Tinggi Badan</th>
-                                        <th>Berat Badan</th>
-                                        <th>Id Kategori</th>
                                         <th>Tentang</th>
-                                        <th>Id Tarif</th>
                                         <th width="150px">&nbsp;</th>
                                     </tr>
                                 </thead>
@@ -99,9 +90,7 @@
                     "orderable": false
                 }, {
                     "data": "nama"
-                }, {
-                    "data": "nama_panggilan"
-                }, {
+                },  {
                     "data": "tempat"
                 }, {
                     "data": "tanggal_lahir"
@@ -110,23 +99,7 @@
                 }, {
                     "data": "jenis_kelamin"
                 }, {
-                    "data": "hobby"
-                }, {
-                    "data": "pendidikan"
-                }, {
-                    "data": "pekerjaan"
-                }, {
-                    "data": "bahasa"
-                }, {
-                    "data": "tinggi_badan"
-                }, {
-                    "data": "berat_badan"
-                }, {
-                    "data": "id_kategori"
-                }, {
                     "data": "tentang"
-                }, {
-                    "data": "id_tarif"
                 },
                 {
                     "data": "action",

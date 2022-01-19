@@ -30,6 +30,28 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <link rel="stylesheet" href="<?php echo base_url(); ?>assets\adminlte\dist\css\adminlte.min.css">
   <!-- Google Font: Source Sans Pro -->
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+  <link rel="stylesheet" href="<?php echo base_url(); ?>assets/js/morris.css">
+  <!-- Ionicons -->
+  <link rel="stylesheet" href="<?php echo base_url(); ?>assets/adminlte/plugins/ionicons.min.css">
+  <!-- Tempusdominus Bbootstrap 4 -->
+  <link rel="stylesheet" href="<?php echo base_url(); ?>assets/adminlte/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css">
+  <!-- iCheck -->
+  <link rel="stylesheet" href="<?php echo base_url(); ?>assets/adminlte/plugins/icheck-bootstrap/icheck-bootstrap.min.css">
+  <!-- JQVMap -->
+  <link rel="stylesheet" href="<?php echo base_url(); ?>assets/adminlte/plugins/jqvmap/jqvmap.min.css">
+  <!-- overlayScrollbars -->
+  <link rel="stylesheet" href="<?php echo base_url(); ?>assets/adminlte/plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
+  <!-- Daterange picker -->
+  <link rel="stylesheet" href="<?php echo base_url(); ?>assets/adminlte/plugins/daterangepicker/daterangepicker.css">
+  <!-- summernote -->
+  <link rel="stylesheet" href="<?php echo base_url(); ?>assets/adminlte/plugins/summernote/summernote-bs4.css">
+  <!-- DataTables -->
+  <link rel="stylesheet" href="<?php echo base_url(); ?>assets/adminlte/plugins/datatables-bs4/css/dataTables.bootstrap4.css">
+  <link rel="stylesheet" href="<?php echo base_url(); ?>assets/adminlte/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
+  <link rel="stylesheet" href="<?php echo base_url() ?>assets/adminlte/select2/dist/css/select2.min.css">
+  <!-- Google Font: Source Sans Pro -->
+  <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+  <link rel="stylesheet" href="<?php echo base_url() ?>assets/tagify/dist/tagify.css">
 </head>
 
 <body class="hold-transition layout-top-nav">
@@ -73,14 +95,20 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
           <!-- Right navbar links -->
           <ul class="order-1 order-md-3 navbar-nav navbar-no-expand ml-auto">
-            <?php if($this->session->userdata('logged')) { ?>
-              <?php if($this->session->userdata('id_user_level')==1 || $this->session->userdata('id_user_level')==2) { ?>
-                <li class="nav-item d-none d-sm-inline-block"> <a href=<?php echo base_url('welcome'); ?> class="nav-link" >Console</a> </li>
+            <?php if ($this->session->userdata('logged')) { ?>
+              <?php if ($this->session->userdata('id_user_level') == 1 || $this->session->userdata('id_user_level') == 2) { ?>
+                <li class="nav-item d-none d-sm-inline-block"> <a href=<?php echo base_url('welcome'); ?> class="nav-link">Console</a> </li>
+              <?php } ?>
+              <li class="nav-item">
+                <?php if ($this->session->userdata('id_user_level') == 1 || $this->session->userdata('id_user_level') == 2) { ?>
+                  <a href="<?php echo base_url('user/profile'); ?>/<?php echo $this->session->userdata('id_users'); ?>" class="nav-link">Profile</a>
+                <?php } else { ?>
+                  <a href="<?php echo base_url('tbl_talent/profile_talent'); ?>/<?php echo $this->session->userdata('id_users'); ?>" class="nav-link">Profile</a>
                 <?php } ?>
+              </li>
               <li class="nav-item dropdown">
                 <a id="dropdownSubMenu1" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle"><?php echo $this->session->userdata('nama_lengkap'); ?></a>
                 <ul aria-labelledby="dropdownSubMenu1" class="dropdown-menu border-0 shadow">
-                  <li><a href="<?php echo base_url('user/profile'); ?>/<?php echo $this->session->userdata('id_users'); ?>" class="dropdown-item">Profile</a></li>
                   <li><a href="<?php echo base_url('auth/logout'); ?>" class="dropdown-item">Logout</a></li>
                 </ul>
               </li>
@@ -92,7 +120,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 <a href="<?php echo base_url('auth/register'); ?>" class="nav-link">Daftar</a>
               </li>
             <?php } ?>
-         
+
           </ul>
         </div>
     </nav>
@@ -132,6 +160,40 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <script src="<?php echo base_url(); ?>assets\adminlte\plugins\bootstrap\js\bootstrap.bundle.min.js"></script>
   <!-- AdminLTE App -->
   <script src="<?php echo base_url(); ?>assets\adminlte\dist\js\adminlte.min.js"></script>
+  <!-- jQuery UI 1.11.4 -->
+  <script src="<?php echo base_url(); ?>assets/adminlte/plugins/jquery-ui/jquery-ui.min.js"></script>
+  <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
+  <script>
+    $.widget.bridge('uibutton', $.ui.button)
+  </script>
+  <!-- JQVMap -->
+  <script src="<?php echo base_url(); ?>assets/adminlte/plugins/jqvmap/jquery.vmap.min.js"></script>
+  <script src="<?php echo base_url(); ?>assets/adminlte/plugins/jqvmap/maps/jquery.vmap.usa.js"></script>
+  <!-- jQuery Knob Chart -->
+  <script src="<?php echo base_url(); ?>assets/adminlte/plugins/jquery-knob/jquery.knob.min.js"></script>
+  <!-- daterangepicker -->
+  <script src="<?php echo base_url(); ?>assets/adminlte/plugins/moment/moment.min.js"></script>
+  <script src="<?php echo base_url(); ?>assets/adminlte/plugins/daterangepicker/daterangepicker.js"></script>
+  <!-- Tempusdominus Bootstrap 4 -->
+  <script src="<?php echo base_url(); ?>assets/adminlte/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>
+  <!-- Summernote -->
+  <script src="<?php echo base_url(); ?>assets/adminlte/plugins/summernote/summernote-bs4.min.js"></script>
+  <!-- overlayScrollbars -->
+  <script src="<?php echo base_url(); ?>assets/adminlte/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
+  <!-- AdminLTE App -->
+  <script src="<?php echo base_url(); ?>assets/adminlte/dist/js/adminlte.js"></script>
+  <!-- AdminLTE for demo purposes -->
+  <script src="<?php echo base_url(); ?>assets/adminlte/dist/js/demo.js"></script>
+  <!-- DataTables -->
+  <!-- DataTables -->
+  <script src="<?php echo base_url(); ?>assets/adminlte/plugins/datatables/jquery.dataTables.js"></script>
+  <script src="<?php echo base_url(); ?>assets/adminlte/plugins/datatables-bs4/js/dataTables.bootstrap4.js"></script>
+  <script src="<?php echo base_url(); ?>assets/adminlte/plugins/datatables/jquery.dataTables.min.js"></script>
+  <script src="<?php echo base_url(); ?>assets/adminlte/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
+  <script src="<?php echo base_url(); ?>assets/adminlte/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
+  <script src="<?php echo base_url(); ?>assets/adminlte/plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
+  <script src="<?php echo base_url(); ?>assets/adminlte/select2/dist/js/select2.full.min.js"></script>
+  <!-- page script -->
 </body>
 
 </html>

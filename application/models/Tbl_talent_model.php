@@ -18,9 +18,9 @@ class Tbl_talent_model extends CI_Model
     // datatables
     function json()
     {
-        $this->datatables->select('id_talent,nama,nama_panggilan,tempat,tanggal_lahir,usia,jenis_kelamin,hobby,pendidikan,pekerjaan,bahasa,tinggi_badan,berat_badan,id_kategori,tentang,id_tarif,SecLogUser,SecLogDate');
+        $this->datatables->select('id_talent,nama,nama_panggilan,tempat,tanggal_lahir,usia,jenis_kelamin,hobby,pendidikan,pekerjaan,bahasa,tinggi_badan,berat_badan,id_kategori,tentang,tarif_minimum,tarif_maximum,SecLogUser,SecLogDate');
         $this->datatables->from('tbl_talent');
-        $this->datatables->where('status','active');
+        $this->datatables->where('status', 'active');
         //add this line for join
         //$this->datatables->join('table2', 'tbl_talent.field = table2.field');
         $this->datatables->add_column('action', anchor(site_url('tbl_talent/read/$1'), '<i class="fa fa-eye" aria-hidden="true"></i>', array('class' => 'btn btn-success btn-sm')) . " 
@@ -31,9 +31,9 @@ class Tbl_talent_model extends CI_Model
 
     function json_verify()
     {
-        $this->datatables->select('id_talent,nama,nama_panggilan,tempat,tanggal_lahir,usia,jenis_kelamin,hobby,pendidikan,pekerjaan,bahasa,tinggi_badan,berat_badan,id_kategori,tentang,id_tarif,status,SecLogUser,SecLogDate');
+        $this->datatables->select('id_talent,nama,nama_panggilan,tempat,tanggal_lahir,usia,jenis_kelamin,hobby,pendidikan,pekerjaan,bahasa,tinggi_badan,berat_badan,id_kategori,tentang,tarif_minimum,tarif_maximum,status,SecLogUser,SecLogDate');
         $this->datatables->from('tbl_talent');
-        $this->datatables->where('status','inactive');
+        $this->datatables->where('status', 'inactive');
         //add this line for join
         //$this->datatables->join('table2', 'tbl_talent.field = table2.field');
         $this->datatables->add_column('action', anchor(site_url('tbl_talent/read/$1'), '<i class="fa fa-eye" aria-hidden="true"></i>', array('class' => 'btn btn-warning btn-sm')) . " 
@@ -44,13 +44,13 @@ class Tbl_talent_model extends CI_Model
 
     function json_rejected()
     {
-        $this->datatables->select('id_talent,nama,nama_panggilan,tempat,tanggal_lahir,usia,jenis_kelamin,hobby,pendidikan,pekerjaan,bahasa,tinggi_badan,berat_badan,id_kategori,tentang,id_tarif,status,SecLogUser,SecLogDate');
+        $this->datatables->select('id_talent,nama,nama_panggilan,tempat,tanggal_lahir,usia,jenis_kelamin,hobby,pendidikan,pekerjaan,bahasa,tinggi_badan,berat_badan,id_kategori,tentang,tarif_minimum,tarif_maximum,status,SecLogUser,SecLogDate');
         $this->datatables->from('tbl_talent');
-        $this->datatables->where('status','rejected');
+        $this->datatables->where('status', 'rejected');
         //add this line for join
         //$this->datatables->join('table2', 'tbl_talent.field = table2.field');
         $this->datatables->add_column('action', anchor(site_url('tbl_talent/read/$1'), '<i class="fa fa-eye" aria-hidden="true"></i>', array('class' => 'btn btn-warning btn-sm')) . " 
-            " . anchor(site_url('tbl_talent_verify/follow_up/$1'), '<i class="fas fa-arrow-up" aria-hidden="true"></i>', array('class' => 'btn btn-success btn-sm')),'id_talent');
+            " . anchor(site_url('tbl_talent_verify/follow_up/$1'), '<i class="fas fa-arrow-up" aria-hidden="true"></i>', array('class' => 'btn btn-success btn-sm')), 'id_talent');
         return $this->datatables->generate();
     }
 
@@ -64,10 +64,9 @@ class Tbl_talent_model extends CI_Model
     // get data by id
     function get_by_id($id)
     {
-        $this->db->select('tbl_talent.*, tbl_photo.*, tbl_kategori.*, tbl_tarif.*, tbl_prestasi.*, tbl_sosmed.*');
+        $this->db->select('tbl_talent.*, tbl_photo.*, tbl_kategori.*, tbl_prestasi.*, tbl_sosmed.*');
         $this->db->join('tbl_photo', 'tbl_talent.code_talent=tbl_photo.code_talent', 'left');
         $this->db->join('tbl_kategori', 'tbl_talent.id_kategori=tbl_kategori.id_kategori', 'left');
-        $this->db->join('tbl_tarif', 'tbl_talent.id_tarif=tbl_tarif.id_tarif', 'left');
         $this->db->join('tbl_prestasi', 'tbl_talent.code_talent=tbl_prestasi.code_talent', 'left');
         $this->db->join('tbl_sosmed', 'tbl_talent.code_talent=tbl_sosmed.code_talent', 'left');
         $this->db->where('tbl_talent.id_talent', $id);
@@ -92,11 +91,12 @@ class Tbl_talent_model extends CI_Model
         $this->db->or_like('berat_badan', $q);
         $this->db->or_like('id_kategori', $q);
         $this->db->or_like('tentang', $q);
-        $this->db->or_like('id_tarif', $q);
+        $this->db->or_like('tarif_minimum', $q);
+        $this->db->or_like('tarif_maximum', $q);
         $this->db->or_like('status', $q);
         $this->db->or_like('prestasi', $q);
         $this->db->or_like('sosmed', $q);
-         $this->db->or_like('sosmed', $q);
+        $this->db->or_like('sosmed', $q);
         $this->db->or_like('SecLogUser', $q);
         $this->db->or_like('SecLogDate', $q);
         $this->db->from($this->table);
@@ -122,7 +122,8 @@ class Tbl_talent_model extends CI_Model
         $this->db->or_like('berat_badan', $q);
         $this->db->or_like('id_kategori', $q);
         $this->db->or_like('tentang', $q);
-        $this->db->or_like('id_tarif', $q);
+        $this->db->or_like('tarif_minimum', $q);
+        $this->db->or_like('tarif_maximum', $q);
         $this->db->or_like('status', $q);
         $this->db->or_like('prestasi', $q);
         $this->db->or_like('sosmed', $q);
@@ -230,10 +231,9 @@ class Tbl_talent_model extends CI_Model
 
     function get_kategori_talent($id_kategori)
     {
-        $this->db->select('tbl_talent.*, tbl_photo.*, tbl_kategori.*, tbl_tarif.*,tbl_sosmed.*,tbl_prestasi.*');
+        $this->db->select('tbl_talent.*, tbl_photo.*, tbl_kategori.*,tbl_sosmed.*,tbl_prestasi.*');
         $this->db->join('tbl_photo', 'tbl_talent.code_talent=tbl_photo.code_talent', 'left');
         $this->db->join('tbl_kategori', 'tbl_talent.id_kategori=tbl_kategori.id_kategori', 'left');
-        $this->db->join('tbl_tarif', 'tbl_talent.id_tarif=tbl_tarif.id_tarif', 'left');
         $this->db->join('tbl_sosmed', 'tbl_talent.code_talent=tbl_sosmed.code_talent', 'left');
         $this->db->join('tbl_prestasi', 'tbl_talent.code_talent=tbl_prestasi.code_talent', 'left');
         $this->db->where('tbl_talent.id_kategori', $id_kategori);
@@ -246,10 +246,9 @@ class Tbl_talent_model extends CI_Model
     {
         // $this->db->where($this->id, $id);
         // return $this->db->get($this->table)->row();
-        $this->db->select('tbl_talent.*, tbl_photo.photo, tbl_kategori.*, tbl_tarif.*, tbl_prestasi.*, tbl_sosmed.*');
+        $this->db->select('tbl_talent.*, tbl_photo.photo, tbl_kategori.*, tbl_prestasi.*, tbl_sosmed.*');
         $this->db->join('tbl_photo', 'tbl_talent.code_talent=tbl_photo.code_talent', 'left');
         $this->db->join('tbl_kategori', 'tbl_talent.id_kategori=tbl_kategori.id_kategori', 'left');
-        $this->db->join('tbl_tarif', 'tbl_talent.id_tarif=tbl_tarif.id_tarif', 'left');
         $this->db->join('tbl_prestasi', 'tbl_talent.code_talent=tbl_prestasi.code_talent', 'left');
         $this->db->join('tbl_sosmed', 'tbl_talent.code_talent=tbl_sosmed.code_talent', 'left');
         $this->db->where('tbl_talent.code_talent', $code_talent);
@@ -313,7 +312,7 @@ class Tbl_talent_model extends CI_Model
         tbl_tags_label.id_tags,
         tbl_tags_label.tag_order,
         tbl_tags.tags', FALSE);
-        $this->db->join('tbl_tags','tbl_tags_label.id_tags = tbl_tags.id_tags','left');
+        $this->db->join('tbl_tags', 'tbl_tags_label.id_tags = tbl_tags.id_tags', 'left');
         $this->db->order_by('tbl_tags_label.tag_order', 'ASC');
         $data = $this->db->get('tbl_tags_label')->result();
         return $data;
@@ -338,6 +337,28 @@ class Tbl_talent_model extends CI_Model
         $this->db->where('tbl_talent.id_talent', $id_talent);
         $this->db->group_by('tbl_talent.code_talent');
         return $this->db->get('tbl_talent')->result();
+    }
+
+    function get_tags_talent($id)
+    {
+        $this->db->select('tbl_tags_label.rel_id,
+        tbl_tags_label.rel_type,
+        tbl_tags_label.id_tags,
+        tbl_tags_label.tag_order,
+        tbl_tags.tags', FALSE);
+        $this->db->join('tbl_tags', 'tbl_tags_label.id_tags = tbl_tags.id_tags', 'left');
+        $this->db->where('tbl_tags_label.rel_id', $id);
+        $this->db->order_by('tbl_tags_label.tag_order', 'ASC');
+        $data = $this->db->get('tbl_tags_label')->result_array();
+        return $data;
+    }
+
+    function check_talent($id)
+    {
+        $this->db->select('tbl_user.*,tbl_talent.*');
+        $this->db->join('tbl_talent', 'tbl_user.id_users = tbl_talent.id_users', 'left');
+        $this->db->where('tbl_user.id_users', $id);
+        return $this->db->get('tbl_user')->row();
     }
 }
 
