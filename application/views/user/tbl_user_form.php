@@ -10,19 +10,21 @@
             <form action="<?php echo $action; ?>" method="post" enctype="multipart/form-data">
               <table class='table table-bordered>' <tr>
                 <td width='200'>Nama Karyawan </td>
-                <td><?php echo cmb_dinamis('id_pasien', 'pasien', 'nama_lengkap', 'id_pasien', $id_pasien, 'ASC') ?></td>
+                <td><input type="text" class="form-control" name="nama_lengkap" id="nama_lengkap" placeholder="nama lengkap" value="<?php echo $nama_lengkap; ?>" /></td>
                 </tr>
                 <tr>
-                  <td width='200'>Jabatan <?php echo form_error('id_user_level') ?></td>
+                  <td width='200'>Role <?php echo form_error('id_user_level') ?></td>
                   <td>
                     <?php echo cmb_dinamis('id_user_level', 'tbl_user_level', 'nama_level', 'id_user_level', $id_user_level, 'ASC') ?>
                   </td>
                 </tr>
                 <tr>
                   <td width='200'>Username </td>
-                  <td><select class="form-control select2" id="email" name="email" required>
-                      <option value="<?php echo $username; ?>" selected><?php echo $username; ?></option>
-                    </select></td>
+                    <td><input type="text" class="form-control" name="username" id="username" placeholder="username" value="<?php echo $username; ?>" /></td>
+                </tr>
+                <tr>
+                  <td width='200'>Contact </td>
+                    <td><input type="text" class="form-control" name="kontak" id="kontak" placeholder="kontak" value="<?php echo $kontak; ?>" /></td>
                 </tr>
                 <?php
                 if ($this->uri->segment(2) == 'create') {

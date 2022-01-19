@@ -55,4 +55,24 @@ class Home_page extends CI_Controller
         // die;
         $this->template->load('home_page/tamplate', 'home_page/talent_list', $data);
     }
+
+    function talent_list_endorse($id_talent)
+    {
+        $get_form_talent_endorse = $this->Tbl_talent_model->get_form_talent_endorse($id_talent);
+        $get_tags_label = $this->Tbl_talent_model->get_tags_label();
+        
+        if($this->session->userdata('logged')){
+            $logged = 1;
+        } else {
+            $logged = 0;
+        }
+
+        $data = array(
+            'get_form_talent_endorse' => $get_form_talent_endorse,
+            'get_tags_label' => $get_tags_label,
+            'logged' => $logged,
+        );
+
+        $this->template->load('home_page/tamplate', 'home_page/talent_list_endorse', $data);
+    }
 }

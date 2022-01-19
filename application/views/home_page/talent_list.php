@@ -271,8 +271,11 @@ foreach ($get_talent as $row) : $no++; ?>
 
   function checkLogin() {
     if (<?php echo $logged; ?> == 1) {
-      var loc = window.open('https://api.whatsapp.com/send?phone=6287887448691', '_blank');
+      <?php $no = 1;
+      foreach ($get_talent as $row) : $no++; ?>
+      var loc = window.open('<?php echo base_url('home_page/talent_list_endorse/' . $row->id_talent . '') ?>', '_blank');
       console.log(loc);
+      <?php endforeach; ?>
     } else {
       var loc = window.location.href = "<?php echo base_url('Auth'); ?>";
       console.log(loc);

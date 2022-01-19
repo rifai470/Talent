@@ -19,18 +19,59 @@ class User_model extends CI_Model
     function json()
     {
         $this->datatables->select('tbl_user.id_users,
-                            tbl_user_level.nama_level,
-                            tbl_user.is_aktif,
-                            tbl_user.username,
-                            pasien.nama_lengkap
-                            
-        ');
+        tbl_user.username,
+        tbl_user.`password`,
+        tbl_user.nama_lengkap,
+        tbl_user.kontak,
+        tbl_user.id_user_level,
+        tbl_user.`code`,
+        tbl_user.is_aktif,
+        tbl_user.cookie,
+        tbl_user.perusahaan,
+        tbl_user.images');
         $this->datatables->from('tbl_user');
-        $this->datatables->add_column('is_aktif', '$1', 'rename_string_is_aktif(is_aktif)');
-        $this->datatables->join('tbl_user_level', 'tbl_user.id_user_level = tbl_user_level.id_user_level', 'left');
-        $this->datatables->join('pasien', 'tbl_user.id_pasien = pasien.id_pasien', 'left');
-        $this->datatables->add_column('action', anchor(site_url('user/update/$1'), '<i class="fa fa-edit" aria-hidden="true"></i>', array('class' => 'btn btn-warning btn-sm')) . " 
-                " . anchor(site_url('user/delete/$1'), '<i class="fa fa-trash" aria-hidden="true"></i>', 'class="btn btn-danger btn-sm" onclick="javasciprt: return confirm(\'Are You Sure ?\')"'), 'id_users');
+        $this->datatables->add_column('action', anchor(site_url('user/update/$1'), '<i class="fa fa-times" aria-hidden="true"></i>', array('class' => 'btn btn-warning btn-sm')) . "
+        " . anchor(site_url('user/nonactive/$1'), '<i class="fa fa-times" aria-hidden="true"></i>', array('class' => 'btn btn-danger btn-sm')), 'id_users');
+        return $this->datatables->generate();
+    }
+
+    function json_nonactive()
+    {
+        $this->datatables->select('tbl_user.id_users,
+        tbl_user.username,
+        tbl_user.`password`,
+        tbl_user.nama_lengkap,
+        tbl_user.kontak,
+        tbl_user.id_user_level,
+        tbl_user.`code`,
+        tbl_user.is_aktif,
+        tbl_user.cookie,
+        tbl_user.perusahaan,
+        tbl_user.images');
+        $this->datatables->from('tbl_user');
+        $this->datatables->where('is_aktif','y');
+        $this->datatables->add_column('action', anchor(site_url('user/update/$1'), '<i class="fa fa-edit" aria-hidden="true"></i>', array('class' => 'btn btn-warning btn-sm')) . "
+        " . anchor(site_url('user/nonactive/$1'), '<i class="fa fa-times" aria-hidden="true"></i>', array('class' => 'btn btn-danger btn-sm')), 'id_users');
+        return $this->datatables->generate();
+    }
+
+    function json_reactive()
+    {
+        $this->datatables->select('tbl_user.id_users,
+        tbl_user.username,
+        tbl_user.`password`,
+        tbl_user.nama_lengkap,
+        tbl_user.kontak,
+        tbl_user.id_user_level,
+        tbl_user.`code`,
+        tbl_user.is_aktif,
+        tbl_user.cookie,
+        tbl_user.perusahaan,
+        tbl_user.images');
+        $this->datatables->from('tbl_user');
+        $this->datatables->where('is_aktif','n');
+        $this->datatables->add_column('action', anchor(site_url('user/update/$1'), '<i class="fa fa-edit" aria-hidden="true"></i>', array('class' => 'btn btn-warning btn-sm')) . "
+        " . anchor(site_url('user/reactive/$1'), '<i class="fas fa-arrow-up" aria-hidden="true"></i>', array('class' => 'btn btn-success btn-sm')) , 'id_users');
         return $this->datatables->generate();
     }
 
@@ -99,14 +140,14 @@ class User_model extends CI_Model
         $this->db->delete($this->table);
     }
 
-    function get_email($id_pasien)
-    {
-        $this->db->select('pasien.email');
-        $this->db->from('pasien');
-        $this->db->where('id_pasien', $id_pasien);
-        $query = $this->db->get();
-        return $query;
-    }
+    // function get_email($id_pasien)
+    // {
+    //     $this->db->select('pasien.email');
+    //     $this->db->from('pasien');
+    //     $this->db->where('id_pasien', $id_pasien);
+    //     $query = $this->db->get();
+    //     return $query;
+    // }
 
     function login($id_users)
     {

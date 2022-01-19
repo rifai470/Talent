@@ -237,6 +237,7 @@ class Tbl_talent_model extends CI_Model
         $this->db->join('tbl_sosmed', 'tbl_talent.code_talent=tbl_sosmed.code_talent', 'left');
         $this->db->join('tbl_prestasi', 'tbl_talent.code_talent=tbl_prestasi.code_talent', 'left');
         $this->db->where('tbl_talent.id_kategori', $id_kategori);
+        $this->db->where('tbl_talent.status','active');
         $this->db->group_by('tbl_talent.code_talent');
         return $this->db->get('tbl_talent')->result();
     }
@@ -324,6 +325,19 @@ class Tbl_talent_model extends CI_Model
         $this->db->join('tbl_user', 'tbl_talent.id_users=tbl_user.id_users', 'left');
         $this->db->where('tbl_talent.id_talent', $id);
         return $this->db->get('tbl_talent')->row();
+    }
+
+    function get_form_talent_endorse($id_talent)
+    {
+        $this->db->select('tbl_talent.*, tbl_photo.*, tbl_kategori.*, tbl_tarif.*,tbl_sosmed.*,tbl_prestasi.*');
+        $this->db->join('tbl_photo', 'tbl_talent.code_talent=tbl_photo.code_talent', 'left');
+        $this->db->join('tbl_kategori', 'tbl_talent.id_kategori=tbl_kategori.id_kategori', 'left');
+        $this->db->join('tbl_tarif', 'tbl_talent.id_tarif=tbl_tarif.id_tarif', 'left');
+        $this->db->join('tbl_sosmed', 'tbl_talent.code_talent=tbl_sosmed.code_talent', 'left');
+        $this->db->join('tbl_prestasi', 'tbl_talent.code_talent=tbl_prestasi.code_talent', 'left');
+        $this->db->where('tbl_talent.id_talent', $id_talent);
+        $this->db->group_by('tbl_talent.code_talent');
+        return $this->db->get('tbl_talent')->result();
     }
 }
 

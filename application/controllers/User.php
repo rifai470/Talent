@@ -20,10 +20,16 @@ class User extends CI_Controller
         $this->template->load('template', 'user/tbl_user_list');
     }
 
-    public function json()
+    public function json_nonactive()
     {
         header('Content-Type: application/json');
-        echo $this->User_model->json();
+        echo $this->User_model->json_nonactive();
+    }
+
+    public function json_reactive()
+    {
+        header('Content-Type: application/json');
+        echo $this->User_model->json_reactive();
     }
 
     public function read($id)
@@ -58,7 +64,6 @@ class User extends CI_Controller
             'password'      => set_value('password'),
             'id_user_level' => set_value('id_user_level'),
             'is_aktif'      => set_value('is_aktif'),
-            'id_pasien'     => set_value('id_pasien'),
             'perusahaan'    => set_value('perusahaan'),
         );
         $this->template->load('template', 'user/tbl_user_form', $data);
@@ -99,7 +104,8 @@ class User extends CI_Controller
                 'button'        => 'Update',
                 'action'        => site_url('user/update_action'),
                 'id_users'      => set_value('id_users', $row->id_users),
-                'id_pasien'     => set_value('first_name', $row->id_pasien),
+                'nama_lengkap'  => set_value('nama_lengkap', $row->nama_lengkap),
+                'kontak'        => set_value('kontak', $row->kontak),
                 'username'      => set_value('username', $row->username),
                 'password'      => set_value('password', $row->password),
                 'id_user_level' => set_value('id_user_level', $row->id_user_level),
@@ -120,7 +126,11 @@ class User extends CI_Controller
             $this->update($this->input->post('id_users', TRUE));
         } else {
             $data = array(
-                'id_pasien'     => $this->input->post('id_pasien', TRUE),
+                'id_users'      => $this->input->post('id_users', TRUE),
+                'nama_lengkap'  => $this->input->post('nama_lengkap', TRUE),
+                'kontak'        => $this->input->post('kontak', TRUE),
+                'username'      => $this->input->post('username', TRUE),
+                'password'      => $this->input->post('password', TRUE),
                 'id_user_level' => $this->input->post('id_user_level', TRUE),
                 'is_aktif'      => $this->input->post('is_aktif', TRUE),
                 'perusahaan'    => $this->input->post('perusahaan', TRUE),
@@ -234,12 +244,12 @@ class User extends CI_Controller
         $this->load->view('user/tbl_user_doc', $data);
     }
 
-    function get_email()
-    {
-        $id_pasien = $this->input->post('id', TRUE);
-        $data = $this->User_model->get_email($id_pasien)->result();
-        echo json_encode($data);
-    }
+    // function get_email()
+    // {
+    //     $id_pasien = $this->input->post('id', TRUE);
+    //     $data = $this->User_model->get_email($id_pasien)->result();
+    //     echo json_encode($data);
+    // }
 
     function profile($id)
     {
@@ -304,4 +314,32 @@ class User extends CI_Controller
 
         
     }
+
+    public function nonactive($id)
+	{
+		$data = array(
+			'is_aktif' => 'n',
+		);
+		// print_r($data);
+		// die;
+
+		$this->User_model->update($id, $data);
+		
+		$this->session->set_flashdata('message', 'Update Record Success');
+		redirect(site_url('user'));
+	}
+
+    public function reactive($id)
+	{
+		$data = array(
+			'is_aktif' => 'y',
+		);
+		// print_r($data);
+		// die;
+
+		$this->User_model->update($id, $data);
+		
+		$this->session->set_flashdata('message', 'Update Record Success');
+		redirect(site_url('user'));
+	}
 }
