@@ -147,7 +147,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
       </div>
       <!-- Default to the left -->
-      <strong>Copyright &copy; 2021 <a href="https://www.mustika-ratu.co.id">www.mustika-ratu.co.id</a>.</strong> All rights reserved.
+      <strong>Copyright &copy; 2021 <a href="https://www.mustika-ratu.co.id">Mustika Ratu</a>.</strong> All rights reserved.
     </footer>
   </div>
   <!-- ./wrapper -->

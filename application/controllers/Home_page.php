@@ -157,7 +157,7 @@ class Home_page extends CI_Controller
 
     function talent_list_endorse($id_talent)
     {
-        $get_form_talent_endorse = $this->Tbl_talent_model->get_form_talent_endorse($id_talent);
+        $get_talent = $this->Tbl_talent_model->get_talent($id_talent);
         $get_tags_label = $this->Tbl_talent_model->get_tags_label();
         
         if($this->session->userdata('logged')){
@@ -167,11 +167,23 @@ class Home_page extends CI_Controller
         }
 
         $data = array(
-            'get_form_talent_endorse' => $get_form_talent_endorse,
             'get_tags_label' => $get_tags_label,
+            'code_talent' => $get_talent->code_talent,
+            'photo' => $get_talent->photo,
+            'nama' => $get_talent->nama,
+            'tempat' => $get_talent->tempat,
+            'pekerjaan' => $get_talent->pekerjaan,
+            'id_talent' => $id_talent,
+            'tentang' => $get_talent->tentang,
+            'instagram' => $get_talent->instagram,
+            'facebook' => $get_talent->facebook,
+            'twitter' => $get_talent->twitter,
+            'other' => $get_talent->other,
             'logged' => $logged,
         );
 
         $this->template->load('home_page/tamplate', 'home_page/talent_list_endorse', $data);
     }
+
+    
 }

@@ -142,6 +142,12 @@ class Tbl_talent_model extends CI_Model
         return $this->db->insert_id();
     }
 
+    function insert_endorse($data_endorse)
+    {
+        $this->db->insert('tbl_endorse', $data_endorse);
+        return $this->db->insert_id();
+    }
+
     //buat function insert sosmed
     function insert_sosmed($data_sosmed)
     {
@@ -169,6 +175,12 @@ class Tbl_talent_model extends CI_Model
     function insert_photo($data_photo)
     {
         $this->db->insert_batch('tbl_photo', $data_photo);
+    }
+
+    //buat function insert photo
+    function insert_photo_endorse($data_photo_endorse)
+    {
+        $this->db->insert_batch('tbl_photo_endorse', $data_photo_endorse);
     }
 
     // update data
@@ -389,7 +401,7 @@ class Tbl_talent_model extends CI_Model
         return $this->db->get('tbl_talent')->row();
     }
 
-    function get_form_talent_endorse($id_talent)
+    function get_talent($id_talent)
     {
         $this->db->select('tbl_talent.*, tbl_photo.*, tbl_kategori.*,tbl_sosmed.*,tbl_prestasi.*');
         $this->db->join('tbl_photo', 'tbl_talent.code_talent=tbl_photo.code_talent', 'left');
@@ -398,7 +410,7 @@ class Tbl_talent_model extends CI_Model
         $this->db->join('tbl_prestasi', 'tbl_talent.code_talent=tbl_prestasi.code_talent', 'left');
         $this->db->where('tbl_talent.id_talent', $id_talent);
         $this->db->group_by('tbl_talent.code_talent');
-        return $this->db->get('tbl_talent')->result();
+        return $this->db->get('tbl_talent')->row();
     }
 
     function get_tags_talent($id)
@@ -429,6 +441,36 @@ class Tbl_talent_model extends CI_Model
         $this->db->where('id_users', $id_users);
         $data = $this->db->get('tbl_user')->row();
         return $data;
+    }
+
+    function get_endorse_by_id($id_endorse)
+    {
+        $this->db->select('tbl_endorse.id_endorse,
+        tbl_endorse.endorse,
+        tbl_endorse.detail,
+        tbl_endorse.todolist,
+        tbl_endorse.syarat,
+        tbl_endorse.budget,
+        tbl_endorse.free,
+        tbl_endorse.id_users,
+        tbl_talent.id_talent,
+        tbl_talent.code_talent,
+        tbl_talent.nama');
+        $this->db->join('tbl_talent', 'tbl_endorse.code_talent=tbl_talent.code_talent', 'left');
+        $this->db->where('tbl_endorse.id_endorse', $id_endorse);
+        
+        // $this->db->group_by('tbl_endorse.code_talent');
+        // $this->db->order_by($code_talent,'DSC','tbl_endorse.id_endorse','DSC');
+        return $this->db->get('tbl_endorse')->row();
+    }
+
+    function get_user_by_id($id_users)
+    {
+        $this->db->select('tbl_user.*');
+        $this->db->where('tbl_user.id_users', $id_users);
+        // $this->db->group_by('tbl_user.id_users');
+        // $this->db->order_by($code_talent,'DSC','tbl_endorse.id_endorse','DSC');
+        return $this->db->get('tbl_user')->row();
     }
 }
 

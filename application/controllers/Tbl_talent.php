@@ -792,6 +792,88 @@ class Tbl_talent extends CI_Controller
 			// show_error($this->email->print_debugger());
 		}
 	}
+	
+	public function create_endorse()
+	{
+		$nama = $this->input->post('nama', TRUE);
+
+		$data = array(
+			'id_users' => $this->input->post('id_users', TRUE),
+			'code_talent' => $this->input->post('code_talent', TRUE),
+			'endorse' => $this->input->post('endorse', TRUE),
+			'detail' => $this->input->post('detail', TRUE),
+			'todolist' => $this->input->post('todolist', TRUE),
+			'syarat' => $this->input->post('syarat', TRUE),
+			'budget' => $this->input->post('budget', TRUE),
+			'free' => $this->input->post('free', TRUE),
+			'SecLogUser' => $this->session->userdata('nama_lengkap'),
+			'SecLogDate' => date('Y-m-d H:i:s'),
+		);
+		$id_endorse = $this->Tbl_talent_model->insert_endorse($data);
+		// print_r($data);
+		// die;
+		//array photo
+		// If files are selected to upload 
+		if (!empty($_FILES['upload']['name']) && count(array_filter($_FILES['upload']['name'])) > 0) {
+			$filesCount = count($_FILES['upload']['name']);
+			for ($i = 0; $i < $filesCount; $i++) {
+				$_FILES['file']['name']     = $_FILES['upload']['name'][$i];
+				$_FILES['file']['type']     = $_FILES['upload']['type'][$i];
+				$_FILES['file']['tmp_name'] = $_FILES['upload']['tmp_name'][$i];
+				$_FILES['file']['error']     = $_FILES['upload']['error'][$i];
+				$_FILES['file']['size']     = $_FILES['upload']['size'][$i];
+
+				// File upload configuration 
+				$uploadPath = './uploads/photo/';
+				$config['upload_path'] = $uploadPath;
+				$config['allowed_types'] = 'gif|jpg|jpeg|png';
+
+				// Load and initialize upload library 
+				$this->load->library('upload', $config);
+				$this->upload->initialize($config);
+
+				// Upload file to server 
+				if ($this->upload->do_upload('file')) {
+					// Uploaded file data 
+					$fileData = $this->upload->data();
+					$uploadData[$i]['photo'] = $fileData['file_name'];
+					$uploadData[$i]['id_endorse'] = $id_endorse;
+					$uploadData[$i]['SecLogUser'] = $this->session->userdata('nama_lengkap');
+					$uploadData[$i]['SecLogDate'] = date("Y-m-d H:i:s");
+				}
+			}
+
+			if (!empty($uploadData)) {
+				// Insert files data into the database 
+				$this->Tbl_talent_model->insert_photo_endorse($uploadData);
+			}
+		}
+
+		$get_endorse = $this->Tbl_talent_model->get_endorse_by_id($id_endorse);
+		$get_user = $this->Tbl_talent_model->get_user_by_id($data['id_users']);
+
+		redirect('https://api.whatsapp.com/send?phone=6287887448691&text=Halo,%20saya%20'.$get_user->nama_lengkap.'%0A%0Aingin%20endorse%20talent%20:%20'.$nama.',%0A%0Auntuk%20mempromosian%20:%20'.$get_endorse->endorse.'%0A%0Adengan%20detail%20:%20%0A'.$get_endorse->todolist.'%0A%0Asyarat%20ketentuan%20:%20%0A'.$get_endorse->syarat.'%0A%0Abudget%20:%20'.$get_endorse->budget.'%0A%0Atalent%20akan%20mendapatkan%20gratis%20:%20%0A'.$get_endorse->free.'');
+		
+		
+	}
+
+	// public function tags(){
+	// 	$data_tags = array();
+
+	// 	$query = $this->db->get('tbl_tags');
+	// 	$result = $query->result_array();
+	// 	foreach ($result as $result){
+	// 		$data_tags[] = array(
+	// 			'tags_id' => $result['tags_id'],
+	// 			'tags' => $result['tags']
+	// 		)
+	// 	}
+
+	// 	$this->output
+	// 	->set_content_type('asset/tags/dist')
+	// 	->
+
+	// }
 
 	public function _rules()
 	{
@@ -817,6 +899,8 @@ class Tbl_talent extends CI_Controller
 		// $this->form_validation->set_rules('id_talent', 'id_talent', 'trim');
 		// $this->form_validation->set_error_delimiters('<span class="text-danger">', '</span>');
 	}
+
+	
 }
 
 /* End of file Tbl_talent.php */
