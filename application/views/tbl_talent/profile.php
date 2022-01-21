@@ -72,19 +72,28 @@
     <div class="content">
         <div class="container">
             <div class="container-fluid">
+            <?php if ($this->session->userdata('message')) { ?>
+                <div class="alert alert-danger alert-dismissible">
+                  <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                  <h5><i class="icon fas fa-check"></i> Alert!</h5>
+                  <?php echo $this->session->userdata('message') <> '' ? $this->session->userdata('message') : ''; ?>
+                </div>
+              <?php } ?>
                 <div class="row">
                     <div class="col-md-8">
                         <div class="card card-default">
-                                <div class="card-tools">
+                            <div class="card-tools">
                                 <ul class="order-1 order-md-3 navbar-nav navbar-no-expand ml-auto">
                                     <li class="nav-item dropdown">
                                         <a id="dropdownSubMenu1" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link"><i class="fas fa-bars" style="color: black;"></i></a>
                                         <ul aria-labelledby="dropdownSubMenu1" class="dropdown-menu border-0 shadow">
                                         <li><a href="<?php echo base_url('tbl_talent/ubah_profile'); ?>/<?php echo $this->session->userdata('id_users'); ?>" class="dropdown-item">Ubah Profile</a></li>
+                                        <button type="button" class="btn" data-toggle="modal" data-target="#modal-password" style="margin-left: 2%;">Ubah Password</button>
                                         </ul>
                                     </li>
+                                <div class="nav-link" style="padding-top: 1%; padding-left: 83%; position: relative;"><b><button class="btn <?php if($status == 'active') {echo 'btn-success';} else {echo 'btn-danger';}?> btn-sm"><?php echo strtoupper($status); ?></b></button</div>
                                 </ul>
-                                </div>
+                            </div>
                             <div class="row-md-6">
                                 <div class="card-body">
                                     <div class="text-center">
@@ -248,6 +257,36 @@
     <!-- /.content -->
 </div>
 <!-- /.content-wrapper -->
+
+<div class="modal fade" id="modal-password">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4 class="modal-title">Ubah Password</h4>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form method="POST" action="<?php echo base_url('user/change_password'); ?>" enctype="multipart/form-data">
+              <div class="input-group mb-3">
+                <input type="password" class="form-control form-control-md" name="password" placeholder="Current Password" value="" required />
+              </div>
+              <div class="input-group mb-3">
+                <input type="password" class="form-control form-control-md" name="new_password" placeholder="New Password" value="" required />
+              </div>
+              <div class="input-group mb-3">
+                <input type="hidden" class="form-control" name="id_users" value="<?php echo $id_users; ?>" />
+                <input type="hidden" class="form-control" name="change_password" value="2" />
+                <button type="submit" class="btn btn-info">Save</button>
+              </div>
+            </form>
+          </div>
+        </div>
+        <!-- /.modal-content -->
+      </div>
+      <!-- /.modal-dialog -->
+    </div>
 
 <script>
     const controls=document.querySelector(".controls");

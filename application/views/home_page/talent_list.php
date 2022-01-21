@@ -1,6 +1,3 @@
-<link href="<?php echo base_url() . 'assets/css/w3.css' ?>" rel="stylesheet" />
-
-
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
   <!-- Content Header (Page header) -->
@@ -8,7 +5,11 @@
     <div class="container">
       <div class="row mb-2">
         <div class="col-sm-6">
-          <h1 class="m-0 text-dark"> <?php echo $get_kategori->kategori; ?> </h1>
+          <?php if($search == '') { ?>
+            <h4 class="m-0 text-dark"> <?php echo $kategori; ?> </h4>
+          <?php } else { ?>
+            <h5 class="m-0 text-dark"> Search '<?php echo $search; ?>' </h5>
+          <?php } ?>
         </div>
         <div class="col-sm-6">
           <ol class="breadcrumb float-sm-right">
@@ -63,6 +64,12 @@
         <?php endforeach; ?>
       </div>
       <!-- /.row -->
+      <div class="row">
+        <div class="col">
+            <!--Tampilkan pagination-->
+            <?php echo $pagination; ?>
+        </div>
+    </div>
     </div><!-- /.container-fluid -->
   </div>
   <!-- /.content -->

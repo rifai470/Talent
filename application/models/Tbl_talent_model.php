@@ -231,7 +231,17 @@ class Tbl_talent_model extends CI_Model
         // exit;
     }
 
-    function get_kategori_talent($id_kategori)
+    // function get_kategori_talent($id_kategori, $start, $limit){
+    //     $query = $this->db->get('tbl_talent', $limit, $start);
+    //     // return $query;
+    //     print_r($this->db->last_query());
+    //     echo "<pre>";
+    //     print_r($query);
+    //     // print_r($code);
+    //     exit;
+    // }
+
+    function get_kategori_talent($id_kategori, $limit, $start)
     {
         $this->db->select('tbl_talent.*, tbl_photo.*, tbl_kategori.*,tbl_sosmed.*,tbl_prestasi.*');
         $this->db->join('tbl_photo', 'tbl_talent.code_talent=tbl_photo.code_talent', 'left');
@@ -240,6 +250,57 @@ class Tbl_talent_model extends CI_Model
         $this->db->join('tbl_prestasi', 'tbl_talent.code_talent=tbl_prestasi.code_talent', 'left');
         $this->db->where('tbl_talent.id_kategori', $id_kategori);
         $this->db->where('tbl_talent.status','active');
+        $this->db->limit($limit, $start);
+        $this->db->group_by('tbl_talent.code_talent');
+        return $this->db->get('tbl_talent')->result();
+        // print_r($this->db->last_query());
+        // echo "<pre>";
+        // print_r($data);
+        // // print_r($code);
+        // exit;
+    }
+
+    function get_kategori_talent_count($id_kategori)
+    {
+        $this->db->select('tbl_talent.*, tbl_photo.*, tbl_kategori.*,tbl_sosmed.*,tbl_prestasi.*');
+        $this->db->join('tbl_photo', 'tbl_talent.code_talent=tbl_photo.code_talent', 'left');
+        $this->db->join('tbl_kategori', 'tbl_talent.id_kategori=tbl_kategori.id_kategori', 'left');
+        $this->db->join('tbl_sosmed', 'tbl_talent.code_talent=tbl_sosmed.code_talent', 'left');
+        $this->db->join('tbl_prestasi', 'tbl_talent.code_talent=tbl_prestasi.code_talent', 'left');
+        $this->db->where('tbl_talent.id_kategori', $id_kategori);
+        $this->db->where('tbl_talent.status','active');
+        $this->db->group_by('tbl_talent.code_talent');
+        return $this->db->get('tbl_talent')->result();
+    }
+
+    function get_search_talent($search, $limit, $start)
+    {
+        $this->db->select('tbl_talent.*, tbl_photo.*, tbl_kategori.*,tbl_sosmed.*,tbl_prestasi.*');
+        $this->db->join('tbl_photo', 'tbl_talent.code_talent=tbl_photo.code_talent', 'left');
+        $this->db->join('tbl_kategori', 'tbl_talent.id_kategori=tbl_kategori.id_kategori', 'left');
+        $this->db->join('tbl_sosmed', 'tbl_talent.code_talent=tbl_sosmed.code_talent', 'left');
+        $this->db->join('tbl_prestasi', 'tbl_talent.code_talent=tbl_prestasi.code_talent', 'left');
+        $this->db->where('tbl_talent.status','active');
+        $this->db->like('tbl_talent.nama', $search, 'both');
+        $this->db->limit($limit, $start);
+        $this->db->group_by('tbl_talent.code_talent');
+        return $this->db->get('tbl_talent')->result();
+        // print_r($this->db->last_query());
+        // echo "<pre>";
+        // print_r($data);
+        // // print_r($code);
+        // exit;
+    }
+
+    function get_search_talent_count($search)
+    {
+        $this->db->select('tbl_talent.*, tbl_photo.*, tbl_kategori.*,tbl_sosmed.*,tbl_prestasi.*');
+        $this->db->join('tbl_photo', 'tbl_talent.code_talent=tbl_photo.code_talent', 'left');
+        $this->db->join('tbl_kategori', 'tbl_talent.id_kategori=tbl_kategori.id_kategori', 'left');
+        $this->db->join('tbl_sosmed', 'tbl_talent.code_talent=tbl_sosmed.code_talent', 'left');
+        $this->db->join('tbl_prestasi', 'tbl_talent.code_talent=tbl_prestasi.code_talent', 'left');
+        $this->db->where('tbl_talent.status','active');
+        $this->db->like('tbl_talent.nama', $search, 'both');
         $this->db->group_by('tbl_talent.code_talent');
         return $this->db->get('tbl_talent')->result();
     }
@@ -360,6 +421,14 @@ class Tbl_talent_model extends CI_Model
         $this->db->join('tbl_talent', 'tbl_user.id_users = tbl_talent.id_users', 'left');
         $this->db->where('tbl_user.id_users', $id);
         return $this->db->get('tbl_user')->row();
+    }
+
+    function get_users($id_users)
+    {
+        $this->db->select('nama_lengkap');
+        $this->db->where('id_users', $id_users);
+        $data = $this->db->get('tbl_user')->row();
+        return $data;
     }
 }
 

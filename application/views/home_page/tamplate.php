@@ -52,6 +52,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <!-- Google Font: Source Sans Pro -->
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
   <link rel="stylesheet" href="<?php echo base_url() ?>assets/tagify/dist/tagify.css">
+  <link href="<?php echo base_url() . 'assets/css/w3.css' ?>" rel="stylesheet" />
 </head>
 
 <body class="hold-transition layout-top-nav">
@@ -62,7 +63,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
       <div class="container">
         <a href="<?php echo base_url(); ?>" class="navbar-brand">
           <img src="<?php echo base_url(); ?>assets/images/mustika_ratu_icon.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
-          <span class="brand-text font-weight-light">TALENT</span>
+          <span class="brand-text font-weight-light"><font style="color: grey; font-weight: 300;">TALENT</font></span>
         </a>
 
         <button class="navbar-toggler order-1" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
@@ -79,50 +80,49 @@ scratch. This page gets rid of all links and provides the needed markup only.
               <a href="#" class="nav-link">Contact</a>
             </li>
           </ul> -->
-
-          <!-- SEARCH FORM -->
-          <!-- <form class="form-inline ml-0 ml-md-3">
-          <div class="input-group input-group-sm">
-            <input class="form-control form-control-navbar" type="search" placeholder="Search" aria-label="Search">
-            <div class="input-group-append">
-              <button class="btn btn-navbar" type="submit">
-                <i class="fas fa-search"></i>
-              </button>
-            </div>
-          </div>
-        </form>
-      </div> -->
-
-          <!-- Right navbar links -->
-          <ul class="order-1 order-md-3 navbar-nav navbar-no-expand ml-auto">
-            <?php if ($this->session->userdata('logged')) { ?>
-              <?php if ($this->session->userdata('id_user_level') == 1 || $this->session->userdata('id_user_level') == 2) { ?>
-                <li class="nav-item d-none d-sm-inline-block"> <a href=<?php echo base_url('welcome'); ?> class="nav-link">Console</a> </li>
-              <?php } ?>
-              <li class="nav-item">
-                <?php if ($this->session->userdata('id_user_level') == 1 || $this->session->userdata('id_user_level') == 2) { ?>
-                  <a href="<?php echo base_url('user/profile'); ?>/<?php echo $this->session->userdata('id_users'); ?>" class="nav-link">Profile</a>
-                <?php } else { ?>
-                  <a href="<?php echo base_url('tbl_talent/profile_talent'); ?>/<?php echo $this->session->userdata('id_users'); ?>" class="nav-link">Profile</a>
-                <?php } ?>
-              </li>
-              <li class="nav-item dropdown">
-                <a id="dropdownSubMenu1" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle"><?php echo $this->session->userdata('nama_lengkap'); ?></a>
-                <ul aria-labelledby="dropdownSubMenu1" class="dropdown-menu border-0 shadow">
-                  <li><a href="<?php echo base_url('auth/logout'); ?>" class="dropdown-item">Logout</a></li>
-                </ul>
-              </li>
-            <?php } else { ?>
-              <li class="nav-item">
-                <a href="<?php echo base_url('auth'); ?>" class="nav-link">Login</a>
-              </li>
-              <li class="nav-item">
-                <a href="<?php echo base_url('auth/register'); ?>" class="nav-link">Daftar</a>
-              </li>
-            <?php } ?>
-
-          </ul>
         </div>
+
+        <!-- Right navbar links -->
+        <ul class="order-1 order-md-3 navbar-nav navbar-no-expand ml-auto">
+          <!-- SEARCH FORM -->
+          <form action="<?php echo base_url('home_page/search'); ?>" method="post" class="form-inline ml-0 ml-md-3">
+            <div class="input-group input-group-sm">
+              <input class="form-control form-control-navbar" name="search" type="text" placeholder="Search" aria-label="Search">
+              <div class="input-group-append">
+                <button class="btn btn-navbar" type="submit">
+                  <i class="fas fa-search"></i>
+                </button>
+              </div>
+            </div>
+          </form>
+          <?php if ($this->session->userdata('logged')) { ?>
+            <?php if ($this->session->userdata('id_user_level') == 1 || $this->session->userdata('id_user_level') == 2) { ?>
+              <li class="nav-item d-none d-sm-inline-block"> <a href=<?php echo base_url('welcome'); ?> class="nav-link">Console</a> </li>
+            <?php } ?>
+            <li class="nav-item">
+              <?php if ($this->session->userdata('id_user_level') == 1 || $this->session->userdata('id_user_level') == 2) { ?>
+                <a href="<?php echo base_url('user/profile'); ?>/<?php echo $this->session->userdata('id_users'); ?>" class="nav-link">Profile</a>
+              <?php } else { ?>
+                <a href="<?php echo base_url('tbl_talent/profile_talent'); ?>/<?php echo $this->session->userdata('id_users'); ?>" class="nav-link">Profile</a>
+              <?php } ?>
+            </li>
+            <li class="nav-item dropdown">
+              <a id="dropdownSubMenu1" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle"><?php echo $this->session->userdata('nama_lengkap'); ?></a>
+              <ul aria-labelledby="dropdownSubMenu1" class="dropdown-menu border-0 shadow">
+                <li><a href="<?php echo base_url('auth/logout'); ?>" class="dropdown-item">Logout</a></li>
+              </ul>
+            </li>
+          <?php } else { ?>
+            <li class="nav-item">
+              <a href="<?php echo base_url('auth'); ?>" class="nav-link">Login</a>
+            </li>
+            <li class="nav-item">
+              <a href="<?php echo base_url('auth/register'); ?>" class="nav-link">Daftar</a>
+            </li>
+          <?php } ?>
+
+        </ul>
+      </div>
     </nav>
     <!-- /.navbar -->
 

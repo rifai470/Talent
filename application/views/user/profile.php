@@ -233,6 +233,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
               </div>
               <div class="input-group mb-3">
                 <input type="hidden" class="form-control" name="id_users" value="<?php echo $id_users; ?>" />
+                <input type="hidden" class="form-control" name="change_password" value="1" />
                 <button type="submit" class="btn btn-info">Save</button>
               </div>
             </form>

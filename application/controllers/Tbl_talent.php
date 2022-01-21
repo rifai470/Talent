@@ -452,6 +452,8 @@ class Tbl_talent extends CI_Controller
 				'code_talent' => $row_talent->code_talent,
 				'row_tags_by_id' => $row_tags_by_id,
 				'row_image' => $row_image,
+				'id_users' => $row_talent->id_users,
+				'status' => $row_talent->status,
 			);
 			$this->template->load('home_page/tamplate', 'tbl_talent/profile', $data);
 		}
@@ -590,6 +592,7 @@ class Tbl_talent extends CI_Controller
 			}
 		}
 
+		$this->send($data);
 		$this->session->set_flashdata('message', 'Create Record Success');
 		redirect(site_url('tbl_talent/profile_talent/'.$this->input->post('id_users', TRUE).''));
 		// }
@@ -742,23 +745,53 @@ class Tbl_talent extends CI_Controller
 		}
 	}
 
-	// public function tags(){
-	// 	$data_tags = array();
+	function send($data)
+	{
+		//Load data
+        $id_users = $data['id_users'];
+		$row_user = $this->Tbl_talent_model->get_users($id_users);
+		// $mail = 'johan.jaffarudin@mustika-ratu.co.id';
+		$mail = 'development@mustika-ratu.co.id';
 
-	// 	$query = $this->db->get('tbl_tags');
-	// 	$result = $query->result_array();
-	// 	foreach ($result as $result){
-	// 		$data_tags[] = array(
-	// 			'tags_id' => $result['tags_id'],
-	// 			'tags' => $result['tags']
-	// 		)
-	// 	}
+		$message = "
+        <html>
+        <head>
+            <title>Talent Verification</title>
+        </head>
+        <body>
+            <p>Yth. Bapak/Ibu Johan Jaffarudin,<br/><br/>A request by $row_user->nama_lengkap has been submitted that requires your approval to verified.</p>
+            <h4><a href='" . base_url("tbl_talent_verify")."'>Click this link to check your approval.</a></h4>
+        </body>
+        </html>
+        ";
 
-	// 	$this->output
-	// 	->set_content_type('asset/tags/dist')
-	// 	->
+		//Send Email
+		$config['protocol'] = 'smtp';
+		$config['charset'] = 'iso-8859-1';
+		$config['wordwrap'] = TRUE;
+		$config['smtp_host'] = 'ssl://smtp.googlemail.com';
+		$config['smtp_port'] = 465;
+		$config['smtp_user'] = 'mustikaratu.mailer@gmail.com';
+		$config['smtp_pass'] = 'mustikagoogle@2022';
+		$config['mailtype'] = 'html';
 
-	// }
+		$this->load->library('email', $config);
+
+		$this->email->initialize($config);
+
+		$this->email->set_newline("\r\n");
+		$this->email->from('mustikaratu.mailer@gmail.com', 'Mustika Ratu Talent');
+		$this->email->to($mail);
+		$this->email->subject('Talent Verification');
+		$this->email->message($message);
+
+		if ($this->email->send()) {
+			$this->session->set_flashdata("email_sent", "Congragulation Email Send Successfully.");
+		} else {
+			$this->session->set_flashdata("email_sent", "Error in sending Email.");
+			// show_error($this->email->print_debugger());
+		}
+	}
 
 	public function _rules()
 	{

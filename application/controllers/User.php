@@ -305,11 +305,20 @@ class User extends CI_Controller
                 redirect('auth');
             } else {
                 $this->session->set_flashdata('message', 'Current password salah');
-                redirect(site_url('user/profile/'.$this->input->post('id_users', TRUE).''));
+                if($this->input->post('change_password', TRUE) == 1){
+                    redirect(site_url('user/profile/'.$this->input->post('id_users', TRUE).''));
+                } else {
+                    redirect(site_url('tbl_talent/profile_talent/'.$this->input->post('id_users', TRUE).''));
+                }
+                
             }
         } else {
             $this->session->set_flashdata('message', 'Data tidak ada');
-            redirect(site_url('user/profile/'.$this->input->post('id_users', TRUE).''));
+            if($this->input->post('change_password', TRUE) == 1){
+                redirect(site_url('user/profile/'.$this->input->post('id_users', TRUE).''));
+            } else {
+                redirect(site_url('tbl_talent/profile_talent/'.$this->input->post('id_users', TRUE).''));
+            }
         }
 
         
