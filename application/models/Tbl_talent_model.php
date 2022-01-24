@@ -369,7 +369,7 @@ class Tbl_talent_model extends CI_Model
 
     function image($code_talent)
     {
-        $this->db->select('id_photo, photo, code_talent');
+        $this->db->select('id_photo, photo, banner, code_talent');
         $this->db->where_in('code_talent', $code_talent);
         return $this->db->get('tbl_photo')->result();
 

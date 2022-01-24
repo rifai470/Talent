@@ -62,6 +62,8 @@ class Tbl_talent extends CI_Controller
 				'other' => $row->other,
 				'row_tags_by_id' => $row_tags_by_id,
 				'row_photo' => $row_photo,
+				
+
 			);
 			$this->template->load('template', 'tbl_talent/tbl_talent_read', $data);
 		} else {
@@ -418,6 +420,7 @@ class Tbl_talent extends CI_Controller
 				'other' => set_value('other'),
 				'tags' => set_value('tags'),
 				'photo' => set_value('photo'),
+				'banner' => set_value('banner'),
 				'row_kategori' => $row_kategori,
 				'code_talent' => set_value('code_talent'),
 				'row_tags' => $row_tags,
@@ -449,6 +452,7 @@ class Tbl_talent extends CI_Controller
 				'twitter' => $row_talent->twitter,
 				'other' => $row_talent->other,
 				'photo' => $row_talent->photo,
+				'banner' => $row_talent->banner,
 				'code_talent' => $row_talent->code_talent,
 				'row_tags_by_id' => $row_tags_by_id,
 				'row_image' => $row_image,
@@ -851,8 +855,14 @@ class Tbl_talent extends CI_Controller
 
 		$get_endorse = $this->Tbl_talent_model->get_endorse_by_id($id_endorse);
 		$get_user = $this->Tbl_talent_model->get_user_by_id($data['id_users']);
+		$nomorwa = file('assets/nomorwa.txt');
+		foreach ($nomorwa as $key=>$value){
+			$nomor=$value;
+		}
+		// print_r($nomor);
+		// die;
 
-		redirect('https://api.whatsapp.com/send?phone=6287887448691&text=Halo,%20saya%20'.$get_user->nama_lengkap.'%0A%0Aingin%20endorse%20talent%20:%20'.$nama.',%0A%0Auntuk%20mempromosian%20:%20'.$get_endorse->endorse.'%0A%0Adengan%20detail%20:%20%0A'.$get_endorse->todolist.'%0A%0Asyarat%20ketentuan%20:%20%0A'.$get_endorse->syarat.'%0A%0Abudget%20:%20'.$get_endorse->budget.'%0A%0Atalent%20akan%20mendapatkan%20gratis%20:%20%0A'.$get_endorse->free.'');
+		redirect('https://api.whatsapp.com/send?phone='.$nomor.'&text=Halo,%20saya%20'.$get_user->nama_lengkap.'%0A%0Aingin%20endorse%20talent%20:%20'.$nama.',%0A%0Auntuk%20mempromosian%20:%20'.$get_endorse->endorse.'%0A%0Adengan%20detail%20:%20%0A'.$get_endorse->todolist.'%0A%0Asyarat%20ketentuan%20:%20%0A'.$get_endorse->syarat.'%0A%0Abudget%20:%20'.$get_endorse->budget.'%0A%0Atalent%20akan%20mendapatkan%20gratis%20:%20%0A'.$get_endorse->free.'');
 		
 		
 	}

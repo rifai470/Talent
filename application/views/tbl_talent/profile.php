@@ -95,14 +95,15 @@
                                 </ul>
                             </div>
                             <div class="row-md-6">
-                                <div class="card-body">
-                                    <div class="text-center">
-                                        <img class="profile-user-img img-fluid img-circle" src="<?php echo base_url('uploads/photo/' . $photo . ''); ?>" style="height:200px; width: 200px; object-fit: cover;">
+                                <div class="card card-widget widget-user">
+                                <img src="<?php echo base_url('uploads/photo/' . $banner . ''); ?>" style="width: 735px; height: 200px; object-fit: cover;">
+                                    <div class="widget-user-image">
+                                        <img class="img-circle" src="<?php echo base_url('uploads/photo/' . $photo . ''); ?>" style="height:200px; width: 200px; object-fit: cover; ">
                                     </div>
                                 </div>
                             </div>
                             <div class="row-md-6">
-                                <div class="card-body">
+                                <div class="card-body" style="padding-top: 75px;">
                                     <div class="text-center">
                                         <span style="font-size: 26px;"><?php echo $nama; ?></span><br />
                                         <span><i class="fas fa-map-marker-alt" style="color: grey;"></i> <?php echo $tempat; ?></span><br/><br/>

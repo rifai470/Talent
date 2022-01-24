@@ -31,7 +31,7 @@
           <div class="col-md-3">
             <div class="card card-widget widget-user">
               <div class="w3-content w3-display-container">
-                <img class="card-widget widget-user" src="<?php echo base_url('uploads/photo/' . $row->photo . ''); ?>" style="height:180px; width: auto; max-width: 270px; object-fit: cover;">
+                <img class="card-widget widget-user" src="<?php echo base_url('uploads/photo/' . $row->photo . ''); ?>" style="height:180px; width: auto; width: 270px; object-fit: cover;">
               </div>
               <div class="card-footer" style="padding-top: 15px;">
                 <div class="row">
@@ -229,7 +229,7 @@ foreach ($get_talent as $row) : $no++; ?>
           <div class="widget-user-username" style="text-align: left; font-size: 16px;"><b><?php echo $row->prestasi; ?></b>
           </div>
           <hr>
-          <a target="_blank" href="https://api.whatsapp.com/send?phone=6287887448691" <button type="button" class="btn btn-block btn-dark"> Endorse</button></a>
+          <button class="btn btn-block btn-dark" onclick="checkLogin(<?php echo $row->id_talent; ?>)"> Endorse</button>
           <!-- Detail -->
         </div>
       </div>

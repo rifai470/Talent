@@ -91,7 +91,7 @@
 								<tr>
 									<td width="20%">Tentang</td>
 									<td width="2%">:</td>
-									<td><?php echo $tentang; ?></td>
+									<td ><?php echo $tentang; ?></td>
 								</tr>
 								<tr>
 									<td width="20%">Tarif Min.</td>

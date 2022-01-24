@@ -170,6 +170,7 @@ class Home_page extends CI_Controller
             'get_tags_label' => $get_tags_label,
             'code_talent' => $get_talent->code_talent,
             'photo' => $get_talent->photo,
+            'banner' => $get_talent->banner,
             'nama' => $get_talent->nama,
             'tempat' => $get_talent->tempat,
             'pekerjaan' => $get_talent->pekerjaan,

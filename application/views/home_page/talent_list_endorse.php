@@ -11,84 +11,88 @@
       <div class="content">
         <div class="container">
           <div class="row">
-           
-              <div class="col-md-8">
-                <div class="card card-widget widget-user">
-                  <!-- untuk foto banner -->
-                  <div class="widget-user-header text-white" style="background-color: red;">
-                  </div>
+            <div class="col-md-8">
+              <div class="card card-widget widget-user">
+
+                <!-- untuk foto banner -->
+                <img src="<?php echo base_url('uploads/photo/' . $banner . ''); ?>" style="width: 745px; height: 200px; object-fit: cover;">
+                <div class="center">
                   <div class="widget-user-image">
-                    <img class="img-circle" src="<?php echo base_url('uploads/photo/' . $photo . ''); ?>">
-                  </div>
-                  <div class="card-footer">
-                    <div class="col">
-                      <h3 class="widget-user-username" style="text-align: center; padding-bottom: 10px;"><b><?php echo $nama; ?></b></h3>
-                      <h6 class="widget-user-desc" style="text-align: center;"><i class="fas fa-map-marker-alt" style="color: grey;"></i> <?php echo $tempat; ?></h6>
-                    </div>
-                    <h6 class="widget-user-desc" style="text-align: center; font-size: 12px;"><?php echo $pekerjaan; ?></h6>
-                    <div class="row">
-                      <div class="col-md-12">
-                        <div style="text-align: center;">
-                          <?php $no = 1;
-                          foreach ($get_tags_label as $tags) : $no++; ?>
-                            <?php if ($tags->rel_id == $id_talent) { ?>
-                              <div class="btn btn-xs" style="padding: revert;">
-                                <h6 class="widget-user-desc" style="font-size: 10px; background-color: #e6e6e6; border-radius: 15px; padding: 2px 5px 2px 5px;"><span style="color: black;"><?php echo $tags->tags; ?></span></h6>
-                              </div>
-                            <?php } ?>
-                          <?php endforeach; ?>
-                        </div>
-                      </div>
-                    </div>
+                    <img class="img-circle" style="height:150px; width: 150px; object-fit: cover;" src="<?php echo base_url('uploads/photo/' . $photo . ''); ?>">
                   </div>
                 </div>
-                <!-- /.widget-user -->
-              </div>
-              <div class="col-md-4">
-                <div class="content">
-                  <div class="container">
-                    <div class="card card-widget widget-user">
-                      <div class="card-body">
-                        <div class="widget-user-username" style="padding-bottom: 10px; font-size: 12px;">Tentang <?php echo $nama; ?></div>
-                        <div class="widget-user-dsc" style="padding-bottom: 10px; font-size: 10px;"><?php echo $tentang; ?></div>
+
+                <div class="card-footer" style="padding-top: 35px;">
+                  <div class="col">
+                    <h3 class="widget-user-username" style="text-align: center; padding-bottom: 10px;"><b><?php echo $nama; ?></b></h3>
+                    <h6 class="widget-user-desc" style="text-align: center;"><i class="fas fa-map-marker-alt" style="color: grey;"></i> <?php echo $tempat; ?></h6>
+                  </div>
+                  <h6 class="widget-user-desc" style="text-align: center; font-size: 12px;"><?php echo $pekerjaan; ?></h6>
+                  <div class="row">
+                    <div class="col-md-12">
+                      <div style="text-align: center;">
+                        <?php $no = 1;
+                        foreach ($get_tags_label as $tags) : $no++; ?>
+                          <?php if ($tags->rel_id == $id_talent) { ?>
+                            <div class="btn btn-xs" style="padding: revert;">
+                              <h6 class="widget-user-desc" style="font-size: 10px; background-color: #e6e6e6; border-radius: 15px; padding: 2px 5px 2px 5px;"><span style="color: black;"><?php echo $tags->tags; ?></span></h6>
+                            </div>
+                          <?php } ?>
+                        <?php endforeach; ?>
                       </div>
                     </div>
                   </div>
                 </div>
 
-                <div class="content">
-                  <div class="container">
-                    <div class="card card-widget widget-user">
-                      <div class="card-body">
-                        <div class="widget-user-username" style="padding-bottom: 10px; font-size: 12px;">Sosial Media</div>
-                        <div class="row">
-                          <div class="col-md-3">
-                            <div class="description-block">
-                              <a target="_blank" href="http://<?php echo $instagram; ?>" <button type="button" class="btn btn-block btn-outline-dark fab fa-instagram <?php if ($instagram == NULL && $instagram == '') {
-                                                                                                                                                                              echo 'disabled';
-                                                                                                                                                                            } ?>" style="font-size: 8px;"> Instagram</button></a>
-                            </div>
+              </div>
+              <!-- /.widget-user -->
+            </div>
+            <div class="col-md-4">
+              <div class="content">
+                <div class="container">
+                  <div class="card card-widget widget-user">
+                    <div class="card-body">
+                      <div class="widget-user-username" style="padding-bottom: 10px; font-size: 12px;">Tentang <?php echo $nama; ?></div>
+                      <div class="widget-user-dsc" style="padding-bottom: 10px; font-size: 10px;"><?php echo $tentang; ?></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="content">
+                <div class="container">
+                  <div class="card card-widget widget-user">
+                    <div class="card-body">
+                      <div class="widget-user-username" style="padding-bottom: 10px; font-size: 12px;">Sosial Media</div>
+                      <div class="row">
+                        <div class="col-md-6">
+                          <div class="description-block">
+                            <a target="_blank" href="http://<?php echo $instagram; ?>" <button type="button" class="btn btn-block btn-outline-dark fab fa-instagram <?php if ($instagram == NULL && $instagram == '') {
+                                                                                                                                                                      echo 'disabled';
+                                                                                                                                                                    } ?>" style="font-size: 12px;"> Instagram</button></a>
                           </div>
-                          <div class="col-md-3">
-                            <div class="description-block">
-                              <a target="_blank" href="http://<?php echo $facebook; ?>" <button type="button" class="btn btn-block btn-outline-dark fab fa-facebook <?php if ($facebook == NULL && $facebook == '') {
-                                                                                                                                                                            echo 'disabled';
-                                                                                                                                                                          } ?>" style="font-size: 8px;"> Facebook</button></a>
-                            </div>
+                        </div>
+                        <div class="col-md-6">
+                          <div class="description-block">
+                            <a target="_blank" href="http://<?php echo $facebook; ?>" <button type="button" class="btn btn-block btn-outline-dark fab fa-facebook <?php if ($facebook == NULL && $facebook == '') {
+                                                                                                                                                                    echo 'disabled';
+                                                                                                                                                                  } ?>" style="font-size: 12px;"> Facebook</button></a>
                           </div>
-                          <div class="col-md-3">
-                            <div class="description-block">
-                              <a target="_blank" href="http://<?php echo $twitter; ?>" <button type="button" class="btn btn-block btn-outline-dark fab fa-twitter <?php if ($twitter == NULL && $twitter == '') {
-                                                                                                                                                                          echo 'disabled';
-                                                                                                                                                                        } ?>" style="font-size: 8px;"> Twitter</button></a>
-                            </div>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-md-6">
+                          <div class="description-block">
+                            <a target="_blank" href="http://<?php echo $twitter; ?>" <button type="button" class="btn btn-block btn-outline-dark fab fa-twitter <?php if ($twitter == NULL && $twitter == '') {
+                                                                                                                                                                  echo 'disabled';
+                                                                                                                                                                } ?>" style="font-size: 12px;"> Twitter</button></a>
                           </div>
-                          <div class="col-md-3">
-                            <div class="description-block">
-                              <a target="_blank" href="http://<?php echo $other; ?>" <button type="button" class="btn btn-block btn-outline-dark <?php if ($other == NULL && $other == '') {
-                                                                                                                                                        echo 'disabled';
-                                                                                                                                                      } ?>" style="font-size: 8px;"><i class="fas fa-globe"></i> Other</button></a>
-                            </div>
+                        </div>
+                        <div class="col-md-6">
+                          <div class="description-block">
+                            <a target="_blank" href="http://<?php echo $other; ?>" <button type="button" class="btn btn-block btn-outline-dark <?php if ($other == NULL && $other == '') {
+                                                                                                                                                  echo 'disabled';
+                                                                                                                                                } ?>" style="font-size: 12px;"><i class="fas fa-globe"></i> Other</button></a>
                           </div>
                         </div>
                       </div>
@@ -96,6 +100,7 @@
                   </div>
                 </div>
               </div>
+            </div>
 
           </div>
           <!-- /.row -->
@@ -158,7 +163,7 @@
                         <input type="file" class="form-control" name="upload[]" multiple>
                       </div>
                       <input type="hidden" name="id_users" value="<?php echo $this->session->userdata('id_users'); ?>" />
-					            <input type="hidden" name="code_talent" value="<?php echo $code_talent; ?>" />
+                      <input type="hidden" name="code_talent" value="<?php echo $code_talent; ?>" />
                       <input type="hidden" name="nama" value="<?php echo $nama; ?>" />
                       <!-- input hidden untuk di lempar ke wa -->
                       <button class="btn btn-block btn-dark" type="submit"> Endorse</button>
@@ -171,9 +176,9 @@
           <!-- /.container-fluid -->
         </div>
       </div>
-      </form>
+    </form>
   </div>
- 
+
 </div>
 <!-- /.content -->
 <!-- /.content-wrapper -->
@@ -232,15 +237,7 @@
     divObject.slideContents[divObject.slideIndex - 1].style.display = "block";
   }
 
-  function checkLogin() {
-    if (<?php echo $logged; ?> == 1) {
-      var loc = window.open('https://api.whatsapp.com/send?phone=6287887448691&text=<?php echo $nama; ?>%20hehehehe%0Abarisbaru');
-      console.log(loc);
-    } else {
-      var loc = window.location.href = "<?php echo base_url('Auth'); ?>";
-      console.log(loc);
-    }
-  }
+  
 </script>
 
 <!-- untuk textarea -->
