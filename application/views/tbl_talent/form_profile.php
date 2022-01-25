@@ -4,7 +4,7 @@
             <div class="container">
                 <div class="row mb-2">
                     <div class="col-sm-12">
-                        
+
                     </div><!-- /.col -->
                 </div><!-- /.row -->
             </div><!-- /.container-fluid -->
@@ -178,8 +178,8 @@
                                 <input type="hidden" name="id_talent" value="<?php echo $id_talent; ?>" />
                                 <input type="hidden" name="code_talent" value="<?php echo $code_talent; ?>" />
                                 <input type="hidden" name="id_users" value="<?php echo $this->session->userdata('id_users'); ?>" />
-                                <?php if($update == 1) { ?>
-                                <a href="<?php echo site_url('tbl_talent/profile_talent') ?>/<?php echo $this->session->userdata('id_users'); ?>" class="btn btn-danger"><i class="fa fa-sign-out"></i> Cancel</a>
+                                <?php if ($update == 1) { ?>
+                                    <a href="<?php echo site_url('tbl_talent/profile_talent') ?>/<?php echo $this->session->userdata('id_users'); ?>" class="btn btn-danger"><i class="fa fa-sign-out"></i> Cancel</a>
                                 <?php } ?>
                                 <button type="submit" class="btn btn-info"><i class="fa fa-floppy-o"></i> <?php echo $button ?></button>
                             </div>
@@ -189,14 +189,22 @@
                             <div class="row-md-6">
                                 <div class="card card-default">
                                     <div class="card-header">
-                                        <h3 class="card-title">Photo *</h3>
+                                        <h3 class="card-title">Photo</h3>
                                     </div>
                                     <div class="card-body">
                                         <div class="input-group" id="upload">
                                             <div class="custom-file">
-                                                <input type="file" class="form-control" name="upload[]" multiple required>
+                                                <input type="file" class="form-control" name="upload[]" multiple>
                                             </div>
                                         </div>
+                                        <table class="table-read">
+                                            <tr>
+                                                <?php $no = 0;
+                                                foreach ($row_image as $photo) : $no++; ?>
+                                                    <img class="card-widget widget-user" src="<?php echo base_url('uploads/photo/' . $photo->photo . ''); ?>" style="height: auto; max-width: 100px; object-fit: cover; padding: 10px 10px 10px 10px;">
+                                                <?php endforeach; ?>
+                                            </tr>
+                                        </table>
                                     </div>
                                 </div>
                                 <!-- Card Prestation -->

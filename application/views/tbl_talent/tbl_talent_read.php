@@ -10,6 +10,21 @@
 		padding: 0.5rem;
 	}
 </style>
+<style>
+
+td.a {
+  word-break: normal;
+}
+
+td.b {
+  word-break: keep-all;
+}
+
+td.c {
+  word-break: break-all;
+}
+</style>
+
 
 <div class="content-wrapper">
 	<section class="content" style="padding-top: 1%">
@@ -26,82 +41,82 @@
 								<tr>
 									<td width="20%">Nama</td>
 									<td width="2%">:</td>
-									<td><?php echo $nama; ?></td>
+									<td class="c"><?php echo $nama; ?></td>
 								</tr>
 								<tr>
 									<td width="20%">Nama Panggilan</td>
 									<td width="2%">:</td>
-									<td><?php echo $nama_panggilan; ?></td>
+									<td class="c"><?php echo $nama_panggilan; ?></td>
 								</tr>
 								<tr>
 									<td width="20%">Tempat</td>
 									<td width="2%">:</td>
-									<td><?php echo $tempat; ?></td>
+									<td class="c"><?php echo $tempat; ?></td>
 								</tr>
 								<tr>
 									<td width="20%">Tanggal Lahir</td>
 									<td width="2%">:</td>
-									<td><?php echo $tanggal_lahir; ?></td>
+									<td class="c"><?php echo $tanggal_lahir; ?></td>
 								</tr>
 								<tr>
 									<td width="20%">Usia</td>
 									<td width="2%">:</td>
-									<td><?php echo $usia; ?></td>
+									<td class="c"><?php echo $usia; ?></td>
 								</tr>
 								<tr>
 									<td width="20%">Jenis Kelamin</td>
 									<td width="2%">:</td>
-									<td><?php echo $jenis_kelamin; ?></td>
+									<td class="c"><?php echo $jenis_kelamin; ?></td>
 								</tr>
 								<tr>
 									<td width="20%">Hobby</td>
 									<td width="2%">:</td>
-									<td><?php echo $hobby; ?></td>
+									<td class="c"><?php echo $hobby; ?></td>
 								</tr>
 								<tr>
 									<td width="20%">Pendidikan</td>
 									<td width="2%">:</td>
-									<td><?php echo $pendidikan; ?></td>
+									<td class="c"><?php echo $pendidikan; ?></td>
 								</tr>
 								<tr>
 									<td width="20%">Pekerjaan</td>
 									<td width="2%">:</td>
-									<td><?php echo $pekerjaan; ?></td>
+									<td class="c"><?php echo $pekerjaan; ?></td>
 								</tr>
 								<tr>
 									<td width="20%">Bahasa</td>
 									<td width="2%">:</td>
-									<td><?php echo $bahasa; ?></td>
+									<td class="c"><?php echo $bahasa; ?></td>
 								</tr>
 								<tr>
 									<td width="20%">Tinggi Badan</td>
 									<td width="2%">:</td>
-									<td><?php echo $tinggi_badan; ?></td>
+									<td class="c"><?php echo $tinggi_badan; ?></td>
 								</tr>
 								<tr>
 									<td width="20%">Berat Badan</td>
 									<td width="2%">:</td>
-									<td><?php echo $berat_badan; ?></td>
+									<td class="c"><?php echo $berat_badan; ?></td>
 								</tr>
 								<tr>
 									<td width="20%">Kategori</td>
 									<td width="2%">:</td>
-									<td><?php echo $id_kategori; ?></td>
+									<td class="c"><?php echo $id_kategori; ?></td>
 								</tr>
 								<tr>
 									<td width="20%">Tentang</td>
 									<td width="2%">:</td>
-									<td ><?php echo $tentang; ?></td>
+									<td class="c"><?php echo $tentang; ?></td>
 								</tr>
 								<tr>
 									<td width="20%">Tarif Min.</td>
 									<td width="2%">:</td>
-									<td><?php echo $tarif_minimum; ?></td>
+									<td class="c"><?php echo $tarif_minimum; ?></td>
 								</tr>
 								<tr>
 									<td width="20%">Tarif Max.</td>
 									<td width="2%">:</td>
-									<td><?php echo $tarif_maximum; ?></td>
+									<td class="c"><?php echo $tarif_maximum; ?></td>
 								</tr>
 							</table>
 						</div>
@@ -118,7 +133,7 @@
 									<tr>
 									<?php $no = 0;
 									foreach ($row_photo as $photo) : $no++; ?>
-									<img class="card-widget widget-user" src="<?php echo base_url('uploads/photo/' . $photo->photo . ''); ?>" style="height:180px; width: auto; max-width: 270px; object-fit: cover; padding-right: 10px;">
+									<img class="card-widget widget-user" src="<?php echo base_url('uploads/photo/' . $photo->photo . ''); ?>" style="height:180px; width: auto; max-width: 270px; object-fit: cover; padding: 10px 10px 10px 10px;">
 									<?php endforeach; ?>
 									</tr>
 								</table>
@@ -158,9 +173,9 @@
 								<h3 class="card-title">PORTOFOLIO </h3>
 							</div>
 							<div class="card-body">
-								<table class="table-read">
+								
 								<?php echo $prestasi; ?>
-								</table>
+							
 							</div>
 						</div>
 						<div class="card card-info">

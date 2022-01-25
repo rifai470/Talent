@@ -45,79 +45,84 @@
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
 </head>
 
-<body class="hold-transition login-page">
-<div class="login-box">
-  <?php if ($this->session->userdata('status_login')) { ?>
-    <div class="alert alert-danger alert-dismissible" style="padding-right: 20px;">
-      <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-      <h5><i class="icon fas fa-times"></i> Alert!</h5>
-      <?php echo $this->session->userdata('status_login') <> '' ? $this->session->userdata('status_login') : ''; ?>
-    </div>
-  <?php } ?>
-  <?php if ($this->session->userdata('status_register')) { ?>
-    <div class="alert alert-success alert-dismissible" style="padding-right: 20px;">
-      <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-      <h5><i class="icon fas fa-check"></i> Alert!</h5>
-      <?php echo $this->session->userdata('status_register') <> '' ? $this->session->userdata('status_register') : ''; ?>
-    </div>
-  <?php } ?>
-</div>
+<body class="hold-transition login-page" style="background-color: white;">
   <div class="login-box">
-    <!-- /.login-logo -->
-    <div class="card card-outline card-primary">
-      <div class="card-header text-center">
-        <a href="" class="h1"><b>LOGIN</b></a>
+    <?php if ($this->session->userdata('status_login')) { ?>
+      <div class="alert alert-danger alert-dismissible" style="padding-right: 20px;">
+        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+        <h5><i class="icon fas fa-times"></i> Alert!</h5>
+        <?php echo $this->session->userdata('status_login') <> '' ? $this->session->userdata('status_login') : ''; ?>
       </div>
-      <div class="card-body">
-        <?php $attributes = array('class' => 'margin-bottom-0');
-        echo form_open('auth/cheklogin', $attributes); ?>
-        <div class="input-group mb-3">
-          <input type="text" class="form-control form-control-md" name="username" placeholder="Email" required />
-          <div class="input-group-append">
-            <div class="input-group-text">
-              <span class="fas fa-envelope"></span>
+    <?php } ?>
+    <?php if ($this->session->userdata('status_register')) { ?>
+      <div class="alert alert-success alert-dismissible" style="padding-right: 20px;">
+        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+        <h5><i class="icon fas fa-check"></i> Alert!</h5>
+        <?php echo $this->session->userdata('status_register') <> '' ? $this->session->userdata('status_register') : ''; ?>
+      </div>
+    <?php } ?>
+  </div>
+  <div class="login-box" style="width: 800px; height: 300px;">
+    <!-- /.login-logo -->
+    <div class="card" style="border-radius: 25px;">
+      <div class="row">
+        <div class="col-md-6">
+          <div class="card-body">
+          <b>Sign In</b>
+            <?php $attributes = array('class' => 'margin-bottom-0');
+            echo form_open('auth/cheklogin', $attributes); ?>
+            <div class="input-group mb-3" style="padding-top: 10px;">
+              <input type="text" class="form-control form-control-md" name="username" placeholder="Email" required />
+              <div class="input-group-append">
+                <div class="input-group-text">
+                  <span class="fas fa-envelope"></span>
+                </div>
+              </div>
             </div>
-          </div>
-        </div>
-        <div class="input-group mb-3">
-          <input type="password" class="form-control form-control-md" name="password" placeholder="Password" required />
-          <div class="input-group-append">
-            <div class="input-group-text">
-              <span class="fas fa-lock"></span>
+            <div class="input-group mb-3" >
+              <input type="password" class="form-control form-control-md" name="password" placeholder="Password" required />
+              <div class="input-group-append">
+                <div class="input-group-text">
+                  <span class="fas fa-lock"></span>
+                </div>
+              </div>
             </div>
+            <div class="row">
+              <div class="col-8">
+                <label for="remember" style="padding-top: 7px;">
+                  <?php echo form_checkbox('remember', TRUE, $remember) ?> Remember Me
+                </label>
+              </div>
+              <!-- /.col -->
+              <div class="col-4">
+                <button type="submit" class="btn btn-primary btn-block btn-dark">Sign In</button>
+              </div>
+              <!-- /.col -->
+            </div>
+            </form>
+
+            </br>
+            <p class="mb-0" style="text-align: center; font-size: small;">
+              Dont have an account ? <a href="<?php echo base_url('auth/register'); ?>" class="text-center">Register here</a>
+            </p>
+            
           </div>
+          <!-- /.card-body -->
         </div>
         <div class="row">
-          <div class="col-8">
-            <label for="remember">
-              <?php echo form_checkbox('remember', TRUE, $remember) ?> Remember Me
-            </label>
-          </div>
-          <!-- /.col -->
-          <div class="col-4">
-            <button type="submit" class="btn btn-primary btn-block">Login</button>
-          </div>
-          <!-- /.col -->
-        </div>
-        </form>
-
-        </br>
-        <p class="mb-0">
-          Belum pernah daftar? <a href="<?php echo base_url('auth/register'); ?>" class="text-center">Daftar di sini​</a>
-        </p>
+              <img src="<?php echo base_url(); ?>assets\img\banner_login.png" style="width: 400px;">
+            </div>
       </div>
-      <!-- /.card-body -->
+      <!-- /.card -->
     </div>
-    <!-- /.card -->
-  </div>
-  <!-- /.login-box -->
+    <!-- /.login-box -->
 
-  <!-- jQuery -->
-  <script src="<?php echo base_url(); ?>assets\adminlte\plugins\jquery\jquery.min.js"></script>
-  <!-- Bootstrap 4 -->
-  <script src="<?php echo base_url(); ?>assets\adminlte\plugins\bootstrap\js\bootstrap.bundle.min.js"></script>
-  <!-- AdminLTE App -->
-  <script src="<?php echo base_url(); ?>assets\adminlte\dist\js\adminlte.min.js"></script>
+    <!-- jQuery -->
+    <script src="<?php echo base_url(); ?>assets\adminlte\plugins\jquery\jquery.min.js"></script>
+    <!-- Bootstrap 4 -->
+    <script src="<?php echo base_url(); ?>assets\adminlte\plugins\bootstrap\js\bootstrap.bundle.min.js"></script>
+    <!-- AdminLTE App -->
+    <script src="<?php echo base_url(); ?>assets\adminlte\dist\js\adminlte.min.js"></script>
 </body>
 
 </html>
