@@ -1,66 +1,76 @@
 <style>
-	.table-read {
-		border-spacing: 0.5rem;
-		border-collapse: collapse;
-		width: 100%;
-	}
+    .table-read {
+        border-spacing: 0.5rem;
+        border-collapse: collapse;
+        width: 100%;
+    }
 
-	.table-read td {
-		border-bottom: 1px solid #dee2e6;
-		padding: 0.5rem;
-	}
+    .table-read td {
+        border-bottom: 1px solid #dee2e6;
+        padding: 0.5rem;
+    }
 
-    .thumbnail-slider{
+    .thumbnail-slider {
         width: 100%;
         float: left;
         overflow: hidden;
     }
 
-    .thumbnail-slider .thumbnail-container{
+    .thumbnail-slider .thumbnail-container {
         width: 100%;
         float: left;
         transition: margin 1s ease;
     }
 
-    .thumbnail-slider .item{
+    .thumbnail-slider .item {
         height: 180px;
         width: 270px;
         /* background-color: grey; */
         line-height: 170px;
         text-align: center;
         font-size: 50px;
-        color:#ffffff;
+        color: #ffffff;
         float: left;
         margin-left: 10%;
     }
 
-    .thumbnail-slider .controls{
+    .thumbnail-slider .controls {
         width: 100%;
         float: left;
-        padding:15px;
+        padding: 15px;
     }
 
-    .thumbnail-slider .controls ul{
+    .thumbnail-slider .controls ul {
         display: block;
         text-align: center;
-        padding:0;
-        margin:0;
+        padding: 0;
+        margin: 0;
         list-style: none;
     }
-    .thumbnail-slider .controls ul li{
+
+    .thumbnail-slider .controls ul li {
         height: 35px;
         width: 35px;
-        border:1px solid #c3c3c3;
-        margin:4px;
+        border: 1px solid #c3c3c3;
+        margin: 4px;
         display: inline-block;
         line-height: 33px;
         cursor: pointer;
     }
-    .thumbnail-slider .controls ul li.active{
+
+    .thumbnail-slider .controls ul li.active {
         background-color: grey;
-        color:#ffffff;
+        color: #ffffff;
 
     }
+
+    .centered {
+            position: absolute;
+            cursor: pointer;
+            text-align: center;
+            /* left: 18%; */
+            transform: translate(-162%, 51%);
+        }
 </style>
 <div class="content-wrapper">
     <div class="content-header">
@@ -72,13 +82,13 @@
     <div class="content">
         <div class="container">
             <div class="container-fluid">
-            <?php if ($this->session->userdata('message')) { ?>
-                <div class="alert alert-danger alert-dismissible">
-                  <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                  <h5><i class="icon fas fa-check"></i> Alert!</h5>
-                  <?php echo $this->session->userdata('message') <> '' ? $this->session->userdata('message') : ''; ?>
-                </div>
-              <?php } ?>
+                <?php if ($this->session->userdata('message')) { ?>
+                    <div class="alert alert-success alert-dismissible">
+                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                        <h5><i class="icon fas fa-check"></i> Updated !</h5>
+                        <?php echo $this->session->userdata('message') <> '' ? $this->session->userdata('message') : ''; ?>
+                    </div>
+                <?php } ?>
                 <div class="row">
                     <div class="col-md-8">
                         <div class="card card-default">
@@ -87,16 +97,20 @@
                                     <li class="nav-item dropdown">
                                         <a id="dropdownSubMenu1" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link"><i class="fas fa-bars" style="color: black;"></i></a>
                                         <ul aria-labelledby="dropdownSubMenu1" class="dropdown-menu border-0 shadow">
-                                        <li><a href="<?php echo base_url('tbl_talent/ubah_profile'); ?>/<?php echo $this->session->userdata('id_users'); ?>" class="dropdown-item">Ubah Profile</a></li>
-                                        <button type="button" class="btn" data-toggle="modal" data-target="#modal-password" style="margin-left: 2%;">Ubah Password</button>
+                                            <li><a href="<?php echo base_url('tbl_talent/ubah_profile'); ?>/<?php echo $this->session->userdata('id_users'); ?>" class="dropdown-item">Ubah Profile</a></li>
+                                            <button type="button" class="btn" data-toggle="modal" data-target="#modal-password" style="margin-left: 2%;">Ubah Password</button>
                                         </ul>
                                     </li>
-                                <div class="nav-link" style="padding-top: 1%; padding-left: 83%; position: relative;"><b><button class="btn <?php if($status == 'active') {echo 'btn-success';} else {echo 'btn-danger';}?> btn-sm"><?php echo strtoupper($status); ?></b></button</div>
+                                    <div class="nav-link" style="padding-top: 1%; padding-left: 83%; position: relative;"><b><button class="btn <?php if ($status == 'active') {
+                                                                                                                                                    echo 'btn-success';
+                                                                                                                                                } else {
+                                                                                                                                                    echo 'btn-danger';
+                                                                                                                                                } ?> btn-sm"><?php echo strtoupper($status); ?></b></button< /div>
                                 </ul>
                             </div>
                             <div class="row-md-6">
                                 <div class="card card-widget widget-user">
-                                <img src="<?php echo base_url('uploads/photo/' . $banner . ''); ?>" style="width: 735px; height: 200px; object-fit: cover;">
+                                    <img src="<?php echo base_url('uploads/photo/' . $banner . ''); ?>" style="width: 735px; height: 200px; object-fit: cover;">
                                     <div class="widget-user-image">
                                         <img class="img-circle" src="<?php echo base_url('uploads/photo/' . $photo . ''); ?>" style="height:200px; width: 200px; object-fit: cover; ">
                                     </div>
@@ -106,9 +120,9 @@
                                 <div class="card-body" style="padding-top: 75px;">
                                     <div class="text-center">
                                         <span style="font-size: 26px;"><?php echo $nama; ?></span><br />
-                                        <span><i class="fas fa-map-marker-alt" style="color: grey;"></i> <?php echo $tempat; ?></span><br/><br/>
-                                        <span><b>Tarif</b></span><br/>
-                                        <span>Min. <?php echo str_replace(",",".",number_format($tarif_minimum)); ?> - Max. <?php echo str_replace(",",".",number_format($tarif_maximum)); ?></span>
+                                        <span><i class="fas fa-map-marker-alt" style="color: grey;"></i> <?php echo $tempat; ?></span><br /><br />
+                                        <span><b>Tarif</b></span><br />
+                                        <span>Min. <?php echo str_replace(",", ".", number_format($tarif_minimum)); ?> - Max. <?php echo str_replace(",", ".", number_format($tarif_maximum)); ?></span>
                                     </div>
                                 </div>
                             </div>
@@ -127,7 +141,12 @@
                         </div>
                         <div class="card card-default">
                             <div class="card-header">
-                                <h3 class="card-title"><?php echo $kategori; ?></h3><br /><br />
+                                <div class="row">
+                                    <h3 class="card-title"><?php echo $kategori; ?></h3>
+                                    <div class="col" style="text-align: right;">
+                                        <button class="btn btn-xs btn-danger" data-toggle="modal" data-target="#modal-photo" style="margin-bottom: 10px; padding-bottom: 5px;"><i class="fa fa-edit"> Edit Foto</i></button>
+                                    </div>
+                                </div>
                                 <h3 class="card-title">
                                     <?php $no = 0;
                                     foreach ($row_tags_by_id as $tags) : $no++; ?>
@@ -143,12 +162,12 @@
                                                 <div class="thumbnail-container">
                                                     <?php $no = 0;
                                                     foreach ($row_image as $image) : $no++; ?>
-                                                    <div class="item">
-                                                        <img src="<?php echo base_url('uploads/photo/' . $image->photo . ''); ?>" style="height:180px; width: auto; max-width: 270px; object-fit: cover;">
-                                                    </div>
+                                                        <div class="item">
+                                                            <img src="<?php echo base_url('uploads/photo/' . $image->photo . ''); ?>" style="height:180px; width: auto; max-width: 270px; object-fit: cover;">
+                                                        </div>
                                                     <?php endforeach; ?>
                                                 </div>
-                                            
+
                                                 <!-- controls slides -->
                                                 <div class="controls">
                                                 </div>
@@ -178,13 +197,21 @@
                             <div class="card card-default">
                                 <div class="card-body">
                                     <div class="description-block">
-                                        <div class="text-left"><i class="fab fa-facebook"></i> <a target="_blank" href="http://www.facebook.com/<?php echo $facebook; ?>" <?php if ($facebook == NULL && $facebook == '') { echo 'disabled'; } ?>  style="color: black;"> Facebook</a></div>
+                                        <div class="text-left"><i class="fab fa-facebook"></i> <a target="_blank" href="http://www.facebook.com/<?php echo $facebook; ?>" <?php if ($facebook == NULL && $facebook == '') {
+                                                                                                                                                                                echo 'disabled';
+                                                                                                                                                                            } ?> style="color: black;"> Facebook</a></div>
                                         <hr />
-                                        <div class="text-left"><i class="fab fa-twitter"></i> <a target="_blank" href="http://twitter.com/<?php echo $twitter; ?>" <?php if ($twitter == NULL && $twitter == '') { echo 'disabled'; } ?>  style="color: black;"> Twitter</a></div>
+                                        <div class="text-left"><i class="fab fa-twitter"></i> <a target="_blank" href="http://twitter.com/<?php echo $twitter; ?>" <?php if ($twitter == NULL && $twitter == '') {
+                                                                                                                                                                        echo 'disabled';
+                                                                                                                                                                    } ?> style="color: black;"> Twitter</a></div>
                                         <hr />
-                                        <div class="text-left"><i class="fab fa-instagram"></i> <a target="_blank" href="http://www.instagram.com/<?php echo $instagram; ?>" <?php if ($instagram == NULL && $instagram == '') { echo 'disabled'; } ?>  style="color: black;"> Instagram</a></div>
+                                        <div class="text-left"><i class="fab fa-instagram"></i> <a target="_blank" href="http://www.instagram.com/<?php echo $instagram; ?>" <?php if ($instagram == NULL && $instagram == '') {
+                                                                                                                                                                                    echo 'disabled';
+                                                                                                                                                                                } ?> style="color: black;"> Instagram</a></div>
                                         <hr />
-                                        <div class="text-left"><i class="fas fa-globe"></i> <a target="_blank" href="http://<?php echo $other; ?>" <?php if ($other == NULL && $other == '') { echo 'disabled'; } ?>  style="color: black;"> Other</a></div>
+                                        <div class="text-left"><i class="fas fa-globe"></i> <a target="_blank" href="http://<?php echo $other; ?>" <?php if ($other == NULL && $other == '') {
+                                                                                                                                                        echo 'disabled';
+                                                                                                                                                    } ?> style="color: black;"> Other</a></div>
                                     </div>
                                 </div>
                             </div>
@@ -204,7 +231,7 @@
                                         <tr>
                                             <td>Tanggal Lahir</td>
                                             <td>:</td>
-                                            <td><?php echo date("d M Y",strtotime($tanggal_lahir)); ?></td>
+                                            <td><?php echo date("d M Y", strtotime($tanggal_lahir)); ?></td>
                                         </tr>
                                         <tr>
                                             <td>Usia</td>
@@ -260,118 +287,199 @@
 <!-- /.content-wrapper -->
 
 <div class="modal fade" id="modal-password">
-      <div class="modal-dialog">
+    <div class="modal-dialog">
         <div class="modal-content">
-          <div class="modal-header">
-            <h4 class="modal-title">Ubah Password</h4>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-          <div class="modal-body">
-            <form method="POST" action="<?php echo base_url('user/change_password'); ?>" enctype="multipart/form-data">
-              <div class="input-group mb-3">
-                <input type="password" class="form-control form-control-md" name="password" placeholder="Current Password" value="" required />
-              </div>
-              <div class="input-group mb-3">
-                <input type="password" class="form-control form-control-md" name="new_password" placeholder="New Password" value="" required />
-              </div>
-              <div class="input-group mb-3">
-                <input type="hidden" class="form-control" name="id_users" value="<?php echo $id_users; ?>" />
-                <input type="hidden" class="form-control" name="change_password" value="2" />
-                <button type="submit" class="btn btn-info">Save</button>
-              </div>
-            </form>
-          </div>
+            <div class="modal-header">
+                <h4 class="modal-title">Ubah Password</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form method="POST" action="<?php echo base_url('user/change_password'); ?>" enctype="multipart/form-data">
+                    <div class="input-group mb-3">
+                        <input type="password" class="form-control form-control-md" name="password" placeholder="Current Password" value="" required />
+                    </div>
+                    <div class="input-group mb-3">
+                        <input type="password" class="form-control form-control-md" name="new_password" placeholder="New Password" value="" required />
+                    </div>
+                    <div class="input-group mb-3">
+                        <input type="hidden" class="form-control" name="id_users" value="<?php echo $id_users; ?>" />
+                        <input type="hidden" class="form-control" name="change_password" value="2" />
+                        <button type="submit" class="btn btn-info">Save</button>
+                    </div>
+                </form>
+            </div>
         </div>
         <!-- /.modal-content -->
-      </div>
-      <!-- /.modal-dialog -->
     </div>
+    <!-- /.modal-dialog -->
+</div>
+
+<div class="modal fade" id="modal-photo">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Foto</h4> 
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+            <span id="notif" style="color: green;"></span>
+            <div class="input-group" id="upload" style="padding-top: 5px;">
+                                            <div class="custom-file">
+                                                <input type="file" class="form-control" name="upload[]" multiple>
+                                            </div>
+                                        </div>
+                <table class="table-read">
+                    <tr>
+                        <?php $no = 0;
+                        foreach ($row_image as $photo) : $no++; ?>
+                            <img id="<?php echo $photo->id_photo;?>" class="card-widget widget-user" src="<?php echo base_url('uploads/photo/' . $photo->photo . ''); ?>" style="height: auto; max-width: 150px; object-fit: cover; padding: 10px 10px 10px 10px; object-fit: cover;">
+                            <button id="btn<?php echo $photo->id_photo;?>" onclick="remove_photo(<?php echo $photo->id_photo;?>)" class="btn centered btn-xs btn-danger" style="border-radius: 25%;"><i class="fa fa-trash"></i></button>
+                        <?php endforeach; ?>
+
+                    </tr>
+                </table>
+            </div>
+            <div class="modal-footer">
+            <input type="hidden" class="form-control" name="id_users" value="<?php echo $id_users; ?>" />
+                <button type="submit" class="btn btn-primary" style="text-align: right;">Save changes</button>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->
+<script>
+    function remove_photo(id) {
+        
+  var photo = document.getElementById(id);
+  var btn = document.getElementById("btn"+id);
+  let text = "Are you sure want to delete this photo ?";
+  if (confirm(text) == true) {
+    text = " Deleted Success";
+    photo.remove();
+    btn.remove();
+  } else {
+      text = "";
+  }
+  document.getElementById("notif").innerHTML = text;
+  
+  $.ajax( {
+				url: "<?php echo site_url('tbl_talent/delete_photo/'); ?>"+id,
+				method: "POST",
+				data: {
+					id: id
+				},
+				async: true,
+				dataType: 'json',
+				success: function ( data ) {
+                    console.log(data);        
+				}
+			} );
+}
+</script>
 
 <script>
-    const controls=document.querySelector(".controls");
-    const container=document.querySelector(".thumbnail-container");
-    const allBox=container.children;
-    const containerWidth=container.offsetWidth;
-    const margin=30;
-    var items=0;
-    var totalItems=0;
-    var jumpSlideWidth=0;
+    const controls = document.querySelector(".controls");
+    const container = document.querySelector(".thumbnail-container");
+    const allBox = container.children;
+    const containerWidth = container.offsetWidth;
+    const margin = 30;
+    var items = 0;
+    var totalItems = 0;
+    var jumpSlideWidth = 0;
 
 
     // item setup per slide
 
-    responsive=[
-    {breakPoint:{width:0,item:1}}, //if width greater than 0 (1 item will show) 
-    {breakPoint:{width:600,item:2}}, //if width greater than 600 (2  item will show) 
-    {breakPoint:{width:1000,item:2}} //if width greater than 1000 (4 item will show) 
+    responsive = [{
+            breakPoint: {
+                width: 0,
+                item: 1
+            }
+        }, //if width greater than 0 (1 item will show) 
+        {
+            breakPoint: {
+                width: 600,
+                item: 2
+            }
+        }, //if width greater than 600 (2  item will show) 
+        {
+            breakPoint: {
+                width: 1000,
+                item: 2
+            }
+        } //if width greater than 1000 (4 item will show) 
     ]
 
-    function load(){
-        for(let i=0; i<responsive.length;i++){
-            if(window.innerWidth>responsive[i].breakPoint.width){
-                items=responsive[i].breakPoint.item
+    function load() {
+        for (let i = 0; i < responsive.length; i++) {
+            if (window.innerWidth > responsive[i].breakPoint.width) {
+                items = responsive[i].breakPoint.item
             }
         }
         start();
     }
-    
-    function start(){
-        var totalItemsWidth=0
-        for(let i=0;i<allBox.length;i++){
+
+    function start() {
+        var totalItemsWidth = 0
+        for (let i = 0; i < allBox.length; i++) {
             // width and margin setup of items
-            allBox[i].style.width=(containerWidth/items)-margin + "px";
-            allBox[i].style.margin=(margin/2)+ "px";
-            totalItemsWidth+=containerWidth/items;
+            allBox[i].style.width = (containerWidth / items) - margin + "px";
+            allBox[i].style.margin = (margin / 2) + "px";
+            totalItemsWidth += containerWidth / items;
             totalItems++;
         }
 
         // thumbnail-container width set up
-        container.style.width=totalItemsWidth + "px";
+        container.style.width = totalItemsWidth + "px";
 
         // slides controls number set up
-        const allSlides=Math.ceil(totalItems/items);
-        const ul=document.createElement("ul");
-            for(let i=1;i<=allSlides;i++){
-            const li=document.createElement("li");
-                li.id=i;
-                li.innerHTML=i;
-                li.setAttribute("onclick","controlSlides(this)");
-                ul.appendChild(li);
-                if(i==1){
-                    li.className="active";
-                }
+        const allSlides = Math.ceil(totalItems / items);
+        const ul = document.createElement("ul");
+        for (let i = 1; i <= allSlides; i++) {
+            const li = document.createElement("li");
+            li.id = i;
+            li.innerHTML = i;
+            li.setAttribute("onclick", "controlSlides(this)");
+            ul.appendChild(li);
+            if (i == 1) {
+                li.className = "active";
             }
-            controls.appendChild(ul);
+        }
+        controls.appendChild(ul);
     }
 
-        // when click on numbers slide to next slide
-    function controlSlides(ele){
+    // when click on numbers slide to next slide
+    function controlSlides(ele) {
         // select controls children  'ul' element 
-        const ul=controls.children;
+        const ul = controls.children;
 
         // select ul children 'li' elements;
-        const li=ul[0].children
-            
-        
+        const li = ul[0].children
+
+
         var active;
 
-        for(let i=0;i<li.length;i++){
-            if(li[i].className=="active"){
+        for (let i = 0; i < li.length; i++) {
+            if (li[i].className == "active") {
                 // find who is now active
-                active=i;
+                active = i;
                 // remove active class from all 'li' elements
-                li[i].className="";
+                li[i].className = "";
             }
         }
         // add active class to current slide
-        ele.className="active";
+        ele.className = "active";
 
-        var numb=(ele.id-1)-active;
-            jumpSlideWidth=jumpSlideWidth+(containerWidth*numb);
-        container.style.marginLeft=-jumpSlideWidth + "px";
+        var numb = (ele.id - 1) - active;
+        jumpSlideWidth = jumpSlideWidth + (containerWidth * numb);
+        container.style.marginLeft = -jumpSlideWidth + "px";
     }
 
-    window.onload=load();
+    window.onload = load();
 </script>

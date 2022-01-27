@@ -202,9 +202,11 @@ class Tbl_talent_model extends CI_Model
         $this->db->update('tbl_sosmed', $data_update_sosmed);
     }
 
-    function update_tags($code_talent, $data_update_tags)
+    function update_tags($id_talent, $data_update_tags)
     {
-        $this->db->where('code_talent', $code_talent);
+        $this->db->select('tbl_talent.*, tbl_tags.*, tbl_tags_label.*');
+        $this->db->join('tbl_tags_label', 'tbl_talent.id_talent=tbl_tags_label.rel_id', 'left');
+        $this->db->where('rel_id', $id_talent);
         $this->db->update('tbl_tags', $data_update_tags);
     }
 
@@ -220,6 +222,18 @@ class Tbl_talent_model extends CI_Model
     {
         $this->db->where($this->id, $id);
         $this->db->delete($this->table);
+    }
+
+    function delete_tags($id)
+    {
+        $this->db->where("rel_id", $id);
+        $this->db->delete("tbl_tags_label");
+    }
+
+    function delete_photo($id)
+    {
+        $this->db->where("id_photo", $id);
+        $this->db->delete("tbl_photo");
     }
 
     function cek_code()

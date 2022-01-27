@@ -1,3 +1,13 @@
+    <style>
+        .centered {
+            position: absolute;
+            cursor: pointer;
+            text-align: center;
+            /* left: 18%; */
+            transform: translate(-162%, 51%);
+        }
+    </style>
+
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->
         <div class="content-header">
@@ -141,7 +151,6 @@
                         <!-- Card Tag Media -->
                         <div class="col-md-6">
                             <!-- Card Sosial Media -->
-
                             <div class="card card-default">
                                 <div class="card-header">
                                     <h3 class="card-title">SOSIAL MEDIA</h3>
@@ -174,60 +183,43 @@
                                 </div>
                             </div>
                             <!-- Button Save -->
-                            <div class="float-left d-none d-sm-block">
-                                <input type="hidden" name="id_talent" value="<?php echo $id_talent; ?>" />
-                                <input type="hidden" name="code_talent" value="<?php echo $code_talent; ?>" />
-                                <input type="hidden" name="id_users" value="<?php echo $this->session->userdata('id_users'); ?>" />
-                                <?php if ($update == 1) { ?>
-                                    <a href="<?php echo site_url('tbl_talent/profile_talent') ?>/<?php echo $this->session->userdata('id_users'); ?>" class="btn btn-danger"><i class="fa fa-sign-out"></i> Cancel</a>
-                                <?php } ?>
-                                <button type="submit" class="btn btn-info"><i class="fa fa-floppy-o"></i> <?php echo $button ?></button>
-                            </div>
                         </div>
                         <!-- Card Photo -->
                         <div class="col-md-6">
                             <div class="row-md-6">
-                                <div class="card card-default">
-                                    <div class="card-header">
-                                        <h3 class="card-title">Photo</h3>
-                                    </div>
-                                    <div class="card-body">
-                                        <div class="input-group" id="upload">
-                                            <div class="custom-file">
-                                                <input type="file" class="form-control" name="upload[]" multiple>
-                                            </div>
+                            <div class="card card-default">
+                                        <div class="card-header">
+                                            <h3 class="card-title">
+                                                PORTOFOLIO
+                                            </h3>
                                         </div>
-                                        <table class="table-read">
-                                            <tr>
-                                                <?php $no = 0;
-                                                foreach ($row_image as $photo) : $no++; ?>
-                                                    <img class="card-widget widget-user" src="<?php echo base_url('uploads/photo/' . $photo->photo . ''); ?>" style="height: auto; max-width: 100px; object-fit: cover; padding: 10px 10px 10px 10px;">
-                                                <?php endforeach; ?>
-                                            </tr>
-                                        </table>
+                                        <!-- /.card-header -->
+                                        <div class="card-body">
+                                            <textarea id="prestasi" name='prestasi'><?php echo $prestasi; ?></textarea>
+                                        </div>
                                     </div>
-                                </div>
                                 <!-- Card Prestation -->
                                 <div class="row">
-                                    <div class="col-md-12">
-                                        <div class="card card-default">
-                                            <div class="card-header">
-                                                <h3 class="card-title">
-                                                    PORTOFOLIO
-                                                </h3>
-                                            </div>
-                                            <!-- /.card-header -->
-                                            <div class="card-body">
-                                                <textarea id="prestasi" name='prestasi'><?php echo $prestasi; ?></textarea>
-                                            </div>
-                                        </div>
+                                    <div class="float-left d-none d-sm-block" style="margin-left: 400px;">
+                                        <input type="hidden" name="id_talent" value="<?php echo $id_talent; ?>" />
+                                        <input type="hidden" name="code_talent" value="<?php echo $code_talent; ?>" />
+                                        <input type="hidden" name="id_users" value="<?php echo $this->session->userdata('id_users'); ?>" />
+                                        <?php if ($update == 1) { ?>
+                                            <a href="<?php echo site_url('tbl_talent/profile_talent') ?>/<?php echo $this->session->userdata('id_users'); ?>" class="btn btn-danger"><i class="fa fa-sign-out"></i> Cancel</a>
+                                        <?php } ?>
+                                        <button type="submit" class="btn btn-info"><i class="fa fa-floppy-o"></i> <?php echo $button ?></button>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
-                    <!-- <div class="card-footer">
+
+    <!-- <div class="card-footer">
                     <div class="float-right d-none d-sm-block">
                         <input type="hidden" name="id_talent" value="<?php echo $id_talent; ?>" />
                         <input type="hidden" name="code_talent" value="<?php echo $code_talent; ?>" />
@@ -235,10 +227,10 @@
                         <button type="submit" class="btn btn-info"><i class="fa fa-floppy-o"></i> <?php echo $button ?></button>
                     </div>
                 </div> -->
-                </div>
-            </div><!-- /.container-fluid -->
-        </div>
-        <!-- /.content -->
+    </div>
+    </div><!-- /.container-fluid -->
+    </div>
+    <!-- /.content -->
     </div>
     <!-- /.content-wrapper -->
     <!-- untuk multi prestasi -->

@@ -298,6 +298,7 @@ class Tbl_talent extends CI_Controller
 	{
 		$code_talent = $this->input->post('code_talent', TRUE);
 		$row = $this->Tbl_talent_model->get_by_id($this->input->post('id_talent', TRUE));
+		
 
 		$data = array(
 			'nama' => $this->input->post('nama', TRUE),
@@ -653,6 +654,8 @@ class Tbl_talent extends CI_Controller
 	{
 		$code_talent = $this->input->post('code_talent', TRUE);
 		$row = $this->Tbl_talent_model->get_by_id($this->input->post('id_talent', TRUE));
+		$id_talent = $this->input->post('id_talent', TRUE);
+		$tags = $this->input->post('tags', TRUE);
 
 		$data = array(
 			'nama' => $this->input->post('nama', TRUE),
@@ -696,13 +699,48 @@ class Tbl_talent extends CI_Controller
 		);
 		$this->Tbl_talent_model->update_sosmed($code_talent, $data_update_sosmed);
 
-		//update tags
-		$data_update_tags = array(
-			'tags' => $this->input->post('tags', TRUE),
-			'SecLogUser' => $this->session->userdata('nama_lengkap'),
-			'SecLogDate' => date('Y-m-d H:i:s'),
-		);
-		$this->Tbl_talent_model->update_tags($code_talent, $data_update_tags);
+		//delete tags
+		$this->Tbl_talent_model->delete_tags($id_talent); 
+
+		//update Tags
+		$tagss = json_decode($tags);
+		for ($i = 0; $i < count($tagss); $i++) {
+			$tagsPost[$i] = $tagss[$i]->value;
+		}
+
+		$row_tags = $this->Tbl_talent_model->get_tags_array();
+		if (empty($row_tags)) {
+			$row_tags = array();
+		}
+		$arrayTags = array_diff($tagsPost, $row_tags);
+		$arrayTags = array_values($arrayTags);
+
+		if (!empty($arrayTags)) {
+			for ($x = 0; $x < count($arrayTags); $x++) {
+				$data_tags[$x] = array(
+					'tags' => $arrayTags[$x],
+					'SecLogUser' => $this->session->userdata('nama_lengkap'),
+					'SecLogDate' => date('Y-m-d H:i:s'),
+				);
+			}
+			$this->Tbl_talent_model->insert_tags($data_tags);
+		}
+
+		//Tags Label
+		$get_tags = $this->Tbl_talent_model->get_id_tags($tagsPost);
+		$index = 1;
+		$tagsArray = array();
+		foreach ($get_tags as $data_tags) {
+			//buat array tags
+			$data_tags_label['id_tags'] = $data_tags->id_tags;
+			$data_tags_label['rel_id'] = $id_talent;
+			$data_tags_label['rel_type'] = 'talent';
+			$data_tags_label['tag_order'] = $index;
+			$index++;
+			array_push($tagsArray, $data_tags_label);
+		}
+
+		$this->Tbl_talent_model->insert_tags_label($tagsArray);
 
 		//update photo
 		if ($_FILES['upload']['name'] == '') {
@@ -732,7 +770,7 @@ class Tbl_talent extends CI_Controller
 
 
 		$this->session->set_flashdata('message', 'Update Record Success');
-		redirect(site_url('tbl_talent'));
+		redirect(site_url('tbl_talent/profile_talent/'.$this->input->post('id_users', TRUE).''));
 	}
 
 	public function delete($id)
@@ -865,6 +903,12 @@ class Tbl_talent extends CI_Controller
 		redirect('https://api.whatsapp.com/send?phone='.$nomor.'&text=Halo,%20saya%20'.$get_user->nama_lengkap.'%0A%0Aingin%20endorse%20talent%20:%20'.$nama.',%0A%0Auntuk%20mempromosian%20:%20'.$get_endorse->endorse.'%0A%0Adengan%20detail%20:%20%0A'.$get_endorse->todolist.'%0A%0Asyarat%20ketentuan%20:%20%0A'.$get_endorse->syarat.'%0A%0Abudget%20:%20'.$get_endorse->budget.'%0A%0Atalent%20akan%20mendapatkan%20gratis%20:%20%0A'.$get_endorse->free.'');
 		
 		
+	}
+
+	public function delete_photo(){
+		$id_photo = $this->input->post('id',TRUE);
+		$data = $this->Tbl_talent_model->delete_photo($id_photo)->num_rows();
+		echo json_encode($data);
 	}
 
 	// public function tags(){
