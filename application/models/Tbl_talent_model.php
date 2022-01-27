@@ -66,7 +66,8 @@ class Tbl_talent_model extends CI_Model
     // get data by id
     function get_by_id($id)
     {
-        $this->db->select('tbl_talent.*, tbl_photo.*, tbl_kategori.*, tbl_prestasi.*, tbl_sosmed.*');
+        $this->db->select('tbl_talent.*, tbl_photo.*, tbl_kategori.*, tbl_prestasi.*, tbl_sosmed.*, tbl_banner.*');
+        $this->db->join('tbl_banner', 'tbl_talent.code_talent=tbl_banner.code_talent', 'left');
         $this->db->join('tbl_photo', 'tbl_talent.code_talent=tbl_photo.code_talent', 'left');
         $this->db->join('tbl_kategori', 'tbl_talent.id_kategori=tbl_kategori.id_kategori', 'left');
         $this->db->join('tbl_prestasi', 'tbl_talent.code_talent=tbl_prestasi.code_talent', 'left');
@@ -176,6 +177,11 @@ class Tbl_talent_model extends CI_Model
     {
         $this->db->insert_batch('tbl_photo', $data_photo);
     }
+    //buat function insert banner
+    function insert_banner($data_banner)
+    {
+        $this->db->insert_batch('tbl_banner', $data_banner);
+    }
 
     //buat function insert photo
     function insert_photo_endorse($data_photo_endorse)
@@ -189,6 +195,13 @@ class Tbl_talent_model extends CI_Model
         $this->db->where($this->id, $id);
         $this->db->update($this->table, $data);
     }
+
+    function update_banner($uploadData,$code_talent)
+    {
+        $this->db->where('code_talent',$code_talent);
+        $this->db->update('tbl_banner', $uploadData);
+    }
+
 
     function update_prestasi($code_talent, $data_update_prestasi)
     {
@@ -236,6 +249,12 @@ class Tbl_talent_model extends CI_Model
         echo "<pre>";
         print_r($data);
         exit;
+    }
+
+    function delete_banner($id)
+    {
+        $this->db->where("id_banner", $id);
+        $this->db->delete("tbl_banner");
     }
 
     function cek_code()
@@ -396,6 +415,18 @@ class Tbl_talent_model extends CI_Model
         // exit;
     }
 
+    function banner($code_talent)
+    {
+        $this->db->select('id_banner, banner, code_talent');
+        $this->db->where_in('code_talent', $code_talent);
+        return $this->db->get('tbl_banner')->row();
+
+
+        //  print_r($this->db->last_query());
+        // echo "<pre>";
+        // print_r($data);
+        // exit;
+    }
     function get_tags_label()
     {
         $this->db->select('tbl_tags_label.rel_id,
@@ -419,7 +450,8 @@ class Tbl_talent_model extends CI_Model
 
     function get_talent($id_talent)
     {
-        $this->db->select('tbl_talent.*, tbl_photo.*, tbl_kategori.*,tbl_sosmed.*,tbl_prestasi.*');
+        $this->db->select('tbl_talent.*, tbl_photo.*, tbl_kategori.*,tbl_sosmed.*,tbl_prestasi.*, tbl_banner.*');
+        $this->db->join('tbl_banner', 'tbl_talent.code_talent=tbl_banner.code_talent', 'left');
         $this->db->join('tbl_photo', 'tbl_talent.code_talent=tbl_photo.code_talent', 'left');
         $this->db->join('tbl_kategori', 'tbl_talent.id_kategori=tbl_kategori.id_kategori', 'left');
         $this->db->join('tbl_sosmed', 'tbl_talent.code_talent=tbl_sosmed.code_talent', 'left');

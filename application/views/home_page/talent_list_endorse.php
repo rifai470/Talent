@@ -15,8 +15,12 @@
               <div class="card card-widget widget-user">
 
                 <!-- untuk foto banner -->
-                <img src="<?php echo base_url('uploads/photo/' . $banner . ''); ?>" style="width: 745px; height: 200px; object-fit: cover;">
-                <div class="center">
+                <?php if($banner=='' || $banner == NULL){ ?>
+                  <img src="<?php echo base_url('uploads/photo/default_banner.jpg'); ?>" style="width: 745px; height: 200px; object-fit: cover;">
+                  <?php } else { ?>
+                    <img src="<?php echo base_url('uploads/photo/' . $banner . ''); ?>" style="width: 745px; height: 200px; object-fit: cover;">
+                      <?php } ?>
+                  <div class="center">
                   <div class="widget-user-image">
                     <img class="img-circle" style="height:150px; width: 150px; object-fit: cover;" src="<?php echo base_url('uploads/photo/' . $photo . ''); ?>">
                   </div>

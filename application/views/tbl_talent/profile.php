@@ -372,30 +372,21 @@
                 </button>
             </div>
             <div class="modal-body">
-                <span id="notif" style="color: green;"></span>
-                <form action="<?php echo base_url("tbl_talent/update_photo"); ?>" method="POST" enctype="multipart/form-data">
+                <span id="notif2" style="color: green;"></span>
+                <form action="<?php echo base_url("tbl_talent/update_banner"); ?>" method="POST" enctype="multipart/form-data">
                     <div class="input-group" id="upload" style="padding-top: 5px; width: 1350px;">
                         <div class="custom-file">
-                            <input type="file" class="form-control" name="upload" multiple>
+                            <input type="file" class="form-control" name="upload_banner">
                            
                             <div class="input-group">
                                 <input type="hidden" class="form-control" name="id_users" value="<?php echo $id_users; ?>" />
                                 <input type="hidden" class="form-control" name="code_talent" value="<?php echo $code_talent; ?>" />
+                                <input type="hidden" class="form-control" name="banner" value="<?php echo $banner; ?>" />
                                 <button type="submit" class="btn btn-primary" style="text-align: right; margin-left: 10px;">Update</button>
                                 </div>
                             </div>
                     </div>
                 </form>
-                <table class="table-read">
-                    <tr>
-                        <?php $no = 0;
-                        foreach ($row_image as $photo) : $no++; ?>
-                            <img id="<?php echo $photo->id_photo; ?>" class="card-widget widget-user" src="<?php echo base_url('uploads/photo/' . $photo->photo . ''); ?>" style="height: auto; max-width: 150px; object-fit: cover; padding: 10px 10px 10px 10px; object-fit: cover;">
-                            <button id="btn<?php echo $photo->id_photo; ?>" onclick="remove_photo(<?php echo $photo->id_photo; ?>)" class="btn centered btn-xs btn-danger" style="border-radius: 25%;"><i class="fa fa-trash"></i></button>
-                        <?php endforeach; ?>
-
-                    </tr>
-                </table>
             </div>
             <div class="modal-footer">
 
@@ -419,10 +410,40 @@
         } else {
             text = "";
         }
-        document.getElementById("notif").innerHTML = text;
+        document.getElementById("notif2").innerHTML = text;
 
         $.ajax({
             url: "<?php echo site_url('tbl_talent/delete_photo/'); ?>" + id,
+            method: "POST",
+            data: {
+                id: id
+            },
+            async: true,
+            dataType: 'json',
+            success: function(data) {
+                console.log(data);
+            }
+        });
+    }
+</script>
+
+<script>
+    function remove_banner(id) {
+
+        var banner = document.getElementById(id);
+        var btn = document.getElementById("btn" + id);
+        let text = "Are you sure want to delete this banner ?";
+        if (confirm(text) == true) {
+            text = " Deleted Success";
+            banner.remove();
+            btn.remove();
+        } else {
+            text = "";
+        }
+        document.getElementById("notif").innerHTML = text;
+
+        $.ajax({
+            url: "<?php echo site_url('tbl_talent/delete_banner/'); ?>" + id,
             method: "POST",
             data: {
                 id: id

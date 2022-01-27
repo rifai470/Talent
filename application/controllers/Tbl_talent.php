@@ -441,7 +441,8 @@ class Tbl_talent extends CI_Controller
 		$row_talent = $this->Tbl_talent_model->get_by_id($id_talent);
 		$row_tags_by_id = $this->Tbl_talent_model->get_tags_talent($id_talent);
 		$row_image = $this->Tbl_talent_model->image($code_talent);
-		
+		$row_banner = $this->Tbl_talent_model->banner($code_talent);
+
 		if ($row->code_talent == NULL) {
 			$data = array(
 				'button' => 'Save',
@@ -471,7 +472,7 @@ class Tbl_talent extends CI_Controller
 				'other' => set_value('other'),
 				'tags' => set_value('tags'),
 				'photo' => set_value('photo'),
-				'banner' => set_value('banner'),
+				'banner' => $row_banner->banner,
 				'row_kategori' => $row_kategori,
 				'code_talent' => set_value('code_talent'),
 				'row_tags' => $row_tags,
@@ -503,7 +504,7 @@ class Tbl_talent extends CI_Controller
 				'twitter' => $row_talent->twitter,
 				'other' => $row_talent->other,
 				'photo' => $row_talent->photo,
-				'banner' => $row_talent->banner,
+				'banner' => $row_banner->banner,
 				'code_talent' => $row_talent->code_talent,
 				'row_tags_by_id' => $row_tags_by_id,
 				'row_image' => $row_image,
@@ -534,6 +535,7 @@ class Tbl_talent extends CI_Controller
 			'pendidikan' => $this->input->post('pendidikan', TRUE),
 			'pekerjaan' => $this->input->post('pekerjaan', TRUE),
 			'bahasa' => $this->input->post('bahasa', TRUE),
+			'banner' => $this->input->post('banner', TRUE),
 			'tinggi_badan' => $this->input->post('tinggi_badan', TRUE),
 			'berat_badan' => $this->input->post('berat_badan', TRUE),
 			'id_kategori' => $this->input->post('id_kategori', TRUE),
@@ -663,6 +665,7 @@ class Tbl_talent extends CI_Controller
 		$row_talent = $this->Tbl_talent_model->get_by_id($id_talent);
 		$row_tags_by_id = $this->Tbl_talent_model->get_tags_talent($id_talent);
 		$row_image = $this->Tbl_talent_model->image($code_talent);
+		$row_banner = $this->Tbl_talent_model->banner($code_talent);
 
 		$data = array(
 			'button' => 'Save',
@@ -692,6 +695,7 @@ class Tbl_talent extends CI_Controller
 			'other' => set_value('other', $row_talent->other),
 			'tags' => set_value('tags'),
 			'row_image' => $row_image,
+			'row_banner' => $row_banner,
 			'row_kategori' => $row_kategori,
 			'code_talent' => set_value('code_talent', $row_talent->code_talent),
 			'row_tags' => $row_tags,
@@ -963,6 +967,7 @@ class Tbl_talent extends CI_Controller
 	}
 
 	public function update_photo(){
+
 		$code_talent = $this->input->post("code_talent",TRUE);
 		$id_users = $this->input->post("id_users",TRUE);
 		//array photo
@@ -999,6 +1004,42 @@ class Tbl_talent extends CI_Controller
 			if (!empty($uploadData)) {
 				// Insert files data into the database 
 				$this->Tbl_talent_model->insert_photo($uploadData);
+			}
+		}
+		$this->session->set_flashdata('message', 'Update Record Success');
+		redirect(site_url('tbl_talent/profile_talent/'.$id_users.''));
+	}
+
+	public function update_banner(){
+		// $this->Tbl_talent_model->delete_banner();
+		$id_users = $this->input->post("id_users",TRUE);
+		$code_talent = $this->input->post("code_talent",TRUE);
+		$banner = $this->input->post("banner",TRUE);
+		
+		//array photo
+		// If files are selected to upload 
+		if (!empty($_FILES['upload_banner']['name']) && $_FILES['upload_banner']['name']!='') {
+			// File upload configuration 
+			$uploadPath = './uploads/photo/';
+			$config['upload_path'] = $uploadPath;
+			$config['allowed_types'] = 'gif|jpg|jpeg|png';
+
+			// Load and initialize upload library 
+			$this->load->library('upload', $config);
+			$this->upload->initialize($config);
+
+			// Upload file to server 
+			if ($this->upload->do_upload('upload_banner')) {
+				// Uploaded file data 
+				$fileData = $this->upload->data();
+			} else {
+				$fileData =array('file_name'=>$banner);
+			}
+				$uploadData['banner'] = $fileData['file_name'];
+
+			if (!empty($uploadData)) {
+				// Insert files data into the database 
+				$this->Tbl_talent_model->update_banner($uploadData,$code_talent);
 			}
 		}
 		$this->session->set_flashdata('message', 'Update Record Success');
