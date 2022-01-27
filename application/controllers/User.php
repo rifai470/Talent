@@ -56,15 +56,16 @@ class User extends CI_Controller
     public function create()
     {
         $data = array(
-            'button'        => 'Save',
-            'action'        => site_url('user/create_action'),
-            'id_users'      => set_value('id_users'),
-            'username'      => set_value('username'),
-            'email'         => set_value('email'),
-            'password'      => set_value('password'),
+            'button' => 'Save',
+            'action' => site_url('user/create_action'),
+            'id_users' => set_value('id_users'),
+            'username' => set_value('username'),
+            'nama_lengkap' => set_value('nama_lengkap'),
+            'password' => set_value('password'),
             'id_user_level' => set_value('id_user_level'),
-            'is_aktif'      => set_value('is_aktif'),
-            'perusahaan'    => set_value('perusahaan'),
+            'is_aktif' => set_value('is_aktif'),
+            'perusahaan' => set_value('perusahaan'),
+            'kontak' => set_value('kontak'),
         );
         $this->template->load('template', 'user/tbl_user_form', $data);
     }
@@ -81,12 +82,13 @@ class User extends CI_Controller
             $hashPassword   = password_hash($password, PASSWORD_BCRYPT, $options);
 
             $data = array(
-                'id_pasien'     => $this->input->post('id_pasien', TRUE),
-                'username'      => $this->input->post('email', TRUE),
+                'nama_lengkap'     => $this->input->post('nama_lengkap', TRUE),
+                'username'      => $this->input->post('username', TRUE),
                 'password'      => $hashPassword,
                 'id_user_level' => $this->input->post('id_user_level', TRUE),
-                'is_aktif'      => $this->input->post('is_aktif', TRUE),
+                'kontak'        => $this->input->post('kontak', TRUE),
                 'perusahaan'    => $this->input->post('perusahaan', TRUE),
+                'is_aktif'      => $this->input->post('is_aktif', TRUE),
             );
 
             $this->User_model->insert($data);
