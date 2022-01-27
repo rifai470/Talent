@@ -854,6 +854,7 @@ class Tbl_talent extends CI_Controller
 		$id_endorse = $this->Tbl_talent_model->insert_endorse($data);
 		// print_r($data);
 		// die;
+
 		//array photo
 		// If files are selected to upload 
 		if (!empty($_FILES['upload']['name']) && count(array_filter($_FILES['upload']['name'])) > 0) {
@@ -909,6 +910,49 @@ class Tbl_talent extends CI_Controller
 		$id_photo = $this->input->post('id',TRUE);
 		$data = $this->Tbl_talent_model->delete_photo($id_photo)->num_rows();
 		echo json_encode($data);
+	}
+
+	public function update_photo(){
+		$code_talent = $this->input->post("code_talent",TRUE);
+		$id_users = $this->input->post("id_users",TRUE);
+		//array photo
+		// If files are selected to upload 
+		if (!empty($_FILES['upload']['name']) && count(array_filter($_FILES['upload']['name'])) > 0) {
+			$filesCount = count($_FILES['upload']['name']);
+			for ($i = 0; $i < $filesCount; $i++) {
+				$_FILES['file']['name']     = $_FILES['upload']['name'][$i];
+				$_FILES['file']['type']     = $_FILES['upload']['type'][$i];
+				$_FILES['file']['tmp_name'] = $_FILES['upload']['tmp_name'][$i];
+				$_FILES['file']['error']     = $_FILES['upload']['error'][$i];
+				$_FILES['file']['size']     = $_FILES['upload']['size'][$i];
+
+				// File upload configuration 
+				$uploadPath = './uploads/photo/';
+				$config['upload_path'] = $uploadPath;
+				$config['allowed_types'] = 'gif|jpg|jpeg|png';
+
+				// Load and initialize upload library 
+				$this->load->library('upload', $config);
+				$this->upload->initialize($config);
+
+				// Upload file to server 
+				if ($this->upload->do_upload('file')) {
+					// Uploaded file data 
+					$fileData = $this->upload->data();
+					$uploadData[$i]['photo'] = $fileData['file_name'];
+					$uploadData[$i]['code_talent'] = $code_talent;
+					$uploadData[$i]['SecLogUser'] = $this->session->userdata('nama_lengkap');
+					$uploadData[$i]['SecLogDate'] = date("Y-m-d H:i:s");
+				}
+			}
+
+			if (!empty($uploadData)) {
+				// Insert files data into the database 
+				$this->Tbl_talent_model->insert_photo($uploadData);
+			}
+		}
+		$this->session->set_flashdata('message', 'Update Record Success');
+		redirect(site_url('tbl_talent/profile_talent/'.$id_users.''));
 	}
 
 	// public function tags(){
