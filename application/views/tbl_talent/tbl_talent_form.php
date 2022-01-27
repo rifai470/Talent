@@ -1,3 +1,23 @@
+<style>
+	.table-read {
+		border-spacing: 0.5rem;
+		border-collapse: collapse;
+		width: 100%;
+	}
+
+	.table-read td {
+		border-bottom: 1px solid #dee2e6;
+		padding: 0.5rem;
+	}
+
+	.centered {
+		position: absolute;
+		cursor: pointer;
+		text-align: center;
+		/* left: 18%; */
+		transform: translate(-162%, 51%);
+	}
+</style>
 <div class="content-wrapper">
 	<section class="content" style="padding-top: 1%">
 		<div class="container-fluid">
@@ -126,6 +146,35 @@
 				</div>
 			</div>
 
+			
+			<!-- Card Prestation -->
+			<div class="row">
+				<div class="col-md-12">
+					<div class="card card-default">
+						<div class="card-header">
+							<h3 class="card-title">Photo *</h3>
+						</div>
+						<div class="card-body">
+							<div class="input-group" id="upload">
+								<div class="custom-file">
+									<input type="file" class="form-control" name="upload[]" multiple required>
+								</div>
+							</div>
+							<table class="table-read">
+								<tr>
+									<?php $no = 0;
+									foreach ($row_image as $photo) : $no++; ?>
+										<img id="<?php echo $photo->id_photo; ?>" class="card-widget widget-user" src="<?php echo base_url('uploads/photo/' . $photo->photo . ''); ?>" style="height: 100px; width: auto; width: 150px; object-fit: cover; padding: 10px 10px 10px 10px;">
+										<button id="btn<?php echo $photo->id_photo; ?>" onclick="remove_photo(<?php echo $photo->id_photo; ?>)" class="btn centered btn-xs btn-danger" style="border-radius: 25%;"><i class="fa fa-trash"></i></button>
+									<?php endforeach; ?>
+
+								</tr>
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
+
 			<div class="row">
 				<!-- Card Tag Media -->
 				<div class="col-md-6">
@@ -168,30 +217,13 @@
 					<div class="row-md-6">
 						<div class="card card-default">
 							<div class="card-header">
-								<h3 class="card-title">Photo *</h3>
+								<h3 class="card-title">
+									PORTOFOLIO
+								</h3>
 							</div>
+							<!-- /.card-header -->
 							<div class="card-body">
-								<div class="input-group" id="upload">
-									<div class="custom-file">
-										<input type="file" class="form-control" name="upload[]" multiple required>
-									</div>
-								</div>
-							</div>
-						</div>
-						<!-- Card Prestation -->
-						<div class="row">
-							<div class="col-md-12">
-								<div class="card card-default">
-									<div class="card-header">
-										<h3 class="card-title">
-											PORTOFOLIO
-										</h3>
-									</div>
-									<!-- /.card-header -->
-									<div class="card-body">
-										<textarea id="prestasi" name='prestasi'><?php echo $prestasi; ?></textarea>
-									</div>
-								</div>
+								<textarea id="prestasi" name='prestasi'><?php echo $prestasi; ?></textarea>
 							</div>
 						</div>
 					</div>
@@ -318,4 +350,33 @@
 			console.log("onDropdownHide: ", e.detail)
 		}
 	})
+</script>
+<script>
+	function remove_photo(id) {
+
+		var photo = document.getElementById(id);
+		var btn = document.getElementById("btn" + id);
+		let text = "Are you sure want to delete this photo ?";
+		if (confirm(text) == true) {
+			text = " Deleted Success";
+			photo.remove();
+			btn.remove();
+		} else {
+			text = "";
+		}
+		alert(text);
+
+		$.ajax({
+			url: "<?php echo site_url('tbl_talent/delete_photo/'); ?>" + id,
+			method: "POST",
+			data: {
+				id: id
+			},
+			async: true,
+			dataType: 'json',
+			success: function(data) {
+				console.log(data);
+			}
+		});
+	}
 </script>

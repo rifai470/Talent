@@ -231,7 +231,11 @@ class Tbl_talent_model extends CI_Model
     function delete_photo($id)
     {
         $this->db->where("id_photo", $id);
-        $this->db->delete("tbl_photo");
+        $data = $this->db->delete("tbl_photo");
+        print_r($this->db->last_query());
+        echo "<pre>";
+        print_r($data);
+        exit;
     }
 
     function cek_code()
@@ -381,7 +385,7 @@ class Tbl_talent_model extends CI_Model
 
     function image($code_talent)
     {
-        $this->db->select('id_photo, photo, banner, code_talent');
+        $this->db->select('id_photo, photo, code_talent');
         $this->db->where_in('code_talent', $code_talent);
         return $this->db->get('tbl_photo')->result();
 
