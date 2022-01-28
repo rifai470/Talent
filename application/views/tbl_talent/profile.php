@@ -111,7 +111,11 @@
                             </div>
                             <div class="row-md-6">
                                 <div class="card card-widget widget-user">
+                                    <?php if ($banner == NULL || $banner == '') { ?>
+                                        <img src="<?php echo base_url('uploads/photo/default_banner.jpg'); ?>" style="width: 735px; height: 200px; object-fit: cover;">
+                                        <?php } else { ?>
                                     <img src="<?php echo base_url('uploads/photo/' . $banner . ''); ?>" style="width: 735px; height: 200px; object-fit: cover;">
+                                    <?php } ?>
                                     <div class="widget-user-image">
                                         <img class="img-circle" src="<?php echo base_url('uploads/photo/' . $photo . ''); ?>" style="height:200px; width: 200px; object-fit: cover; ">
                                     </div>
@@ -332,7 +336,6 @@
                     <div class="input-group" id="upload" style="padding-top: 5px; width: 1350px;">
                         <div class="custom-file">
                             <input type="file" class="form-control" name="upload[]" multiple>
-                           
                             <div class="input-group">
                                 <input type="hidden" class="form-control" name="id_users" value="<?php echo $id_users; ?>" />
                                 <input type="hidden" class="form-control" name="code_talent" value="<?php echo $code_talent; ?>" />

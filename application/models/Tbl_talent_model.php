@@ -66,7 +66,50 @@ class Tbl_talent_model extends CI_Model
     // get data by id
     function get_by_id($id)
     {
-        $this->db->select('tbl_talent.*, tbl_photo.*, tbl_kategori.*, tbl_prestasi.*, tbl_sosmed.*, tbl_banner.*');
+        $this->db->select('tbl_talent.id_talent,
+        tbl_talent.id_users,
+        tbl_talent.code_talent,
+        tbl_talent.nama,
+        tbl_talent.nama_panggilan,
+        tbl_talent.tempat,
+        tbl_talent.tanggal_lahir,
+        tbl_talent.usia,
+        tbl_talent.jenis_kelamin,
+        tbl_talent.hobby,
+        tbl_talent.pendidikan,
+        tbl_talent.pekerjaan,
+        tbl_talent.bahasa,
+        tbl_talent.tinggi_badan,
+        tbl_talent.berat_badan,
+        tbl_talent.id_kategori,
+        tbl_talent.tentang,
+        tbl_talent.tarif_minimum,
+        tbl_talent.tarif_maximum,
+        tbl_talent.`status`,
+        tbl_talent.SecLogUser,
+        tbl_talent.SecLogDate,
+        tbl_photo.id_photo,
+        tbl_photo.photo,
+        tbl_photo.SecLogUser,
+        tbl_photo.SecLogDate,
+        tbl_kategori.id_kategori,
+        tbl_kategori.kategori,
+        tbl_kategori.icon,
+        tbl_prestasi.id_prestasi,
+        tbl_prestasi.prestasi,
+        tbl_prestasi.SecLogUser,
+        tbl_prestasi.SecLogDate,
+        tbl_banner.id_banner,
+        tbl_banner.banner,
+        tbl_banner.SecLogUser,
+        tbl_banner.SecLogDate,
+        tbl_sosmed.id_sosmed,
+        tbl_sosmed.instagram,
+        tbl_sosmed.facebook,
+        tbl_sosmed.twitter,
+        tbl_sosmed.other,
+        tbl_sosmed.SecLogUser,
+        tbl_sosmed.SecLogDate');
         $this->db->join('tbl_banner', 'tbl_talent.code_talent=tbl_banner.code_talent', 'left');
         $this->db->join('tbl_photo', 'tbl_talent.code_talent=tbl_photo.code_talent', 'left');
         $this->db->join('tbl_kategori', 'tbl_talent.id_kategori=tbl_kategori.id_kategori', 'left');
@@ -180,7 +223,7 @@ class Tbl_talent_model extends CI_Model
     //buat function insert banner
     function insert_banner($data_banner)
     {
-        $this->db->insert_batch('tbl_banner', $data_banner);
+        $this->db->insert('tbl_banner', $data_banner);
     }
 
     //buat function insert photo
@@ -196,9 +239,9 @@ class Tbl_talent_model extends CI_Model
         $this->db->update($this->table, $data);
     }
 
-    function update_banner($uploadData,$code_talent)
+    function update_banner($uploadData, $code_talent)
     {
-        $this->db->where('code_talent',$code_talent);
+        $this->db->where('code_talent', $code_talent);
         $this->db->update('tbl_banner', $uploadData);
     }
 
@@ -296,7 +339,7 @@ class Tbl_talent_model extends CI_Model
         $this->db->join('tbl_sosmed', 'tbl_talent.code_talent=tbl_sosmed.code_talent', 'left');
         $this->db->join('tbl_prestasi', 'tbl_talent.code_talent=tbl_prestasi.code_talent', 'left');
         $this->db->where('tbl_talent.id_kategori', $id_kategori);
-        $this->db->where('tbl_talent.status','active');
+        $this->db->where('tbl_talent.status', 'active');
         $this->db->limit($limit, $start);
         $this->db->group_by('tbl_talent.code_talent');
         return $this->db->get('tbl_talent')->result();
@@ -315,7 +358,7 @@ class Tbl_talent_model extends CI_Model
         $this->db->join('tbl_sosmed', 'tbl_talent.code_talent=tbl_sosmed.code_talent', 'left');
         $this->db->join('tbl_prestasi', 'tbl_talent.code_talent=tbl_prestasi.code_talent', 'left');
         $this->db->where('tbl_talent.id_kategori', $id_kategori);
-        $this->db->where('tbl_talent.status','active');
+        $this->db->where('tbl_talent.status', 'active');
         $this->db->group_by('tbl_talent.code_talent');
         return $this->db->get('tbl_talent')->result();
     }
@@ -327,7 +370,7 @@ class Tbl_talent_model extends CI_Model
         $this->db->join('tbl_kategori', 'tbl_talent.id_kategori=tbl_kategori.id_kategori', 'left');
         $this->db->join('tbl_sosmed', 'tbl_talent.code_talent=tbl_sosmed.code_talent', 'left');
         $this->db->join('tbl_prestasi', 'tbl_talent.code_talent=tbl_prestasi.code_talent', 'left');
-        $this->db->where('tbl_talent.status','active');
+        $this->db->where('tbl_talent.status', 'active');
         $this->db->like('tbl_talent.nama', $search, 'both');
         $this->db->limit($limit, $start);
         $this->db->group_by('tbl_talent.code_talent');
@@ -346,7 +389,7 @@ class Tbl_talent_model extends CI_Model
         $this->db->join('tbl_kategori', 'tbl_talent.id_kategori=tbl_kategori.id_kategori', 'left');
         $this->db->join('tbl_sosmed', 'tbl_talent.code_talent=tbl_sosmed.code_talent', 'left');
         $this->db->join('tbl_prestasi', 'tbl_talent.code_talent=tbl_prestasi.code_talent', 'left');
-        $this->db->where('tbl_talent.status','active');
+        $this->db->where('tbl_talent.status', 'active');
         $this->db->like('tbl_talent.nama', $search, 'both');
         $this->db->group_by('tbl_talent.code_talent');
         return $this->db->get('tbl_talent')->result();
@@ -386,12 +429,17 @@ class Tbl_talent_model extends CI_Model
         $this->db->select('tags', FALSE);
         $this->db->group_by('tags');
         $data = $this->db->get('tbl_tags')->result_array();
-        $index = 0;
-        foreach ($data as $tag) {
-            $tagsRow[$index] = $tag['tags'];
-            $index++;
+        if (!empty($data)) {
+            $index = 0;
+            foreach ($data as $tag) {
+                $tagsRow[$index] = $tag['tags'];
+                $index++;
+            }
+        } else {
+            $tagsRow = array();
         }
-        return $tagsRow;
+
+       return $tagsRow;
     }
 
     function get_id_tags($tagss)
@@ -506,7 +554,7 @@ class Tbl_talent_model extends CI_Model
         tbl_talent.nama');
         $this->db->join('tbl_talent', 'tbl_endorse.code_talent=tbl_talent.code_talent', 'left');
         $this->db->where('tbl_endorse.id_endorse', $id_endorse);
-        
+
         // $this->db->group_by('tbl_endorse.code_talent');
         // $this->db->order_by($code_talent,'DSC','tbl_endorse.id_endorse','DSC');
         return $this->db->get('tbl_endorse')->row();

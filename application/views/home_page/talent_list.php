@@ -31,7 +31,7 @@
           <div class="col-md-3">
             <div class="card card-widget widget-user">
               <div class="w3-content w3-display-container">
-                <img class="card-widget widget-user" src="<?php echo base_url('uploads/photo/' . $row->photo . ''); ?>" style="height:180px; width: auto; width: 270px; object-fit: cover;">
+                <img class="card-widget widget-user" src="<?php echo base_url('uploads/photo/' . $row->photo . ''); ?>" style="height:270px; width: auto; width: 270px; object-fit: cover;">
               </div>
               <div class="card-footer" style="padding-top: 15px;">
                 <div class="row">

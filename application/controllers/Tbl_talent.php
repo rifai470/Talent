@@ -472,7 +472,7 @@ class Tbl_talent extends CI_Controller
 				'other' => set_value('other'),
 				'tags' => set_value('tags'),
 				'photo' => set_value('photo'),
-				'banner' => $row_banner->banner,
+				'banner' => set_value('banner'),
 				'row_kategori' => $row_kategori,
 				'code_talent' => set_value('code_talent'),
 				'row_tags' => $row_tags,
@@ -535,7 +535,6 @@ class Tbl_talent extends CI_Controller
 			'pendidikan' => $this->input->post('pendidikan', TRUE),
 			'pekerjaan' => $this->input->post('pekerjaan', TRUE),
 			'bahasa' => $this->input->post('bahasa', TRUE),
-			'banner' => $this->input->post('banner', TRUE),
 			'tinggi_badan' => $this->input->post('tinggi_badan', TRUE),
 			'berat_badan' => $this->input->post('berat_badan', TRUE),
 			'id_kategori' => $this->input->post('id_kategori', TRUE),
@@ -649,6 +648,14 @@ class Tbl_talent extends CI_Controller
 			}
 		}
 
+		$data_banner = array(
+			'banner' => 'default_banner.jpg',
+			'code_talent' => $code_talent,
+			'SecLogUser' => $this->session->userdata('nama_lengkap'),
+			'SecLogDate' => date('Y-m-d H:i:s'),
+		);
+		$this->Tbl_talent_model->insert_banner($data_banner);
+
 		$this->send($data);
 		$this->session->set_flashdata('message', 'Create Record Success');
 		redirect(site_url('tbl_talent/profile_talent/'.$this->input->post('id_users', TRUE).''));
@@ -660,6 +667,8 @@ class Tbl_talent extends CI_Controller
 		$row = $this->Tbl_talent_model->check_talent($id);
 		$id_talent = $row->id_talent;
 		$code_talent = $row->code_talent;
+		// print_r($code_talent);
+		// die;
 		$row_kategori = $this->Tbl_kategori_model->get_all();
 		$row_tags = $this->Tbl_talent_model->get_tags();
 		$row_talent = $this->Tbl_talent_model->get_by_id($id_talent);
@@ -706,8 +715,10 @@ class Tbl_talent extends CI_Controller
 
 	public function ubah_profile_action()
 	{
-		$code_talent = $this->input->post('code_talent', TRUE);
+		// $row = $this->Tbl_talent_model->check_talent();
+		// $code_talent = $row->code_talent;
 		$row = $this->Tbl_talent_model->get_by_id($this->input->post('id_talent', TRUE));
+		$code_talent = $this->input->post('code_talent', TRUE);
 		$id_talent = $this->input->post('id_talent', TRUE);
 		$tags = $this->input->post('tags', TRUE);
 
@@ -816,6 +827,7 @@ class Tbl_talent extends CI_Controller
 			}
 			$data_update_photo = array(
 				'photo' => $data_file['file_name'],
+				'code_talent' => $data_file['code_talent'],
 				'SecLogUser' => $this->session->userdata('nama_lengkap'),
 				'SecLogDate' => date('Y-m-d H:i:s'),
 			);
