@@ -159,6 +159,7 @@ class Home_page extends CI_Controller
     {
         $get_talent = $this->Tbl_talent_model->get_talent($id_talent);
         $get_tags_label = $this->Tbl_talent_model->get_tags_label();
+
         
         if($this->session->userdata('logged')){
             $logged = 1;
@@ -181,6 +182,7 @@ class Home_page extends CI_Controller
             'twitter' => $get_talent->twitter,
             'other' => $get_talent->other,
             'logged' => $logged,
+            'kategori' => $get_talent->kategori,
         );
 
         $this->template->load('home_page/tamplate', 'home_page/talent_list_endorse', $data);

@@ -1,5 +1,5 @@
 <!-- Content Wrapper. Contains page content -->
-<div class="content-wrapper">
+<div class="content-wrapper" style="background-color: white;">
   <!-- Content Header (Page header) -->
   <div class="content-header">
     <div class="container">
@@ -29,8 +29,8 @@
         <?php $no = 1;
         foreach ($get_talent as $row) : $no++; ?>
           <div class="col-md-3">
-            <div class="card card-widget widget-user">
-              <div class="w3-content w3-display-container">
+            <div class="card card-widget widget-user" >
+              <div class="w3-content w3-display-container" >
                 <img class="card-widget widget-user" src="<?php echo base_url('uploads/photo/' . $row->photo . ''); ?>" style="height:270px; width: auto; width: 270px; object-fit: cover;">
               </div>
               <div class="card-footer" style="padding-top: 15px;">

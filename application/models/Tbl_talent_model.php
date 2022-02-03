@@ -302,7 +302,7 @@ class Tbl_talent_model extends CI_Model
 
     function cek_code()
     {
-        $this->db->select("CAST(SUBSTR(code_talent,5) as INT) as code", FALSE);
+        $this->db->select("CAST(SUBSTR(code_talent,5) as SIGNED) as code", FALSE);
         $this->db->order_by("code", "DESC");
         $this->db->limit(1);
         $query = $this->db->get($this->table);
@@ -543,11 +543,9 @@ class Tbl_talent_model extends CI_Model
     {
         $this->db->select('tbl_endorse.id_endorse,
         tbl_endorse.endorse,
-        tbl_endorse.detail,
-        tbl_endorse.todolist,
-        tbl_endorse.syarat,
+        tbl_endorse.sow,
+        tbl_endorse.jadwal,
         tbl_endorse.budget,
-        tbl_endorse.free,
         tbl_endorse.id_users,
         tbl_talent.id_talent,
         tbl_talent.code_talent,

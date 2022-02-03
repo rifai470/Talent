@@ -113,8 +113,8 @@
                                 <div class="card card-widget widget-user">
                                     <?php if ($banner == NULL || $banner == '') { ?>
                                         <img src="<?php echo base_url('uploads/photo/default_banner.jpg'); ?>" style="width: 735px; height: 200px; object-fit: cover;">
-                                        <?php } else { ?>
-                                    <img src="<?php echo base_url('uploads/photo/' . $banner . ''); ?>" style="width: 735px; height: 200px; object-fit: cover;">
+                                    <?php } else { ?>
+                                        <img src="<?php echo base_url('uploads/photo/' . $banner . ''); ?>" style="width: 735px; height: 200px; object-fit: cover;">
                                     <?php } ?>
                                     <div class="widget-user-image">
                                         <img class="img-circle" src="<?php echo base_url('uploads/photo/' . $photo . ''); ?>" style="height:200px; width: 200px; object-fit: cover; ">
@@ -126,8 +126,12 @@
                                     <div class="text-center">
                                         <span style="font-size: 26px;"><?php echo $nama; ?></span><br />
                                         <span><i class="fas fa-map-marker-alt" style="color: grey;"></i> <?php echo $tempat; ?></span><br /><br />
-                                        <span><b>Tarif</b></span><br />
-                                        <span>Min. <?php echo str_replace(",", ".", number_format($tarif_minimum)); ?> - Max. <?php echo str_replace(",", ".", number_format($tarif_maximum)); ?></span>
+                                        <?php $no = 0;
+                                        foreach ($row_tags_by_id as $tags) : $no++; ?>
+                                            <button class="btn btn-sm" style="font-size: 12px; background-color: #e6e6e6; border-radius: 15px; padding: 2px 5px 2px 5px; margin-right: 5px;"><?php echo $tags['tags']; ?></button>
+                                        <?php endforeach; ?>
+                                        <!-- <span><b>Tarif</b></span><br />
+                                        <span>Min. <?php echo str_replace(",", ".", number_format($tarif_minimum)); ?> - Max. <?php echo str_replace(",", ".", number_format($tarif_maximum)); ?></span> -->
                                     </div>
                                 </div>
                             </div>
@@ -152,12 +156,12 @@
                                         <button class="btn btn-xs btn-danger" data-toggle="modal" data-target="#modal-photo" style="margin-bottom: 10px; padding-bottom: 5px;"><i class="fa fa-edit"> Edit Foto</i></button>
                                     </div>
                                 </div>
-                                <h3 class="card-title">
+                                <!-- <h3 class="card-title">
                                     <?php $no = 0;
                                     foreach ($row_tags_by_id as $tags) : $no++; ?>
                                         <button class="btn btn-sm" style="font-size: 12px; background-color: #e6e6e6; border-radius: 15px; padding: 2px 5px 2px 5px; margin-right: 5px;"><?php echo $tags['tags']; ?></button>
                                     <?php endforeach; ?>
-                                </h3>
+                                </h3> -->
                             </div>
                             <div class="col">
                                 <div class="row-md-12">
@@ -185,38 +189,44 @@
                     </div>
                     <div class="col-md-4">
                         <div class="row-md-12">
-                            <div class="card card-default">
+                            <div class="content">
+                                <div class="card card-widget widget-user">
                                 <div class="card-header">
-                                    <h3 class="card-title">TENTANG</h3>
+                                    <h3 class="card-title">SOSIAL MEDIA</h3>
                                 </div>
-                                <div class="col">
-                                    <div class="row-md-6">
-                                        <div class="card-body">
-                                            <?php echo $tentang; ?>
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="description-block">
+                                                    <a target="_blank" href="http://www.instagram.com/<?php echo $instagram; ?>" <button type="button" class="btn btn-block btn-outline-dark fab fa-instagram <?php if ($instagram == NULL && $instagram == '') {
+                                                                                                                                                                                                                    echo 'disabled';
+                                                                                                                                                                                                                } ?>" style="font-size: 12px;"> Instagram</button></a>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="description-block">
+                                                    <a target="_blank" href="http://www.facebook.com/<?php echo $facebook; ?>" <button type="button" class="btn btn-block btn-outline-dark fab fa-facebook <?php if ($facebook == NULL && $facebook == '') {
+                                                                                                                                                                                                                echo 'disabled';
+                                                                                                                                                                                                            } ?>" style="font-size: 12px;"> Facebook</button></a>
+                                                </div>
+                                            </div>
                                         </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row-md-12">
-                            <div class="card card-default">
-                                <div class="card-body">
-                                    <div class="description-block">
-                                        <div class="text-left"><i class="fab fa-facebook"></i> <a target="_blank" href="http://www.facebook.com/<?php echo $facebook; ?>" <?php if ($facebook == NULL && $facebook == '') {
-                                                                                                                                                                                echo 'disabled';
-                                                                                                                                                                            } ?> style="color: black;"> Facebook</a></div>
-                                        <hr />
-                                        <div class="text-left"><i class="fab fa-twitter"></i> <a target="_blank" href="http://twitter.com/<?php echo $twitter; ?>" <?php if ($twitter == NULL && $twitter == '') {
-                                                                                                                                                                        echo 'disabled';
-                                                                                                                                                                    } ?> style="color: black;"> Twitter</a></div>
-                                        <hr />
-                                        <div class="text-left"><i class="fab fa-instagram"></i> <a target="_blank" href="http://www.instagram.com/<?php echo $instagram; ?>" <?php if ($instagram == NULL && $instagram == '') {
-                                                                                                                                                                                    echo 'disabled';
-                                                                                                                                                                                } ?> style="color: black;"> Instagram</a></div>
-                                        <hr />
-                                        <div class="text-left"><i class="fas fa-globe"></i> <a target="_blank" href="http://<?php echo $other; ?>" <?php if ($other == NULL && $other == '') {
-                                                                                                                                                        echo 'disabled';
-                                                                                                                                                    } ?> style="color: black;"> Other</a></div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="description-block">
+                                                    <a target="_blank" href="http://twitter.com/<?php echo $twitter; ?>" <button type="button" class="btn btn-block btn-outline-dark fab fa-twitter <?php if ($twitter == NULL && $twitter == '') {
+                                                                                                                                                                                                        echo 'disabled';
+                                                                                                                                                                                                    } ?>" style="font-size: 12px;"> Twitter</button></a>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="description-block">
+                                                    <a target="_blank" href="http://<?php echo $other; ?>" <button type="button" class="btn btn-block btn-outline-dark <?php if ($other == NULL && $other == '') {
+                                                                                                                                                                            echo 'disabled';
+                                                                                                                                                                        } ?>" style="font-size: 12px;"><i class="fas fa-globe"></i> Other</button></a>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -241,7 +251,7 @@
                                         <tr>
                                             <td>Usia</td>
                                             <td>:</td>
-                                            <td><?php echo $usia; ?></td>
+                                            <td><?php echo $usia; ?> tahun</td>
                                         </tr>
                                         <tr>
                                             <td>Jenis Kelamin</td>
@@ -271,12 +281,12 @@
                                         <tr>
                                             <td>Tinggi Badan</td>
                                             <td>:</td>
-                                            <td><?php echo $tinggi_badan; ?></td>
+                                            <td><?php echo $tinggi_badan; ?> cm</td>
                                         </tr>
                                         <tr>
                                             <td>Berat Badan</td>
                                             <td>:</td>
-                                            <td><?php echo $berat_badan; ?></td>
+                                            <td><?php echo $berat_badan; ?> kg</td>
                                         </tr>
                                     </table>
                                 </div>
@@ -340,8 +350,8 @@
                                 <input type="hidden" class="form-control" name="id_users" value="<?php echo $id_users; ?>" />
                                 <input type="hidden" class="form-control" name="code_talent" value="<?php echo $code_talent; ?>" />
                                 <button type="submit" class="btn btn-primary" style="text-align: right; margin-left: 10px;">Update</button>
-                                </div>
                             </div>
+                        </div>
                     </div>
                 </form>
                 <table class="table-read">
@@ -380,14 +390,14 @@
                     <div class="input-group" id="upload" style="padding-top: 5px; width: 1350px;">
                         <div class="custom-file">
                             <input type="file" class="form-control" name="upload_banner">
-                           
+
                             <div class="input-group">
                                 <input type="hidden" class="form-control" name="id_users" value="<?php echo $id_users; ?>" />
                                 <input type="hidden" class="form-control" name="code_talent" value="<?php echo $code_talent; ?>" />
                                 <input type="hidden" class="form-control" name="banner" value="<?php echo $banner; ?>" />
                                 <button type="submit" class="btn btn-primary" style="text-align: right; margin-left: 10px;">Update</button>
-                                </div>
                             </div>
+                        </div>
                     </div>
                 </form>
             </div>

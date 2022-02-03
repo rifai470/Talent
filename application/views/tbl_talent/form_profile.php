@@ -119,10 +119,10 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="form-group">
+                                    <!-- <div class="form-group">
                                         <label for="tentang">Tentang <?php echo form_error('tentang') ?></label>
                                         <textarea class="form-control" name="tentang" id="tentang" placeholder="Tentang"><?php echo $tentang; ?></textarea>
-                                    </div>
+                                    </div> -->
                                 </div>
                             </div>
                         </div>
@@ -132,7 +132,7 @@
                         <div class="col-md-12">
                             <div class="card card-default">
                                 <div class="card-header">
-                                    <h3 class="card-title">Tag</h3>
+                                    <h3 class="card-title">Skill</h3>
                                 </div>
                                 <div class="card-body">
                                     <div class="input-group mb-3">
