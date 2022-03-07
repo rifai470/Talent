@@ -141,7 +141,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <!-- /.control-sidebar -->
 
     <!-- Main Footer -->
-    <footer class="main-footer">
+    <footer class="main-footer" style="margin-left: 0px;">
       <!-- To the right -->
       <div class="float-right d-none d-sm-inline">
 

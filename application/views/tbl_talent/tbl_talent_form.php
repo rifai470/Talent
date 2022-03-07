@@ -152,12 +152,12 @@
 				<div class="col-md-12">
 					<div class="card card-default">
 						<div class="card-header">
-							<h3 class="card-title">Photo *</h3>
+							<h3 class="card-title">Photo</h3>
 						</div>
 						<div class="card-body">
 							<div class="input-group" id="upload">
 								<div class="custom-file">
-									<input type="file" class="form-control" name="upload[]" multiple required>
+									<input type="file" class="form-control" name="upload[]" multiple>
 								</div>
 							</div>
 							<table class="table-read">

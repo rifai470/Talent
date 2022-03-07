@@ -38,6 +38,7 @@ class Tbl_talent_model extends CI_Model
         //add this line for join
         //$this->datatables->join('table2', 'tbl_talent.field = table2.field');
         $this->datatables->add_column('action', anchor(site_url('tbl_talent/read/$1'), '<i class="fa fa-eye" aria-hidden="true"></i>', array('class' => 'btn btn-warning btn-sm')) . " 
+        " . anchor(site_url('tbl_talent/update/$1'), '<i class="fa fa-edit" aria-hidden="true"></i>', array('class' => 'btn btn-warning btn-sm')) . " 
             " . anchor(site_url('tbl_talent_verify/approve/$1'), '<i class="fas fa-thumbs-up" aria-hidden="true"></i>', array('class' => 'btn btn-success btn-sm')) . " 
                 " . anchor(site_url('tbl_talent_verify/reject/$1'), '<i class="fas fa-thumbs-down" aria-hidden="true"></i>', 'class="btn btn-danger btn-sm"'), 'id_talent');
         return $this->datatables->generate();
@@ -52,7 +53,8 @@ class Tbl_talent_model extends CI_Model
         //add this line for join
         //$this->datatables->join('table2', 'tbl_talent.field = table2.field');
         $this->datatables->add_column('action', anchor(site_url('tbl_talent/read/$1'), '<i class="fa fa-eye" aria-hidden="true"></i>', array('class' => 'btn btn-warning btn-sm')) . " 
-            " . anchor(site_url('tbl_talent_verify/follow_up/$1'), '<i class="fas fa-arrow-up" aria-hidden="true"></i>', array('class' => 'btn btn-success btn-sm')), 'id_talent');
+        " . anchor(site_url('tbl_talent/update/$1'), '<i class="fa fa-edit" aria-hidden="true"></i>', array('class' => 'btn btn-warning btn-sm')) . "     
+        " . anchor(site_url('tbl_talent_verify/follow_up/$1'), '<i class="fas fa-arrow-up" aria-hidden="true"></i>', array('class' => 'btn btn-success btn-sm')), 'id_talent');
         return $this->datatables->generate();
     }
 
@@ -534,6 +536,14 @@ class Tbl_talent_model extends CI_Model
     function get_users($id_users)
     {
         $this->db->select('nama_lengkap');
+        $this->db->where('id_users', $id_users);
+        $data = $this->db->get('tbl_user')->row();
+        return $data;
+    }
+
+    function get_email_users($id_users)
+    {
+        $this->db->select('username');
         $this->db->where('id_users', $id_users);
         $data = $this->db->get('tbl_user')->row();
         return $data;
