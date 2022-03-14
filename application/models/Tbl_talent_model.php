@@ -18,7 +18,7 @@ class Tbl_talent_model extends CI_Model
     // datatables
     function json()
     {
-        $this->datatables->select('id_talent,nama,nama_panggilan,tempat,tanggal_lahir,usia,jenis_kelamin,hobby,pendidikan,pekerjaan,bahasa,tinggi_badan,berat_badan,id_kategori,tentang,tarif_minimum,tarif_maximum,SecLogUser,SecLogDate');
+        $this->datatables->select('id_talent,nama,nama_panggilan,tempat,tanggal_lahir,usia,jenis_kelamin,hobby,pendidikan,pekerjaan,bahasa,tinggi_badan,berat_badan,id_kategori,tentang,tarif_minimum,tarif_maximum,rides,SecLogUser,SecLogDate');
         $this->datatables->from('tbl_talent');
         $this->datatables->where('status', 'active');
         //add this line for join
@@ -31,7 +31,7 @@ class Tbl_talent_model extends CI_Model
 
     function json_verify()
     {
-        $this->datatables->select('tbl_talent.id_talent,tbl_talent.nama,tbl_talent.nama_panggilan,tbl_talent.tempat,tbl_talent.tanggal_lahir,tbl_talent.usia,tbl_talent.jenis_kelamin,tbl_talent.hobby,pendidikan,tbl_talent.pekerjaan,tbl_talent.bahasa,tbl_talent.tinggi_badan,tbl_talent.berat_badan,tbl_talent.id_kategori,tbl_talent.tentang,tbl_talent.tarif_minimum,tbl_talent.tarif_maximum,tbl_talent.status,tbl_talent.SecLogUser,tbl_talent.SecLogDate,tbl_kategori.kategori');
+        $this->datatables->select('tbl_talent.id_talent,tbl_talent.nama,tbl_talent.nama_panggilan,tbl_talent.tempat,tbl_talent.tanggal_lahir,tbl_talent.usia,tbl_talent.jenis_kelamin,tbl_talent.hobby,pendidikan,tbl_talent.pekerjaan,tbl_talent.bahasa,tbl_talent.tinggi_badan,tbl_talent.berat_badan,tbl_talent.id_kategori,tbl_talent.tentang,tbl_talent.tarif_minimum,tbl_talent.tarif_maximum,tbl_talent.rides,tbl_talent.status,tbl_talent.SecLogUser,tbl_talent.SecLogDate,tbl_kategori.kategori');
         $this->datatables->from('tbl_talent');
         $this->datatables->join('tbl_kategori', 'tbl_talent.id_kategori=tbl_kategori.id_kategori', 'left');
         $this->datatables->where('tbl_talent.status', 'inactive');
@@ -46,7 +46,7 @@ class Tbl_talent_model extends CI_Model
 
     function json_rejected()
     {
-        $this->datatables->select('tbl_talent.id_talent,tbl_talent.nama,tbl_talent.nama_panggilan,tbl_talent.tempat,tbl_talent.tanggal_lahir,tbl_talent.usia,tbl_talent.jenis_kelamin,tbl_talent.hobby,pendidikan,tbl_talent.pekerjaan,tbl_talent.bahasa,tbl_talent.tinggi_badan,tbl_talent.berat_badan,tbl_talent.id_kategori,tbl_talent.tentang,tbl_talent.tarif_minimum,tbl_talent.tarif_maximum,tbl_talent.status,tbl_talent.SecLogUser,tbl_talent.SecLogDate,tbl_kategori.kategori');
+        $this->datatables->select('tbl_talent.id_talent,tbl_talent.nama,tbl_talent.nama_panggilan,tbl_talent.tempat,tbl_talent.tanggal_lahir,tbl_talent.usia,tbl_talent.jenis_kelamin,tbl_talent.hobby,pendidikan,tbl_talent.pekerjaan,tbl_talent.bahasa,tbl_talent.tinggi_badan,tbl_talent.berat_badan,tbl_talent.id_kategori,tbl_talent.tentang,tbl_talent.tarif_minimum,tbl_talent.tarif_maximum,tbl_talent.rides,tbl_talent.status,tbl_talent.SecLogUser,tbl_talent.SecLogDate,tbl_kategori.kategori');
         $this->datatables->from('tbl_talent');
         $this->datatables->join('tbl_kategori', 'tbl_talent.id_kategori=tbl_kategori.id_kategori', 'left');
         $this->datatables->where('tbl_talent.status', 'rejected');
@@ -87,6 +87,7 @@ class Tbl_talent_model extends CI_Model
         tbl_talent.tentang,
         tbl_talent.tarif_minimum,
         tbl_talent.tarif_maximum,
+        tbl_talent.rides,
         tbl_talent.`status`,
         tbl_talent.SecLogUser,
         tbl_talent.SecLogDate,
@@ -109,6 +110,8 @@ class Tbl_talent_model extends CI_Model
         tbl_sosmed.instagram,
         tbl_sosmed.facebook,
         tbl_sosmed.twitter,
+        tbl_sosmed.tiktok,
+        tbl_sosmed.youtube,
         tbl_sosmed.other,
         tbl_sosmed.SecLogUser,
         tbl_sosmed.SecLogDate');
@@ -141,6 +144,7 @@ class Tbl_talent_model extends CI_Model
         $this->db->or_like('tentang', $q);
         $this->db->or_like('tarif_minimum', $q);
         $this->db->or_like('tarif_maximum', $q);
+        $this->db->or_like('rides', $q);
         $this->db->or_like('status', $q);
         $this->db->or_like('prestasi', $q);
         $this->db->or_like('sosmed', $q);
@@ -172,6 +176,7 @@ class Tbl_talent_model extends CI_Model
         $this->db->or_like('tentang', $q);
         $this->db->or_like('tarif_minimum', $q);
         $this->db->or_like('tarif_maximum', $q);
+        $this->db->or_like('rides', $q);
         $this->db->or_like('status', $q);
         $this->db->or_like('prestasi', $q);
         $this->db->or_like('sosmed', $q);

@@ -61,7 +61,7 @@
               </div>
             </div>
             <div class="input-group mb-3">
-              <input type="text" class="form-control form-control-md" name="kontak" placeholder="No Whatsapp" required />
+              <input type="text" class="form-control form-control-md" name="kontak" placeholder="No Whatsapp (contoh : 081297486321)" required />
               <div class="input-group-append">
                 <div class="input-group-text" style="width: 45px;">
                   <span class="fab fa-whatsapp"></span>

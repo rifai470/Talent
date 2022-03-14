@@ -28,6 +28,8 @@
 		    <th>Instagram</th>
 		    <th>Facebook</th>
             <th>Twitter</th>
+		    <th>Tiktok</th>
+            <th>Youtube</th>
 		    <th>Other</th>
 		    <th>Code Talent</th>
 		    <th>SecLogUser</th>
@@ -87,7 +89,7 @@
                         {
                             "data": "id_sosmed",
                             "orderable": false
-                        },{"data": "instagram"},{"data": "facebook"},{"data": "twitter"},{"data": "other"},{"data": "code_talent"},{"data": "SecLogUser"},{"data": "SecLogDate"},
+                        },{"data": "instagram"},{"data": "facebook"},{"data": "twitter"},{"data": "tiktok"},{"data": "youtube"},{"data": "other"},{"data": "code_talent"},{"data": "SecLogUser"},{"data": "SecLogDate"},
                         {
                             "data" : "action",
                             "orderable": false,

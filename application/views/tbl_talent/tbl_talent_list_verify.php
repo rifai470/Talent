@@ -39,8 +39,8 @@
                                         <!-- <th>Berat Badan</th> -->
                                         <th>Kategori</th>
                                         <!-- <th>Tentang</th> -->
-                                        <th>Tarif Min.</th>
-                                        <th>Tarif Max.</th>
+                                        <th>Rate Min.</th>
+                                        <th>Rate Max.</th>
                                         <th width="150px">&nbsp;</th>
                                     </tr>
                                 </thead>
@@ -81,8 +81,8 @@
                                         <!-- <th>Berat Badan</th> -->
                                         <th>Kategori</th>
                                         <!-- <th>Tentang</th> -->
-                                        <th>Tarif Min.</th>
-                                        <th>Tarif Max.</th>
+                                        <th>Rate Min.</th>
+                                        <th>Rate Max.</th>
                                         <th width="150px">&nbsp;</th>
                                     </tr>
                                 </thead>

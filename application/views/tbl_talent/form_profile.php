@@ -40,8 +40,8 @@
                                             <input type="text" class="form-control" name="nama_panggilan" id="nama_panggilan" placeholder="Nama Panggilan" value="<?php echo $nama_panggilan; ?>" required />
                                         </div>
                                         <div class="form-group">
-                                            <label for="tempat">Tempat *<?php echo form_error('tempat') ?></label>
-                                            <input type="text" class="form-control" name="tempat" id="tempat" placeholder="Tempat" value="<?php echo $tempat; ?>" required />
+                                            <label for="tempat">Domisili *<?php echo form_error('tempat') ?></label>
+                                            <input type="text" class="form-control" name="tempat" id="tempat" placeholder="Domisili" value="<?php echo $tempat; ?>" required />
                                         </div>
                                         <div class="form-group">
                                             <label for="tanggal_lahir">Tanggal Lahir *<?php echo form_error('tanggal_lahir') ?></label>
@@ -105,20 +105,24 @@
                                         </select>
                                     </div>
                                     <div class="form-group">
-                                        <label for="tarif">Tarif *<?php echo form_error('tarif') ?></label>
+                                        <label for="tarif">Rate *<?php echo form_error('tarif') ?></label>
                                         <div class="row">
                                             <div class="col-md-2" style="margin-top: 1%; padding-left: 5%;">Min.</div>
                                             <div class="col-md-10">
-                                                <input type="text" class="form-control" name="tarif_minimum" id="tarif_minimum" placeholder="Tarif Min." value="<?php echo $tarif_minimum; ?>" required />
+                                                <input type="text" class="form-control" name="tarif_minimum" id="tarif_minimum" placeholder="Rate Min." value="<?php echo $tarif_minimum; ?>" required />
                                             </div>
                                         </div>
                                         <div class="row" style="padding-top: 1%;">
                                             <div class="col-md-2" style="margin-top: 1%; padding-left: 5%;">Max.</div>
                                             <div class="col-md-10">
-                                                <input type="text" class="form-control" name="tarif_maximum" id="tarif_maximum" placeholder="Tarif Max." value="<?php echo $tarif_maximum; ?>" required />
+                                                <input type="text" class="form-control" name="tarif_maximum" id="tarif_maximum" placeholder="Rate Max." value="<?php echo $tarif_maximum; ?>" required />
                                             </div>
                                         </div>
                                     </div>
+                                    <div class="form-group">
+                                            <label for="rides">Rides<?php echo form_error('rides') ?></label>
+                                            <textarea class="form-control" name="rides" id="rides" rows="5" placeholder="Rides"><?php echo $rides; ?></textarea>
+                                        </div>
                                     <!-- <div class="form-group">
                                         <label for="tentang">Tentang <?php echo form_error('tentang') ?></label>
                                         <textarea class="form-control" name="tentang" id="tentang" placeholder="Tentang"><?php echo $tentang; ?></textarea>
@@ -132,14 +136,14 @@
                         <div class="col-md-12">
                             <div class="card card-default">
                                 <div class="card-header">
-                                    <h3 class="card-title">Skill</h3>
+                                    <h3 class="card-title">Skill *</h3>
                                 </div>
                                 <div class="card-body">
                                     <div class="input-group mb-3">
                                         <div class="input-group-prepend">
                                             <span class="input-group-text"><i class="fas fa-tags"></i></span>
                                         </div>
-                                        <input type="text" name="tags" id="tags" class="form-control" placeholder="tags" value="<?php $no = 0;
+                                        <input type="text" name="tags" id="tags" class="form-control" placeholder="skill" value="<?php $no = 0;
                                                                                                                                 foreach ($row_tags_by_id as $tags) : $no++; ?> <?php echo $tags['tags']; ?>, <?php endforeach; ?>" required />
                                     </div>
                                 </div>
@@ -176,6 +180,18 @@
                                     </div>
                                     <div class="input-group mb-3">
                                         <div class="input-group-prepend">
+                                            <span class="input-group-text"><i class="fab fa-tiktok-square"></i></span>
+                                        </div>
+                                        <input type="text" name="tiktok" class="form-control" placeholder="Username tiktok" value="<?php echo $tiktok; ?>">
+                                    </div>
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><i class="fab fa-youtube-square"></i></span>
+                                        </div>
+                                        <input type="text" name="youtube" class="form-control" placeholder="Username youtube" value="<?php echo $youtube; ?>">
+                                    </div>
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-prepend">
                                             <span class="input-group-text"><i class="fa fa-plus-square"></i></span>
                                         </div>
                                         <input type="text" name="other" class="form-control" placeholder="URL Other" value="<?php echo $other; ?>">
@@ -190,7 +206,7 @@
                             <div class="card card-default">
                                         <div class="card-header">
                                             <h3 class="card-title">
-                                                PORTOFOLIO
+                                                PORTOFOLIO / PRESTASI
                                             </h3>
                                         </div>
                                         <!-- /.card-header -->

@@ -35,6 +35,16 @@
 							<td width="2%">:</td>
 							<td><?php echo $twitter; ?></td>
 						</tr>
+						<tr>
+							<td width="20%">Tiktok</td>
+							<td width="2%">:</td>
+							<td><?php echo $tiktok; ?></td>
+						</tr>
+						<tr>
+							<td width="20%">Youtube</td>
+							<td width="2%">:</td>
+							<td><?php echo $youtube; ?></td>
+						</tr>
 	    <tr>
 							<td width="20%">Other</td>
 							<td width="2%">:</td>

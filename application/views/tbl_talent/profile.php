@@ -138,7 +138,7 @@
                         </div>
                         <div class="card card-default">
                             <div class="card-header">
-                                <h3 class="card-title">PORTOFOLIO</h3>
+                                <h3 class="card-title">PORTOFOLIO / PRESTASI</h3>
                             </div>
                             <div class="col">
                                 <div class="row-md-6">
@@ -217,6 +217,22 @@
                                                     <a target="_blank" href="http://twitter.com/<?php echo $twitter; ?>" <button type="button" class="btn btn-block btn-outline-dark fab fa-twitter <?php if ($twitter == NULL && $twitter == '') {
                                                                                                                                                                                                         echo 'disabled';
                                                                                                                                                                                                     } ?>" style="font-size: 12px;"> Twitter</button></a>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="description-block">
+                                                    <a target="_blank" href="http://tiktok.com/<?php echo $tiktok; ?>" <button type="button" class="btn btn-block btn-outline-dark fab fa-tiktok<?php if ($tiktok == NULL && $tiktok == '') {
+                                                                                                                                                                            echo 'disabled';
+                                                                                                                                                                        } ?>" style="font-size: 12px;"><i class="fas fa-globe"></i> Tiktok</button></a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="description-block">
+                                                    <a target="_blank" href="http://youtube.com/<?php echo $youtube; ?>" <button type="button" class="btn btn-block btn-outline-dark fab fa-youtube <?php if ($youtube == NULL && $youtube == '') {
+                                                                                                                                                                                                        echo 'disabled';
+                                                                                                                                                                                                    } ?>" style="font-size: 12px;"> Youtube</button></a>
                                                 </div>
                                             </div>
                                             <div class="col-md-6">

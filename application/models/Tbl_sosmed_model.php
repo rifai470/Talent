@@ -17,7 +17,7 @@ class Tbl_sosmed_model extends CI_Model
 
     // datatables
     function json() {
-        $this->datatables->select('id_sosmed,instagram,facebook,twitter,other,code_talent,SecLogUser,SecLogDate');
+        $this->datatables->select('id_sosmed,instagram,facebook,twitter,tiktok,youtube,other,code_talent,SecLogUser,SecLogDate');
         $this->datatables->from('tbl_sosmed');
         //add this line for join
         //$this->datatables->join('table2', 'tbl_sosmed.field = table2.field');
@@ -47,6 +47,8 @@ class Tbl_sosmed_model extends CI_Model
 	$this->db->or_like('instagram', $q);
 	$this->db->or_like('facebook', $q);
     $this->db->or_like('twitter', $q);
+	$this->db->or_like('tiktok', $q);
+    $this->db->or_like('youtube', $q);
 	$this->db->or_like('other', $q);
 	$this->db->or_like('code_talent', $q);
 	$this->db->or_like('SecLogUser', $q);
@@ -62,6 +64,8 @@ class Tbl_sosmed_model extends CI_Model
 	$this->db->or_like('instagram', $q);
 	$this->db->or_like('facebook', $q);
     $this->db->or_like('twitter', $q);
+	$this->db->or_like('tiktok', $q);
+    $this->db->or_like('youtube', $q);
 	$this->db->or_like('other', $q);
 	$this->db->or_like('code_talent', $q);
 	$this->db->or_like('SecLogUser', $q);

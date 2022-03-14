@@ -68,14 +68,14 @@
                       <div class="row">
                         <div class="col-md-6">
                           <div class="description-block">
-                            <a target="_blank" href="http://<?php echo $instagram; ?>" <button type="button" class="btn btn-block btn-outline-dark fab fa-instagram <?php if ($instagram == NULL && $instagram == '') {
+                            <a target="_blank" href="http://instagram.com/<?php echo $instagram; ?>" <button type="button" class="btn btn-block btn-outline-dark fab fa-instagram <?php if ($instagram == NULL && $instagram == '') {
                                                                                                                                                                       echo 'disabled';
                                                                                                                                                                     } ?>" style="font-size: 12px;"> Instagram</button></a>
                           </div>
                         </div>
                         <div class="col-md-6">
                           <div class="description-block">
-                            <a target="_blank" href="http://<?php echo $facebook; ?>" <button type="button" class="btn btn-block btn-outline-dark fab fa-facebook <?php if ($facebook == NULL && $facebook == '') {
+                            <a target="_blank" href="http://facebook.com/<?php echo $facebook; ?>" <button type="button" class="btn btn-block btn-outline-dark fab fa-facebook <?php if ($facebook == NULL && $facebook == '') {
                                                                                                                                                                     echo 'disabled';
                                                                                                                                                                   } ?>" style="font-size: 12px;"> Facebook</button></a>
                           </div>
@@ -84,9 +84,25 @@
                       <div class="row">
                         <div class="col-md-6">
                           <div class="description-block">
-                            <a target="_blank" href="http://<?php echo $twitter; ?>" <button type="button" class="btn btn-block btn-outline-dark fab fa-twitter <?php if ($twitter == NULL && $twitter == '') {
+                            <a target="_blank" href="http://twitter.com/<?php echo $twitter; ?>" <button type="button" class="btn btn-block btn-outline-dark fab fa-twitter <?php if ($twitter == NULL && $twitter == '') {
                                                                                                                                                                   echo 'disabled';
                                                                                                                                                                 } ?>" style="font-size: 12px;"> Twitter</button></a>
+                          </div>
+                        </div>
+                        <div class="col-md-6">
+                          <div class="description-block">
+                            <a target="_blank" href="http://tiktok.com/<?php echo $tiktok; ?>" <button type="button" class="btn btn-block btn-outline-dark <?php if ($tiktok == NULL && $tiktok == '') {
+                                                                                                                                                                  echo 'disabled';
+                                                                                                                                                                } ?>" style="font-size: 12px;"> Tiktok</button></a>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-md-6">
+                          <div class="description-block">
+                            <a target="_blank" href="http://youtube.com/<?php echo $youtube; ?>" <button type="button" class="btn btn-block btn-outline-dark fab fa-youtube <?php if ($youtube == NULL && $youtube == '') {
+                                                                                                                                                                  echo 'disabled';
+                                                                                                                                                                } ?>" style="font-size: 12px;"> Youtube</button></a>
                           </div>
                         </div>
                         <div class="col-md-6">

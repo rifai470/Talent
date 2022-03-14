@@ -5,7 +5,7 @@
     <div class="container">
       <div class="row mb-2">
         <div class="col-sm-6">
-          <?php if($search == '') { ?>
+          <?php if ($search == '') { ?>
             <h4 class="m-0 text-dark"> <?php echo $kategori; ?> </h4>
           <?php } else { ?>
             <h5 class="m-0 text-dark"> Search '<?php echo $search; ?>' </h5>
@@ -29,8 +29,8 @@
         <?php $no = 1;
         foreach ($get_talent as $row) : $no++; ?>
           <div class="col-md-3">
-            <div class="card card-widget widget-user" >
-              <div class="w3-content w3-display-container" >
+            <div class="card card-widget widget-user">
+              <div class="w3-content w3-display-container">
                 <img class="card-widget widget-user" src="<?php echo base_url('uploads/photo/' . $row->photo . ''); ?>" style="height:270px; width: auto; width: 270px; object-fit: cover;">
               </div>
               <div class="card-footer" style="padding-top: 15px;">
@@ -74,10 +74,10 @@
       <!-- /.row -->
       <div class="row">
         <div class="col">
-            <!--Tampilkan pagination-->
-            <?php echo $pagination; ?>
+          <!--Tampilkan pagination-->
+          <?php echo $pagination; ?>
         </div>
-    </div>
+      </div>
     </div><!-- /.container-fluid -->
   </div>
   <!-- /.content -->
@@ -130,28 +130,42 @@ foreach ($get_talent as $row) : $no++; ?>
             </div>
           </div>
           <div class="row">
-            <div class="col-md-3">
+            <div class="col-md-4">
               <div class="description-block">
                 <a target="_blank" href="http://www.instagram.com/<?php echo $row->instagram; ?>" <button type="button" class="btn btn-block btn-outline-dark fab fa-instagram <?php if ($row->instagram == NULL && $row->instagram == '') {
                                                                                                                                                                                   echo 'disabled';
                                                                                                                                                                                 } ?>" style="font-size: 12px;"> Instagram</button></a>
               </div>
             </div>
-            <div class="col-md-3">
+            <div class="col-md-4">
               <div class="description-block">
                 <a target="_blank" href="http://www.facebook.com/<?php echo $row->facebook; ?>" <button type="button" class="btn btn-block btn-outline-dark fab fa-facebook <?php if ($row->facebook == NULL && $row->facebook == '') {
                                                                                                                                                                               echo 'disabled';
                                                                                                                                                                             } ?>" style="font-size: 12px;"> Facebook</button></a>
               </div>
             </div>
-            <div class="col-md-3">
+            <div class="col-md-4">
               <div class="description-block">
                 <a target="_blank" href="http://twitter.com/<?php echo $row->twitter; ?>" <button type="button" class="btn btn-block btn-outline-dark fab fa-twitter <?php if ($row->twitter == NULL && $row->twitter == '') {
                                                                                                                                                                         echo 'disabled';
                                                                                                                                                                       } ?>" style="font-size: 12px;"> Twitter</button></a>
               </div>
             </div>
-            <div class="col-md-3">
+            <div class="col-md-4">
+              <div class="description-block">
+                <a target="_blank" href="http://tiktok.com/<?php echo $row->tiktok; ?>" <button type="button" class="btn btn-block btn-outline-dark fab fa-tiktok <?php if ($row->tiktok == NULL && $row->tiktok == '') {
+                                                                                                                                                                        echo 'disabled';
+                                                                                                                                                                      } ?>" style="font-size: 12px;"> Tiktok</button></a>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="description-block">
+                <a target="_blank" href="http://youtube.com/<?php echo $row->youtube; ?>" <button type="button" class="btn btn-block btn-outline-dark fab fa-youtube <?php if ($row->youtube == NULL && $row->youtube == '') {
+                                                                                                                                                                        echo 'disabled';
+                                                                                                                                                                      } ?>" style="font-size: 12px;"> Youtube</button></a>
+              </div>
+            </div>
+            <div class="col-md-4">
               <div class="description-block">
                 <a target="_blank" href="http://<?php echo $row->other; ?>" <button type="button" class="btn btn-block btn-outline-dark <?php if ($row->other == NULL && $row->other == '') {
                                                                                                                                           echo 'disabled';

@@ -49,7 +49,7 @@ td.c {
 									<td class="c"><?php echo $nama_panggilan; ?></td>
 								</tr>
 								<tr>
-									<td width="20%">Tempat</td>
+									<td width="20%">Domisili</td>
 									<td width="2%">:</td>
 									<td class="c"><?php echo $tempat; ?></td>
 								</tr>
@@ -109,12 +109,17 @@ td.c {
 									<td class="c"><?php echo $tentang; ?></td>
 								</tr>
 								<tr>
-									<td width="20%">Tarif Min.</td>
+									<td width="20%">Rate Min.</td>
 									<td width="2%">:</td>
 									<td class="c"><?php echo $tarif_minimum; ?></td>
 								</tr>
 								<tr>
-									<td width="20%">Tarif Max.</td>
+									<td width="20%">Rate Max.</td>
+									<td width="2%">:</td>
+									<td class="c"><?php echo $tarif_maximum; ?></td>
+								</tr>
+								<tr>
+									<td width="20%">Rides</td>
 									<td width="2%">:</td>
 									<td class="c"><?php echo $tarif_maximum; ?></td>
 								</tr>
@@ -148,17 +153,27 @@ td.c {
 									<tr>
 										<td width="150px">Instagram</td>
 										<td width="10px">:</td>
-										<td><a href="https://<?php echo $instagram; ?>"></a><?php echo $instagram; ?></td>
+										<td><a href="https://instagram.com/<?php echo $instagram; ?>"></a><?php echo $instagram; ?></td>
 									</tr>
 									<tr>
 										<td>Facebook</td>
 										<td>:</td>
-										<td><a href="https://<?php echo $instagram; ?>"></a><?php echo $facebook; ?></td>
+										<td><a href="https://facebook.com/<?php echo $instagram; ?>"></a><?php echo $facebook; ?></td>
 									</tr>
 									<tr>
 										<td>Twitter</td>
 										<td>:</td>
-										<td><a href="https://<?php echo $instagram; ?>"></a><?php echo $twitter; ?></td>
+										<td><a href="https://twitter.com/<?php echo $instagram; ?>"></a><?php echo $twitter; ?></td>
+									</tr>
+									<tr>
+										<td>Tiktok</td>
+										<td>:</td>
+										<td><a href="https://tiktok.com/<?php echo $instagram; ?>"></a><?php echo $tiktok; ?></td>
+									</tr>
+									<tr>
+										<td>Youtube</td>
+										<td>:</td>
+										<td><a href="https://youtube.com/<?php echo $instagram; ?>"></a><?php echo $youtube; ?></td>
 									</tr>
 									<tr>
 										<td>Other</td>
@@ -170,7 +185,7 @@ td.c {
 						</div>
 						<div class="card card-info">
 							<div class="card-header" style="background: -webkit-gradient(linear, left bottom, left top, color-stop(0, #4d5b76), color-stop(1, #6f80a1));">
-								<h3 class="card-title">PORTOFOLIO </h3>
+								<h3 class="card-title">PORTOFOLIO / PRESTASI</h3>
 							</div>
 							<div class="card-body">
 								

@@ -22,6 +22,15 @@
 			<label for="twitter">Twitter <?php echo form_error('twitter') ?></label>
 			<input type="text" class="form-control" name="twitter" id="twitter" placeholder="twitter" value="<?php echo $twitter; ?>"/>
 		</div>
+
+		<div class="form-group">
+			<label for="tiktok">Tiktok <?php echo form_error('tiktok') ?></label>
+			<input type="text" class="form-control" name="tiktok" id="tiktok" placeholder="tiktok" value="<?php echo $tiktok; ?>"/>
+		</div>
+		<div class="form-group">
+			<label for="youtube">Youtube <?php echo form_error('youtube') ?></label>
+			<input type="text" class="form-control" name="youtube" id="youtube" placeholder="youtube" value="<?php echo $youtube; ?>"/>
+		</div>
 	  
 		<div class="form-group">
 			<label for="other">other <?php echo form_error('other') ?></label>

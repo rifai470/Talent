@@ -180,6 +180,8 @@ class Home_page extends CI_Controller
             'instagram' => $get_talent->instagram,
             'facebook' => $get_talent->facebook,
             'twitter' => $get_talent->twitter,
+            'tiktok' => $get_talent->tiktok,
+            'youtube' => $get_talent->youtube,
             'other' => $get_talent->other,
             'logged' => $logged,
             'kategori' => $get_talent->kategori,

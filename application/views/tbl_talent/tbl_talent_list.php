@@ -27,7 +27,7 @@
                                     <tr>
                                         <th width="30px">#</th>
                                         <th>Nama</th>
-                                        <th>Tempat</th>
+                                        <th>Domisili</th>
                                         <th>Tanggal Lahir</th>
                                         <th>Usia</th>
                                         <th>Jenis Kelamin</th>
